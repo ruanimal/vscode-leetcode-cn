@@ -38,18 +38,27 @@
 # 你能不将整数转为字符串来解决这个问题吗？
 #
 #
+
 class Solution:
     def isPalindrome(self, x: 'int') -> 'bool':
+        # import math
         if x < 0:
             return False
-        tmp = []
-        while x != 0:
-            x, s = divmod(x, 10)  # 余数, 商
-            tmp.append(s)
-        for i in range(len(tmp)//2):
-            if tmp[i] != tmp[-1-i]:
+        # n = int(math.log10(x)) + 1  # 位数
+        n = len(str(x))
+        # while x != 0:
+        #     x, s = divmod(x, 10)  # 商, 余数,
+        #     tmp.append(s)
+        for i in range(n//2):
+            i += 1
+            x, tail = divmod(x, 10)
+            base = 10 ** (n-2*i)
+            head = x // base
+            x = x % base
+            if head != tail:
                 return False
         return True
 
 if __name__ == '__main__':
-    print(Solution().isPalindrome(1221))
+    # import ipdb; ipdb.set_trace()
+    print(Solution().isPalindrome(12221))
