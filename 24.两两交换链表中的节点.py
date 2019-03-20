@@ -39,7 +39,7 @@ class ListNode:
         tmp = []
         node = self
         while node:
-            tmp.append(str(node.val))
+            tmp.append(repr(node.val))
             node = node.next
         return ' -> '.join(tmp)
 
