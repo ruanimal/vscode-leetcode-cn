@@ -25,6 +25,23 @@
 #
 #
 #
+
+# slow verison
+# class Solution(object):
+#     def twoSum(self, nums, target):
+#         """
+#         :type nums: List[int]
+#         :type target: int
+#         :rtype: List[int]
+#         """
+#         for i, ele in enumerate(nums):
+#             try:
+#                 if i == nums.index(target-ele):
+#                     continue
+#                 return [i, nums.index(target-ele)]
+#             except ValueError:
+#                 continue
+
 class Solution:
     def twoSum(self, nums, target):
         """

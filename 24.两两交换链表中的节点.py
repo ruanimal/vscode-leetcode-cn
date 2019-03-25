@@ -53,6 +53,7 @@ def build_list_node(nums):
         node = node.next
     return head.next
 
+'''
 class Solution:
     def swapPairs(self, head: ListNode) -> ListNode:
         """
@@ -85,6 +86,20 @@ class Solution:
         if stack:
             p.next = stack.pop()
         return head_node.next
+'''
+
+class Solution(object):
+    def swapPairs(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        直接交换值
+        """
+        pointer = head
+        while pointer and pointer.next is not None:
+            pointer.val, pointer.next.val = pointer.next.val, pointer.val
+            pointer = pointer.next.next
+        return head
 
 if __name__ == "__main__":
     l = build_list_node([1,2,3,4])

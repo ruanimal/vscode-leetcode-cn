@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-#
-=======
 # -*- coding:utf-8 -*-#
->>>>>>> 652666c26262bb7ca5fb39b399ee55215bb9e0eb
 # @lc app=leetcode.cn id=25 lang=python3
 #
 # [25] k个一组翻转链表
@@ -10,15 +6,9 @@
 # https://leetcode-cn.com/problems/reverse-nodes-in-k-group/description/
 #
 # algorithms
-<<<<<<< HEAD
-# Hard (48.59%)
-# Total Accepted:    7.9K
-# Total Submissions: 15.9K
-=======
 # Hard (49.82%)
 # Total Accepted:    7.9K
 # Total Submissions: 15.8K
->>>>>>> 652666c26262bb7ca5fb39b399ee55215bb9e0eb
 # Testcase Example:  '[1,2,3,4,5]\n2'
 #
 # 给出一个链表，每 k 个节点一组进行翻转，并返回翻转后的链表。
@@ -93,7 +83,6 @@ class Solution:
         if head.next is None:
             return head
 
-<<<<<<< HEAD
         length = 0  # 链表长度
 
         # p 段前指针
@@ -166,38 +155,5 @@ class Solution:
 if __name__ == "__main__":
     l = build_list_node(range(11))
     print(Solution().reverseKGroup(l, 3))
-=======
-        count = 1
-        p = head
-        pre_head = head
-        new_head = None
-        while p:
-            count += 1
-            p = p.next
-            print(count)
-            if count >= k:
-                tmp = p.next
-                print('tmp', tmp.val)
-                p.next = None
-                print('pre_head', pre_head)
-                sub_link = recurse(pre_head, None)
-                print('sub_link', sub_link)
-                if new_head is None:
-                    new_head = sub_link
-                print('p', p.val)
-                pre_head.next = tmp
-                print('pre_head2', pre_head)
-                print('new_head', new_head)
-                p = pre_head
-                pre_head = pre_head.next
-                print('bb', new_head)
-                print('c', p.val)
-                count = 0
-        return new_head
+    print(Solution().reverseKGroup1(l, 3))  # 有bug
 
-
-if __name__ == "__main__":
-    l = build_list_node(range(10))
-    print(Solution().reverseKGroup(l, 3))
-
->>>>>>> 652666c26262bb7ca5fb39b399ee55215bb9e0eb
