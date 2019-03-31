@@ -1,15 +1,14 @@
-# -*- coding:utf-8 -*-
-
-# @lc app=leetcode.cn id=1 lang=python3
+#
+# @lc app=leetcode.cn id=1 lang=python
 #
 # [1] 两数之和
 #
 # https://leetcode-cn.com/problems/two-sum/description/
 #
 # algorithms
-# Easy (44.25%)
-# Total Accepted:    234.2K
-# Total Submissions: 529.2K
+# Easy (44.50%)
+# Total Accepted:    309.9K
+# Total Submissions: 680.5K
 # Testcase Example:  '[2,7,11,15]\n9'
 #
 # 给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。
@@ -25,23 +24,6 @@
 #
 #
 #
-
-# slow verison
-# class Solution(object):
-#     def twoSum(self, nums, target):
-#         """
-#         :type nums: List[int]
-#         :type target: int
-#         :rtype: List[int]
-#         """
-#         for i, ele in enumerate(nums):
-#             try:
-#                 if i == nums.index(target-ele):
-#                     continue
-#                 return [i, nums.index(target-ele)]
-#             except ValueError:
-#                 continue
-
 class Solution:
     def twoSum(self, nums, target):
         """
@@ -54,7 +36,3 @@ class Solution:
             t = target - e
             if t in tmp_dict and tmp_dict[t] != index:
                 return [index, tmp_dict[t]]
-
-if __name__ == "__main__":
-    a = Solution().twoSum([2, 7, 11, 15], 9)
-    print(a)
