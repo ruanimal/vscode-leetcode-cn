@@ -60,11 +60,37 @@ class Heap(object):
             tmp.append(l)
         return '\n'.join(tmp)
 
+
+class MinHeap(Heap):
+    def more(self, i, j):
+        return self._items[i] > self._items[j]
+
+    def swim(self, k):
+        while k > 1 and self.more(k//2, k):
+            self.exch(k//2, k)
+            k = k//2
+
+    def sink(self, k):
+        while 2 * k <= self.length:
+            j = 2 * k
+            if j < self.length and self.more(j, j+1):
+                j += 1
+            if not self.more(k, j):
+                break
+            self.exch(k, j)
+            k = j
+
+    def min(self):
+        return Heap.max(self)
+
+    def delMin(self):
+        return Heap.delMax(self)
+
 if __name__ == "__main__":
     import random
     nums = list(range(8))
     random.shuffle(nums)
-    obj = Heap()
+    obj = MinHeap()
     for i in nums:
         obj.Insert(i)
         print('max', obj.max(), obj._items)
