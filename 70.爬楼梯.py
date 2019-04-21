@@ -53,3 +53,24 @@ class Solution(object):
             a, b = b, a + b
         return b
 
+    def climbStairs2(self, n):
+        """
+        :type n: int
+        :rtype: int
+
+        动态规划解法
+        1. 最后一步可以是1级,也可以是2级, f(n) = f(n-1) + f(n-2) , n >=0
+        2. f(0) = 1, f(1) = 1
+        """
+        f = {}
+        f[0] = 1  # 这里的含义不明确
+        f[1] = 1
+        for i in range(2, n+1):
+            f[i] = f[i-1] + f[i-2]
+        return f[n]
+
+if __name__ == "__main__":
+    s = Solution().climbStairs(22)
+    print(s)
+    s = Solution().climbStairs2(22)
+    print(s)
