@@ -94,8 +94,7 @@ class Solution(object):
             b = stack2.pop() if stack2 else 0
             tmp, val = divmod(tmp + a + b, 10)
             node = ListNode(val)
-            node.next = new_head.next
-            new_head.next = node
+            node.next, new_head.next = new_head.next, node
         if tmp:
             new_head.val = tmp
             return new_head

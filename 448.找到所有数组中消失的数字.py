@@ -34,8 +34,32 @@ class Solution(object):
         :type nums: List[int]
         :rtype: List[int]
         """
+        # # v1 计数法, 使用额外空间
+        # tmp = {i:0 for i in xrange(1, len(nums)+1)}
+        # for num in nums:
+        #     tmp[num] = 1
+        # return [key for key,val in tmp.iteritems() if val == 0]
 
-        tmp = {i:0 for i in xrange(1, len(nums)+1)}
-        for num in nums:
-            tmp[num] = 1
-        return [key for key,val in tmp.iteritems() if val == 0]
+        # # v2 bitmap
+        # import array
+        # bitmap = array.array('B', [0 for i in range(len(nums))])
+        # for i in nums:
+        #     bitmap[i-1] = 1
+        # ans = [idx+1 for idx, i in enumerate(bitmap) if not i]
+        # return ans
+
+        # v3 原位排序, 时间复杂度n, 空间复杂度1
+        idx = 0
+        while idx < len(nums):
+            i = nums[idx]
+            if nums[i-1] != i:
+                nums[i-1], nums[idx] = nums[idx], nums[i-1]
+            else:
+                idx += 1
+        ans = [idx+1 for idx, i in enumerate(nums) if i != idx+1]
+        return ans
+
+if __name__ == "__main__":
+    s = Solution().findDisappearedNumbers([4,3,2,7,8,2,3,1])
+    print(s)
+
