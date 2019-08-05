@@ -39,12 +39,24 @@ class Solution(object):
         :type s: str
         :rtype: str
         """
+        # # v1
+        # if len(s) < 2:
+        #     return s
+        # i = 0
+        # while i < len(s)/2:
+        #     s[i], s[-i-1] = s[-i-1], s[i]
+        #     i += 1
+        # return s
+
+        # v2
         if len(s) < 2:
             return s
         i = 0
-        while i < len(s)/2:
-            s[i], s[-i-1] = s[-i-1], s[i]
+        j = len(s) - 1
+        while i < j:
+            s[i], s[j] = s[j], s[i]
             i += 1
+            j -= 1
         return s
 
 if __name__ == "__main__":

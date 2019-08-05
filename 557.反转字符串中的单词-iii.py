@@ -9,18 +9,33 @@ class Solution(object):
         :type s: str
         :rtype: str
         """
-        # ret = []
-        # pre_i = i = 0
-        # while i < len(s):
-        #     if s[i] == ' ':
-        #         ret.append(s[pre_i:i][::-1])
-        #         pre_i = i+1
-        #     i += 1
-        # ret.append(s[pre_i:i][::-1])
-        # return ' '.join(ret)
-        return ' '.join(i[::-1] for i in s.split())
+        if len(s) < 2:
+            return s
+        s = list(s)
+        begin = 0
+        end = 0
+        while end < len(s):
+            if s[end] != ' ':
+                end += 1
+            else:
+                self.reverseStringSlice(s, begin, end-1)
+                end += 1
+                begin = end
+        self.reverseStringSlice(s, begin, end-1)
+        return ''.join(s)
+
+    @staticmethod
+    def reverseStringSlice(s, i, j):
+        """
+        :type s: str
+        :rtype: str
+        """
+        while i < j:
+            s[i], s[j] = s[j], s[i]
+            i += 1
+            j -= 1
 
 if __name__ == "__main__":
-    s = Solution().reverseWords("Let's take LeetCode contest")
-    print(s)
+    s = Solution().reverseWords("Let's take LeetCode contest ")
+    print(repr(s))
 
