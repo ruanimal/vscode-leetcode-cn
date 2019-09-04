@@ -38,6 +38,9 @@
 
 class Solution(object):
     def findMedianSortedArrays(self, nums1, nums2):
+        pass
+
+    def findMedianSortedArrays_v1(self, nums1, nums2):
         """
         :type nums1: List[int]
         :type nums2: List[int]

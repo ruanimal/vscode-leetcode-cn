@@ -38,6 +38,19 @@
 #
 class Solution:
     def reverse(self, x):
+        ans = 0
+        flag = -1 if x < 0 else 1
+        x = abs(x)
+        while x != 0:
+            x, pop = divmod(x, 10)
+            ans = ans * 10 + pop
+        if ans > 2 ** 31-1 or ans < -(2 ** 31):
+            return 0
+        return flag * ans
+
+    def reverse_v1(self, x):
+        """转为字符串"""
+
         str_x = str(x)
         if str_x[0] == '-':
             num = '-' + str_x[1::][::-1]

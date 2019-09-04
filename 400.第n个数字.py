@@ -43,7 +43,7 @@
 #
 #
 class Solution(object):
-    def findNthDigit(self, n):
+    def findNthDigit_v1(self, n):
         """
         :type n: int
         :rtype: int
@@ -79,8 +79,39 @@ class Solution(object):
         offset = func(right) - n
         return str(right)[-1-offset]
 
+    def findNthDigit(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+
+        def func(x):
+            if x == 0: return 0
+            a = len(str(x))
+            return x * a + a - sum(10**i for i in range(a))
+
+        if n < 1:
+            return
+
+        left = 0
+        right = 2 ** 31
+        target = n
+        while left < right:
+            mid = (left + right)//2
+            if func(mid) < target:
+                left = mid + 1
+            else:
+                right = mid
+        # print(func(left), target)
+        if func(left) == target:
+            return str(left)[-1]
+        offset = func(left) - n
+        return str(left)[-1-offset]
+
 if __name__ == "__main__":
     s = Solution().findNthDigit(15384)
     print(s)
-    s = Solution().findNthDigit(10)
+    s = Solution().findNthDigit(11)
+    print(s)
+    s = Solution().findNthDigit_v1(11)
     print(s)

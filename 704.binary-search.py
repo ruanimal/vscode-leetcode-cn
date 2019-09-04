@@ -49,6 +49,24 @@ class Solution(object):
         """
         left = 0
         right = len(nums) - 1
+        while left < right:
+            mid = (left + right) // 2
+            if nums[mid] < target:
+                left = mid + 1
+            else:
+                right = mid
+        if nums[left] == target:
+            return left
+        return -1
+
+    def search_v1(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: int
+        """
+        left = 0
+        right = len(nums) - 1
         while left <= right:
             mid = (left + right) // 2
             if target < nums[mid]:

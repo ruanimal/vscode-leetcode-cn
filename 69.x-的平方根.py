@@ -40,6 +40,23 @@ class Solution(object):
         """
         left = 0
         right = x
+        while left < right:
+            mid = (left + right) >> 1
+            if mid ** 2 < x:
+                left = mid + 1
+            else:
+                right = mid
+        if left ** 2 == x:
+            return left
+        return left - 1
+
+    def mySqrt_v1(self, x):
+        """
+        :type x: int
+        :rtype: int
+        """
+        left = 0
+        right = x
         ret = 0
         while left <= right:
             mid = (left + right) // 2

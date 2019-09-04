@@ -44,11 +44,7 @@ class Solution:
         # import math
         if x < 0:
             return False
-        # n = int(math.log10(x)) + 1  # 位数
         n = len(str(x))
-        # while x != 0:
-        #     x, s = divmod(x, 10)  # 商, 余数,
-        #     tmp.append(s)
         for i in range(n//2):
             i += 1
             x, tail = divmod(x, 10)

@@ -25,14 +25,29 @@
 #
 #
 class Solution:
-    def twoSum(self, nums, target):
+    def twoSum_v1(self, nums, target):
         """
         :type nums: List[int]
         :type target: int
         :rtype: List[int]
+        构建hash, 一次遍历
         """
         tmp_dict = {e: index for index, e in enumerate(nums)}
         for index, e in enumerate(nums):
             t = target - e
             if t in tmp_dict and tmp_dict[t] != index:
                 return [index, tmp_dict[t]]
+
+    def twoSum(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        遍历的同时构建hash
+        """
+        tmp_dict = {}
+        for index, e in enumerate(nums):
+            t = target - e
+            if t in tmp_dict:
+                return [index, tmp_dict[t]]
+            tmp_dict[e] = index
