@@ -74,13 +74,48 @@ class Solution(object):
         :rtype: int
         从左到右将罗马字符转换为数字再相加, 遇到IV这种就减去两倍的I
         """
-        map = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
+        num_map = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
         result = 0
         for i in range(len(s)-1):
-            result += map[s[i]]
-            if map[s[i]] < map[s[i+1]]:
-                result -= 2*map[s[i]]
-        result += map[s[-1]]
+            result += num_map[s[i]]
+            if num_map[s[i]] < num_map[s[i+1]]:
+                result -= 2*num_map[s[i]]
+        result += num_map[s[-1]]
         return result
 
+    # def IntToroman(self, num):
+    #     num_list = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]
+    #     num_map = {
+    #         1: 'I',
+    #         4: 'IV',
+    #         5: 'V',
+    #         9: 'IX',
+    #         10: 'X',
+    #         40: 'XL',
+    #         50: 'L',
+    #         90: 'XC',
+    #         100: 'C',
+    #         400: 'CD',
+    #         500: 'D',
+    #         900: 'CM',
+    #         1000: 'M',
+    #     }
+
+    #     ans = []
+    #     for i in num_list:
+    #         if i > num:
+    #             continue
+    #         if num == 0:
+    #             break
+    #         a, num = divmod(num, i)
+    #         ans.append(a * num_map[i])
+    #     return ''.join(ans)
+
+if __name__ == "__main__":
+    obj = Solution()
+    for i in range(1,6000):
+        a = obj.IntToroman(i)
+        b = obj.romanToInt(a)
+        print(a,b)
+        assert i == b
 
