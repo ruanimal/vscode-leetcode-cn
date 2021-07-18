@@ -45,7 +45,7 @@
 # ]
 #
 #
-class Solution(object):
+class SolutionV1(object):
     def combinationSum(self, candidates, target):
         """
         :type candidates: List[int]
@@ -71,6 +71,30 @@ class Solution(object):
             path.append(candidates[level])
             self.dfs(candidates, level, next_target, path, res)
             path.pop()
+
+class Solution(object):
+    def combinationSum(self, candidates, target):
+        """
+        :type candidates: List[int]
+        :type target: int
+        :rtype: List[List[int]]
+        """
+        def bt(res, path, t):
+            if t == 0:
+                res.append(path[:])
+                return
+            for i in candidates:
+                if (not path or path[-1] <= i) and t-i >= 0:
+                    path.append(i)
+                    bt(res, path, t-i)
+                    path.pop()
+
+        if not candidates:
+            return []
+        res = []
+        bt(res, [], target)
+        return res
+
 
 if __name__ == "__main__":
     s = Solution().combinationSum(candidates=[2, 3, 6, 7], target=7)
