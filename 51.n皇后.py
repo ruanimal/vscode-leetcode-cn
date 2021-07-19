@@ -39,7 +39,7 @@
 #
 #
 #
-class Solution(object):
+class SolutionV1(object):
     def solveNQueens_1(self, n):
         """
         :type n: int
@@ -101,7 +101,12 @@ class Solution(object):
         dfs(n, {}, {}, res, [])
         return [['.'*i + 'Q' + '.'*(n-i-1) for i in sol] for sol in res]
 
-
+class Solution(object):
+    def solveNQueens(self, n):
+        def backtrack(res):
+            pass
+        board = [['.'] * n for _ in range(n)]
+        record = [[0] * n for _ in range(n)]
 
 if __name__ == "__main__":
     pass
