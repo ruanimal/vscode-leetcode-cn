@@ -6,7 +6,7 @@
 # https://leetcode-cn.com/problems/fancy-sequence/description/
 #
 # algorithms
-# Hard (14.54%)
+# Hard (14.55%)
 # Likes:    33
 # Dislikes: 0
 # Total Accepted:    2.1K
@@ -67,47 +67,43 @@
 #
 
 # @lc code=start
+
 MASK = 10**9 + 7
-ADD = 0
-MUL = 1
 
 class Fancy(object):
 
     def __init__(self):
         self.array = []
         self.operations = []
+        self.op_index = []
 
     def append(self, val):
         """
         :type val: int
         :rtype: None
         """
-        for idx in range(len(self.array)):
-            self.array[idx] = self.calc(idx)
-        self.operations = []
         self.array.append(val)
+        self.op_index.append(len(self.operations))
 
     def addAll(self, inc):
         """
         :type inc: int
         :rtype: None
         """
-        self.operations.append((ADD, inc))
+        self.operations.append((1, inc))
 
     def multAll(self, m):
         """
         :type m: int
         :rtype: None
         """
-        self.operations.append((MUL, m))
+        self.operations.append((m, 0))
 
     def calc(self, idx):
         base = self.array[idx]
-        for op, val in self.operations:
-            if op == ADD:
-                base += val
-            else:
-                base *= val
+        for i in range(self.op_index[idx], len(self.operations)):
+            a, b = self.operations[i]
+            base = base * a + b
         return base
 
     def getIndex(self, idx):
@@ -121,6 +117,79 @@ class Fancy(object):
 
     def __repr__(self):
         return '{!r}, {!r}'.format(self.array, self.operations)
+
+
+class FancyBak(object):
+
+    def __init__(self):
+        self.array = []
+        self.operations = []
+        self.op_index = []
+        self.coef_list = [(1, 0)]  # getIndex(x) = ax + b
+
+    def append(self, val):
+        """
+        :type val: int
+        :rtype: None
+        """
+        self.array.append(val)
+        self.op_index.append(len(self.operations)-1)
+
+    def addAll(self, inc):
+        """
+        :type inc: int
+        :rtype: None
+        """
+        # (pre_a * x + pre_a * b) x
+        #
+        a, b = 1, inc
+        pre_a, pre_b = self.coef_list[-1]
+        self.coef_list.append((pre_a*a, pre_b * b + b))
+
+    def multAll(self, m):
+        """
+        :type m: int
+        :rtype: None
+        """
+        a, b = m, 0
+        pre_a, pre_b = self.coef_list[-1]
+        self.coef_list.append((pre_a*a, pre_b * b + b))
+
+    def calc(self, idx):
+        base = self.array[idx]
+        a1, b1 = self.operations[self.op_index[idx]]
+        a2, b2 = self.operations[-1]
+        return a2 * base + b2 - (a1 * base - b1)
+
+    def getIndex(self, idx):
+        """
+        :type idx: int
+        :rtype: int
+        """
+        if idx >= len(self.array):
+            return -1
+        return self.calc(idx) % MASK
+
+    def __repr__(self):
+        return '{!r}, {!r}'.format(self.array, self.operations)
+
+
+# Your Fancy object will be instantiated and called as such:
+fancy = Fancy()
+fancy.append(2);   # 奇妙序列：[2]
+fancy.addAll(3);   # 奇妙序列：[2+3] -> [5]
+fancy.append(7);   # 奇妙序列：[5, 7]
+fancy.multAll(2);  # 奇妙序列：[5*2, 7*2] -> [10, 14]
+# import ipdb; ipdb.set_trace()
+print(fancy.getIndex(1)); # 返回 10
+print(fancy.getIndex(0)); # 返回 10
+fancy.addAll(3);   # 奇妙序列：[10+3, 14+3] -> [13, 17]
+fancy.append(10);  # 奇妙序列：[13, 17, 10]
+fancy.multAll(2);  # 奇妙序列：[13*2, 17*2, 10*2] -> [26, 34, 20]
+print(fancy.getIndex(0)); # 返回 26
+# import ipdb; ipdb.set_trace()
+print(fancy.getIndex(1)); # 返回 34
+print(fancy.getIndex(2)); # 返回 20
 
 # Your Fancy object will be instantiated and called as such:
 # obj = Fancy()
