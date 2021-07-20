@@ -37,5 +37,5 @@ def backtracking(args):
         res = process(args)   # 该节点数据加工
         if need():   # 必要时该节点的结果
             collect_result()
-        backtracking(args)   # 递归进入下一层次
+        backtracking(args)   # 递归进入下一层次, 用什么作为层次划分的依据也很重要
         revert_state(args, choice)   # 撤销当前选择

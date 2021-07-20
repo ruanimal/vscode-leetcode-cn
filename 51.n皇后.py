@@ -101,14 +101,48 @@ class SolutionV1(object):
         dfs(n, {}, {}, res, [])
         return [['.'*i + 'Q' + '.'*(n-i-1) for i in sol] for sol in res]
 
+
+EMPTY = '.'
+QUEEN = 'Q'
+
 class Solution(object):
     def solveNQueens(self, n):
-        def backtrack(res):
-            pass
+        def can_put(i, j):
+            return (heng.get(i, 0) == 0 and shu.get(j, 0) == 0
+                    and pie.get(i+j, 0) == 0 and na.get(i-j, 0) == 0)
+
+        def backtrack(res, i):
+            if i == n:
+                res.append([''.join(i) for i in board])
+                return
+
+            for j in range(n):
+                if can_put(i, j):
+                    board[i][j] = QUEEN
+                    heng[i] = 1
+                    shu[j] = 1
+                    pie[i+j] = 1
+                    na[i-j] = 1
+                    backtrack(res, i+1)
+                    heng[i] = 0
+                    shu[j] = 0
+                    pie[i+j] = 0
+                    na[i-j] = 0
+                    board[i][j] = EMPTY
+
+        if n == 1:
+            return [['Q']]
         board = [['.'] * n for _ in range(n)]
-        record = [[0] * n for _ in range(n)]
+        res = []
+        heng = {}
+        shu = {}
+        pie = {}
+        na = {}
+        backtrack(res, 0)
+        return res
 
 if __name__ == "__main__":
     pass
-    print(Solution().solveNQueens(4))
+    # import ipdb;ipdb.set_trace()
+    print(Solution().solveNQueens(1))
     # print(Solution().solveNQueens(10))
