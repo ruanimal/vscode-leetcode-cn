@@ -94,12 +94,7 @@ class Solution:
                 p.next = p2
                 p2 = p2.next
             p = p.next
-        p1 = p1 or p2 or None
-
-        while p1:
-            p.next = p1
-            p = p.next
-            p1 = p1.next
+        p.next = p1 or p2
         return head.next
 
 if __name__ == "__main__":

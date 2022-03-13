@@ -59,17 +59,21 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        len_nums = len(nums)
-        if len_nums <= 1:
-            return len_nums
-        to_del = []
-        i = 0
-        while i < (len_nums - 1):
-            if nums[i] == nums[i+1]:
-                del nums[i]
-            else:
-                i += 1
-            if i == len(nums) - 1:
-                break
-        return len(nums)
+        length = len(nums)
+        if length <= 1:
+            return length
+        # slow: 当前可用位置
+        # fast: 当前判断数字位置
+        slow, fast = 1, 1
+        while fast < length:
+            if nums[fast] != nums[slow-1]:
+                nums[slow] = nums[fast]
+                slow += 1
+            fast += 1
+        return slow
 
+if __name__ == '__main__':
+    s = Solution()
+    case = [0,0,1,1,1,2,2,3,3,4]
+    res = s.removeDuplicates(case)
+    print(case[:res])
