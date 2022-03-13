@@ -30,32 +30,13 @@
 #         self.next = None
 
 
-class ListNode:
-    def __init__(self, x):
-        self.val = x
-        self.next = None
-
-    def __str__(self):
-        tmp = []
-        node = self
-        while node:
-            tmp.append(repr(node.val))
-            node = node.next
-        tmp.append('None')
-        return ' -> '.join(tmp)
-
-    __repr__ = __str__
+try:
+    from comm import *
+except ImportError:
+    LOCAL_TEST = False
 
 
-def build_list_node(nums):
-    head = node = ListNode(None)
-    for i in nums:
-        node.next = ListNode(i)
-        node = node.next
-    return head.next
-
-
-class Solution:
+class Solution_A:
     def reverseBetween(self, head: ListNode, m: int, n: int) -> ListNode:
         """
         使用头指针, 先走m-1步
@@ -65,8 +46,8 @@ class Solution:
         if not head or not head.next:
             return head
 
-        new_head = ptr = ListNode(None)
-        new_head.next = head
+        dummy = ptr = ListNode(None)
+        dummy.next = head
 
         for _ in range(m-1):
             ptr = ptr.next
@@ -76,8 +57,32 @@ class Solution:
             edge_ptr.next = edge_ptr.next.next
             tmp.next = ptr.next
             ptr.next = tmp
-        return new_head.next
+        return dummy.next
 
-if __name__ == "__main__":
-    l = build_list_node(range(1,10))
-    print(Solution().reverseBetween(l, 2, 9))
+class Solution:
+    def reverseN(self, head: ListNode, n: int) -> ListNode:
+        if n <= 1 or not head.next:
+            self.successor = head.next
+            return head
+        others = head.next
+        head.next = None
+        new_head = self.reverseN(others, n-1)
+        others.next = head
+        head.next = self.successor
+        return new_head
+
+    def reverseBetween(self, head: ListNode, m: int, n: int) -> ListNode:
+        if m == n:
+            return head
+        if m == 1:
+            return self.reverseN(head, n)
+        head.next = self.reverseBetween(head.next, m-1, n-1)
+        return head
+
+
+if LOCAL_TEST:
+    l = build_list_node([3,5])
+    # print(l)
+    # print('---')
+    # print(Solution().reverseN(l, 2))
+    print(Solution().reverseBetween(l, 1, 2))

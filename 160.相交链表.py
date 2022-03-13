@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=160 lang=python
+# @lc app=leetcode.cn id=160 lang=python3
 #
 # [160] 相交链表
 #
@@ -76,7 +76,12 @@
 #         self.val = x
 #         self.next = None
 
-class Solution(object):
+try:
+    from comm import *
+except ImportError:
+    LOCAL_TEST = False
+
+class Solution_A(object):
     def getIntersectionNode(self, headA, headB):
         """
         :type head1, head1: ListNode
@@ -94,32 +99,90 @@ class Solution(object):
         if headA.next == headB.next:
             return headA.next
 
-        count_a = 0
-        count_b = 0
-        ptr_a = headA
-        ptr_b = headB
+        count1 = 0
+        count2 = 0
+        p1 = headA
+        p2 = headB
 
-        while ptr_a.next:
-            count_a += 1
-            ptr_a = ptr_a.next
-        while ptr_b.next:
-            count_b += 1
-            ptr_b = ptr_b.next
-        if ptr_a != ptr_b:
+        while p1.next:
+            count1 += 1
+            p1 = p1.next
+        while p2.next:
+            count2 += 1
+            p2 = p2.next
+        if p1 != p2:
             return
 
-        ptr_a = headA
-        ptr_b = headB
-        while count_a > count_b:
-            ptr_a = ptr_a.next
-            count_a -= 1
-        while count_a < count_b:
-            ptr_b = ptr_b.next
-            count_b -= 1
-        while ptr_a and ptr_b:
-            if ptr_a == ptr_b:
-                return ptr_a
+        p1 = headA
+        p2 = headB
+        while count1 > count2:
+            p1 = p1.next
+            count1 -= 1
+        while count1 < count2:
+            p2 = p2.next
+            count2 -= 1
+        while p1 and p2:
+            if p1 == p2:
+                return p1
             else:
-                ptr_a = ptr_a.next
-                ptr_b = ptr_b.next
+                p1 = p1.next
+                p2 = p2.next
+
+class Solution_B(object):
+    def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> ListNode:
+        """
+        将A链的末尾链上B链的头部, 转化为求链表环的问题
+        """
+        if not headA or not headB:
+            return
+
+        p = headA
+        while p.next:
+            p = p.next
+        p.next = headB   # 链表相连
+        slow = fast = headA
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+            if slow == fast:
+                break
+        if fast is None or fast.next is None:   # 无环
+            p.next = None  # 还原相连的链表
+            return
+        slow = headA
+        while slow != fast:
+            slow = slow.next
+            fast = fast.next
+        p.next = None  # 还原相连的链表
+        return slow
+
+class Solution(object):
+    def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> ListNode:
+        """
+        A: A单独部分
+        B: B单独部分
+        C: 相交的部分
+
+        则:
+            p1 = A + C + B + C
+            p2 = B + C + A + C
+            p1 == p2
+
+        还得排除C长度为0的情况, 也就是没有相交
+        """
+
+        if not headA or not headB:
+            return
+
+        p1, p2 = headA, headB
+        while p1 != p2:   # 结束时, 两者都为None, 或者两者相等
+            if p1 is None:
+                p1 = headB
+            else:
+                p1 = p1.next
+            if p2 is None:
+                p2 = headA
+            else:
+                p2 = p2.next
+        return p1
 

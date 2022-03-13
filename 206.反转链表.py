@@ -28,20 +28,48 @@
 #         self.val = x
 #         self.next = None
 
-class Solution:
+try:
+    from comm import *
+except ImportError:
+    LOCAL_TEST = False
+
+class Solution_A:
     def reverseList(self, head: ListNode) -> ListNode:
+        """
+        逐个取出放到dummy节点之后
+        """
+
         if not head:
             return
         if not head.next:
             return head
 
-        new_head = p = ListNode(None)
-        new_head.next = head
+        dummy = p = ListNode(None)
+        dummy.next = head
         p = head
         while p.next:
             tmp = p.next
             p.next = p.next.next
-            tmp.next = new_head.next
-            new_head.next = tmp
-        return new_head.next
+            tmp.next = dummy.next
+            dummy.next = tmp
+        return dummy.next
+
+class Solution:
+    def reverseList(self, head: ListNode) -> ListNode:
+        """
+        递归版本, 把链表分成两部分
+        head -> others  转变成 reverseList(others) -> head
+        """
+        if not head or not head.next:
+            return head
+
+        others = head.next
+        head.next = None
+        new_head = self.reverseList(others)
+        others.next = head   # 反转之后others变成尾部
+        return new_head
+
+if LOCAL_TEST:
+    n = build_list_node(range(5))
+    print(Solution().reverseList(n))
 
