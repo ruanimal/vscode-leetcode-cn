@@ -1,5 +1,7 @@
 from typing import *
 
+LOCAL_TEST = True
+
 class ListNode:
     def __init__(self, x):
         self.val = x

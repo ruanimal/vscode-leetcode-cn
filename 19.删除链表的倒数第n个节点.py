@@ -30,23 +30,11 @@
 #
 #
 # Definition for singly-linked list.
-class ListNode:
-    def __init__(self, x):
-        self.val = x
-        self.next = None
 
-def print_list_node(node):
-    while node:
-        print(node.val, '-> ', end='')
-        node = node.next
-
-
-def build_list_node(nums):
-    head = node = ListNode(None)
-    for i in nums:
-        node.next = ListNode(i)
-        node = node.next
-    return head.next
+try:
+    from comm import *
+except ImportError:
+    LOCAL_TEST = False
 
 
 class Solution:
@@ -55,12 +43,9 @@ class Solution:
         快慢指针
 
         """
-        if n <= 0:
-            raise ValueError('wrong n')
-
-        pre_head = ListNode(None)
-        pre_head.next = head
-        p1 = p2 = pre_head
+        dummy = ListNode(None)
+        dummy.next = head
+        p1 = p2 = dummy
 
         while p2.next:
             if n > 0:
@@ -69,16 +54,12 @@ class Solution:
             else:
                 p2 = p2.next
                 p1 = p1.next
-
-        if n > 0:
-            raise ValueError('n big than listNode length')
         p1.next = p1.next.next
-        return pre_head.next
+        return dummy.next
 
+if LOCAL_TEST:
+    n = build_list_node(range(10))
+    print(n)
+    head = build_list_node([1, 2, 3, 4, 5])
+    print(Solution().removeNthFromEnd(head, 2))
 
-if __name__ == "__main__":
-    # n = build_list_node(range(10))
-    # print_list_node(n)
-    # head = build_list_node([1, 2, 3, 4, 5])
-    # print_list_node(Solution().removeNthFromEnd(head, 2))
-    pass
