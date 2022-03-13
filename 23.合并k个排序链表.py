@@ -29,7 +29,39 @@
 #     def __init__(self, x):
 #         self.val = x
 #         self.next = None
+try:
+    from comm import *
+except Exception:
+    pass
 
+from dataclasses import dataclass, field
+from typing import Any
+
+@dataclass(order=True)
+class PrioritizedItem:
+    priority: int
+    item: Any=field(compare=False)
+
+class Solution_MinHeap:
+    def mergeKLists(self, lists: List[ListNode]) -> ListNode:
+        """
+        采用优先队列(最小堆), 比归并排序慢
+        """
+        import queue
+        min_heap = queue.PriorityQueue()
+        p = dummy = ListNode(-1)
+        for node in lists:
+            if node:
+                min_heap.put(PrioritizedItem(node.val, node))
+        while not min_heap.empty():
+            wrap = min_heap.get()
+            node = wrap.item
+            p.next = node
+            p = p.next
+            node = node.next
+            if node:
+                min_heap.put(PrioritizedItem(node.val, node))
+        return dummy.next
 
 class Solution:
     def mergeKLists(self, lists: List[ListNode]) -> ListNode:
@@ -47,7 +79,7 @@ class Solution:
 
     def mergeTwoLists(self, l1: ListNode, l2: ListNode) -> ListNode:
         """
-        参考 插入排序,将一个链表插入到另一个链表中
+        参考 21.合并两个有序链表.py
         """
 
         p1 = l1
@@ -68,4 +100,4 @@ class Solution:
 
 if __name__ == "__main__":
     pass
-    from comm import *
+

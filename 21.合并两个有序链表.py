@@ -74,7 +74,7 @@ def build_list_node(nums):
 class Solution:
     def mergeTwoLists(self, l1: ListNode, l2: ListNode) -> ListNode:
         """
-        参考 插入排序,将一个链表插入到另一个链表中
+        参考归并排序
         """
 
         if not l1:
