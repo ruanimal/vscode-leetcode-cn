@@ -117,7 +117,7 @@ class Solution(object):
                 return
 
             for j in range(n):
-                if can_put(i, j):
+                if can_put(i, j):   # 剪枝: 把明显不满足的去掉
                     board[i][j] = QUEEN
                     heng[i] = 1
                     shu[j] = 1
