@@ -22,3 +22,9 @@ def build_list_node(nums):
         node.next = ListNode(i)
         node = node.next
     return head.next
+
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
