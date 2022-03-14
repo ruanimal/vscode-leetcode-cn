@@ -27,39 +27,17 @@
 # 进阶：
 # 你能否用 O(n) 时间复杂度和 O(1) 空间复杂度解决此题？
 
-
-class ListNode:
-    def __init__(self, x):
-        self.val = x
-        self.next = None
-
-    def __repr__(self):
-        tmp = []
-        node = self
-        max_depth = 20
-        while node:
-            max_depth -= 1
-            if max_depth < 0:
-                break
-            tmp.append(repr(node.val))
-            node = node.next
-        else:
-            tmp.append('None')
-        return ' -> '.join(tmp)
-
-
-def build_list_node(nums):
-    head = node = ListNode(None)
-    for i in nums:
-        node.next = ListNode(i)
-        node = node.next
-    return head.next
+try:
+    from comm import *
+except ImportError:
+    LOCAL_TEST = False
 
 class Solution(object):
     def isPalindrome(self, head):
         """
         :type head: ListNode
         :rtype: bool
+        快慢指针法, 反转其中一半, 比较
         """
         if not head:
             return True
@@ -76,7 +54,6 @@ class Solution(object):
 
         new_head = ListNode(None)
         new_head.next = ptr = head_b
-        print(head, head_b)
         while ptr.next:
             tmp = ptr.next
             ptr.next = ptr.next.next
@@ -92,8 +69,31 @@ class Solution(object):
             ptr_b = ptr_b.next
         return True
 
-if __name__ == "__main__":
-    ll = build_list_node([1,2])
+class Solution_B(object):
+    def traverse(self, right):
+        """判断左右往里各移动移动一位之后是不是回文
+        性能比较差, 耗时为迭代法的2倍
+        """
+        if not right:
+            return True
+        res = self.traverse(right.next)
+        res = res and right.val == self.left.val
+        self.left = self.left.next
+        return res
+
+
+    def isPalindrome(self, head):
+        """
+        递归法
+        """
+        if not head:
+            return
+
+        self.left = head
+        return self.traverse(head)
+
+if LOCAL_TEST:
+    ll = build_list_node([1,2,1])
     print(Solution().isPalindrome(ll))
 
 

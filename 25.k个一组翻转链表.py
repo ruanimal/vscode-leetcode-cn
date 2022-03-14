@@ -43,7 +43,7 @@ except ImportError:
     LOCAL_TEST = False
 
 
-class Solution:
+class Solution_A:
     def reverseKGroup(self, head, k):
         """
         :type head: ListNode
@@ -80,7 +80,37 @@ class Solution:
             sub_head = sub_head.next
         return new_head.next
 
-if __name__ == "__main__":
-    l = build_list_node(range(11))
+class Solution:
+    def reverseN(self, head, n):
+        if n == 1:
+            return head
+
+        others = head.next
+        head.next = None
+        new_head = self.reverseN(others, n-1)
+        head.next = others.next
+        others.next = head
+        return new_head
+
+    def reverseKGroup(self, head, k):
+        if not head or k <= 1:
+            return head
+
+        n = k
+        p = head
+        while n > 0 and p:
+            n -= 1
+            p = p.next
+        if n > 0:   # 不足k
+            return head
+
+        new_head = self.reverseN(head, k)
+        if p:
+            head.next = self.reverseKGroup(p, k)  # tail = head
+        return new_head
+
+if LOCAL_TEST:
+    l = build_list_node(range(12))
+    print(l)
     print(Solution().reverseKGroup(l, 3))
 
