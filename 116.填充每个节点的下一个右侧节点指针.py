@@ -88,18 +88,22 @@ class Solution:
         if not root:
             return
 
-        # dummy = Node()
-        # dummy.next = root
-        # fast , slow = root, dummy
-        # while slow != fast:
-        #     if fast.left:
-        #         fast.next = fast.left
-        #         fast = fast.next
-        #     if fast.right:
-        #         fast.next = fast.right
-        #         fast = fast.next
-        #     slow = slow.next
-        # 用dqueue
+        que = []
+        que.append(root)
+        while len(que) > 0:
+            p = que[0]
+            for i in que[1:]:
+                p.next = i
+                p = p.next
+            next_que = []
+            for i in que:
+                if i.left:
+                    next_que.append(i.left)
+                if i.right:
+                    next_que.append(i.right)
+            que = next_que
+        return root
+
 
 # @lc code=end
 
