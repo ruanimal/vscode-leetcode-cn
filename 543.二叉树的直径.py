@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=543 lang=python
+# @lc app=leetcode.cn id=543 lang=python3
 #
 # [543] 二叉树的直径
 #
@@ -47,23 +47,21 @@ class Solution(object):
         if not root:
             return 0
         self.ans = 0
-        self.find_depth(root)
+        self.find_width(root)
         return self.ans
 
-    def find_depth(self, node):
-        if not node.left and not node.right:
+    def find_width(self, node):
+        """
+        注意理解递归返回的是什么, 有多少种情况
+        遍历过程中,在什么时候更新了什么状态
+        """
+
+        if not node and not node:
             return 0
 
-        width = 0
-        left_depth = 0
-        right_depth = 0
-        if node.left:
-            left_depth = self.find_depth(node.left)   # 左子树深度
-            width += left_depth + 1   # 左半路径长度
-        if node.right:
-            right_depth = self.find_depth(node.right)
-            width += right_depth + 1
-        self.ans = max(self.ans, width)
-        return max(left_depth, right_depth) + 1   # 当前深度为子树深度的较大者, 再加一
+        left_depth = self.find_width(node.left)   # 左子树直径
+        right_depth = self.find_width(node.right)
+        self.ans = max(self.ans, left_depth + right_depth)
+        return max(left_depth, right_depth) + 1   # 当前直径为子树直径的较大者, 再加一
 
 

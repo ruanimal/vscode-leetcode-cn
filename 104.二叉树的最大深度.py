@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=104 lang=python
+# @lc app=leetcode.cn id=104 lang=python3
 #
 # [104] 二叉树的最大深度
 #
