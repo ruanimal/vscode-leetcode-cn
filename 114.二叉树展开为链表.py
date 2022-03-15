@@ -79,8 +79,9 @@ class Solution:
         if not root:
             return
 
-        left = self.flatten(root.left)
-        right = self.flatten(root.right)
+        left = self.flatten(root.left)  # 左侧展开
+        right = self.flatten(root.right)  # 右侧展开
+        # 后序位置操作, 将左侧接到右节点, 将右侧接到节点的末尾
         root.left = None
         root.right = left
         p = root
