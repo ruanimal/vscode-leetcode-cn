@@ -76,19 +76,30 @@ class Solution:
 
     def helper(self, preorder: List[int], postorder: List[int],
                pre_low, pre_high, post_low, post_high) -> TreeNode:
-        if (pre_high - pre_low < 0) or (post_high - post_low < 0):
+        # pre_low, pre_high => 子树在前序数组的位置 => 该子树的前序数组
+        # post_low, post_high => 子树在后序数组的位置 => 该子树的后序数组
+        if (pre_high - pre_low < 0):   # 一侧子树为空的情况
             return
+        if pre_low == pre_high:
+            return TreeNode(preorder[pre_low])   # 叶子节点
 
         lroot_val = preorder[pre_low+1]
         rroot_val = postorder[post_high-1]
         root = TreeNode(preorder[pre_low])
+        # 通过后序数组得到左子树的右边界
         root.left = self.helper(preorder, postorder,
                                 pre_low+1, self.preorder_index[rroot_val]-1,
                                 post_low, self.postorder_index[lroot_val])
+        # 通过前序数组得到右子树的左边界
         root.right = self.helper(preorder, postorder,
                                  self.preorder_index[rroot_val], pre_high,
                                  self.preorder_index[rroot_val]+1, post_high-1)
         return root
+
+if LOCAL_TEST:
+    s = Solution()
+    s.constructFromPrePost(preorder = [1,2,4,5,3,6,7], postorder = [4,5,2,6,7,3,1])
+
 
 # @lc code=end
 
