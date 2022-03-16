@@ -71,7 +71,7 @@
 #         self.left = None
 #         self.right = None
 
-class Codec:
+class Codec_A:
     def serialize(self, root):
         """Encodes a tree to a single string.
         层次遍历
@@ -127,6 +127,47 @@ class Codec:
             que = new_que
         return root
 
+
+class Codec:
+    def serialize(self, root):
+        """Encodes a tree to a single string.
+        前序遍历
+        :type root: TreeNode
+        :rtype: str
+        """
+        self.res = []
+        self.serialize_helper(root)
+        return ','.join(self.res)
+
+    def serialize_helper(self, root):
+        if root is None:
+            self.res.append('')
+            return
+        self.res.append(str(root.val))
+        self.serialize_helper(root.left)
+        self.serialize_helper(root.right)
+
+    def deserialize(self, data):
+        """Decodes your encoded data to tree.
+
+        :type data: str
+        :rtype: TreeNode
+        """
+        if not data:
+            return
+
+        self.index = -1
+        return self.deserialize_helper(data.split(','))
+
+    def deserialize_helper(self, data):
+        self.index += 1  # 注意增加的时机
+        if data[self.index] == '':
+            return
+
+        root = TreeNode(int(data[self.index]))
+        root.left = self.deserialize_helper(data)
+        root.right = self.deserialize_helper(data)
+        return root
 # Your Codec object will be instantiated and called as such:
 # ser = Codec()
 # deser = Codec()
