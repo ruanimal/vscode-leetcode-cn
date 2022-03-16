@@ -11,16 +11,13 @@
 #         self.right = None
 
 class Solution(object):
-    count = 0
+    total = 0
     def convertBST(self, root):
-        """
-        :type root: TreeNode
-        :rtype: TreeNode
-        """
         if not root:
             return
         self.convertBST(root.right)
-        root.val += self.count
-        self.count = root.val
+        self.total += root.val
+        root.val = self.total
         self.convertBST(root.left)
         return root
+
