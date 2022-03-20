@@ -54,9 +54,10 @@
 #
 #
 #
+from comm import *
 
 # @lc code=start
-class Solution:
+class Solution_A:
     def countSmaller(self, nums: List[int]) -> List[int]:
         """暴力法, 时间超时"""
 
@@ -71,10 +72,65 @@ class Solution:
                     res[i] += 1
         return res
 
+from collections import namedtuple
+
+Pair = namedtuple('Pair', ['val', 'idx'])
+
+class Solution:
+    def countSmaller(self, nums: List[int]) -> List[int]:
+        """
+        归并排序
+        merge时, 右半边数组的数据如果要移动到前方, 则逆序+1
+        """
+
+        self.tmp = [0] * len(nums)
+        self.count = [0] * len(nums)
+        nums = [Pair(val, idx) for idx, val in enumerate(nums)]
+        self.sort(nums, 0, len(nums)-1)
+        # print(nums)
+        return self.count
+
+    def sort(self, nums: List[Pair], low, high) -> List:
+        if low == high:
+            return
+        mid = (low + high) // 2
+        self.sort(nums, low, mid)
+        self.sort(nums, mid+1, high)
+        return self.merge(nums, low, mid, high)
+
+    def merge(self, nums, low, mid, high) -> List[Pair]:
+        # print(nums[low: mid+1], nums[mid+1: high+1])
+        self.tmp[low:high+1] = nums[low:high+1]    # 缓存原数据
+        i, j = low, mid+1
+        p = low
+        while p < high+1:
+            if i == mid+1:   # 左侧空了
+                nums[p] = self.tmp[j]
+                j += 1
+            elif j == high+1:  # 右侧空了, 当前位置比右侧所有都大
+                nums[p] = self.tmp[i]
+                self.count[nums[p].idx] += j - mid - 1
+                i += 1
+                # 左侧前进一位, 当前位置比右侧已处理的都大
+            elif self.tmp[i].val <= self.tmp[j].val:
+                nums[p] = self.tmp[i]
+                self.count[nums[p].idx] += j - mid - 1
+                i += 1
+            else:
+                nums[p] = self.tmp[j]
+                j += 1
+            p += 1
+
 # @lc code=end
 
-from comm import *
 if __name__ == '__main__':
+    import random
+    # nums = list(range(10))
+    # random.shuffle(nums)
+    # print(nums)
     s = Solution()
-    r = s.countSmaller([5,2,6,1])
+    # r = s.countSmaller(range(10, 0, -1))
+    # r = s.countSmaller(nums)
+    r = s.countSmaller([1,9,7,8,5])
+    # r = s.sort(nums, 0, len(nums)-1)
     print(r)

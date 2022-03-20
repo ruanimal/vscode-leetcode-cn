@@ -91,6 +91,10 @@ class NestedInteger:
 
 class NestedIterator_A:
     def __init__(self, nestedList: List[NestedInteger]):
+        """
+        直接展开法
+        """
+
         self.res = []
         self.index = -1
         for i in nestedList:
@@ -112,7 +116,7 @@ class NestedIterator_A:
     def hasNext(self) -> bool:
         return self.index < len(self.res)-1
 
-class NestedIterator:
+class NestedIterator_B:
     def __init__(self, nestedList: List[NestedInteger]):
         """
         原生生成器版本
@@ -138,6 +142,42 @@ class NestedIterator:
         except StopIteration:
             self.current = None
             return False
+
+from collections import deque
+
+class NestedIterator_C:
+    def __init__(self, nestedList: List[NestedInteger]):
+        """
+        双端队列版本
+        """
+        self.que = deque()
+        self.que.extend(nestedList)
+
+    def next(self) -> int:
+        return self.que.popleft().getInteger()
+
+    def hasNext(self) -> bool:
+        while self.que and not self.que[0].isInteger():
+            tmp = self.que.popleft().getList()
+            for i in range(len(tmp)-1, -1, -1):
+                self.que.appendleft(tmp[i])
+        return len(self.que) > 0
+
+class NestedIterator:
+    def __init__(self, nestedList: List[NestedInteger]):
+        """
+        list 版本
+        """
+        self.que = []
+        self.que.extend(nestedList[::-1])
+
+    def next(self) -> int:
+        return self.que.pop().getInteger()
+
+    def hasNext(self) -> bool:
+        while self.que and not self.que[-1].isInteger():
+            self.que.extend(self.que.pop().getList()[::-1])
+        return len(self.que) > 0
 
 # Your NestedIterator object will be instantiated and called as such:
 # i, v = NestedIterator(nestedList), []
