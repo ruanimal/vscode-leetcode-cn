@@ -13,6 +13,8 @@
 class Solution(object):
     total = 0
     def convertBST(self, root):
+        """中序遍历右侧优先"""
+
         if not root:
             return
         self.convertBST(root.right)
