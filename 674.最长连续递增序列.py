@@ -35,7 +35,9 @@
 # 注意：数组长度不会超过10000。
 #
 #
-class Solution(object):
+
+# @lc code=start
+class Solution_A(object):
     def findLengthOfLCIS(self, nums):
         """
         :type nums: List[int]
@@ -56,12 +58,23 @@ class Solution(object):
         max_count = max(max_count, count)
         return max_count
 
-if __name__ == "__main__":
-    # s = Solution().findLengthOfLCIS([3,1,2,3,4,2,5])
-    # print(s)
-    # s = Solution().findLengthOfLCIS([])
-    # print(s)
-    s = Solution().findLengthOfLCIS([1,1,1,1])
-    print(s)
 
+class Solution(object):
+    def findLengthOfLCIS(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
 
+        if len(nums) <= 1:
+            return len(nums)
+
+        i, j = 0, 1
+        length = 0
+        while i < j < len(nums):
+            if nums[j-1] >= nums[j]:
+                length = max(j-i, length)
+                i = j
+            j += 1
+        return max(length, j-i)
+# @lc code=end
