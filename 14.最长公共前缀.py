@@ -41,7 +41,7 @@ class Tried(dict):
         self.count = 0
 
 
-class Solution(object):
+class Solution_A(object):
     def longestCommonPrefix(self, strs):
         """
         :type strs: List[str]
@@ -79,6 +79,16 @@ class Solution(object):
         #     else:
         #         return res
         # return res
+
+class Solution(object):
+    def longestCommonPrefix(self, strs):
+        res = []
+        for i in range(min(len(i) for i in strs)):
+            if len(set(s[i] for s in strs)) == 1:
+                res.append(strs[0][i])
+            else:
+                break
+        return ''.join(res)
 
 
 if __name__ == "__main__":

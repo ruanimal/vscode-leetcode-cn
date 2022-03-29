@@ -39,7 +39,9 @@
 #
 #
 
-class Solution:
+# @lc code=start
+
+class Solution_A:
     def isPalindrome(self, x: 'int') -> 'bool':
         # import math
         if x < 0:
@@ -55,6 +57,51 @@ class Solution:
                 return False
         return True
 
+class Solution_B:
+    def isPalindrome(self, x: 'int') -> 'bool':
+        """
+        使用了额外空间
+        """
+
+        if x < 0:
+            return False
+
+        tmp = []
+        while x > 0:
+            tmp.append(x % 10)
+            x = x // 10
+        i, j = 0, len(tmp) -1
+        while i < j:
+            if tmp[i] != tmp[j]:
+                return False
+            i +=  1
+            j -= 1
+        return True
+
+class Solution:
+    def isPalindrome(self, x: 'int') -> 'bool':
+        """
+        使用了额外空间
+        """
+
+        if x < 0:
+            return False
+        if x > 0 and x % 10 == 0:
+            return False
+
+        reversed_x = 0
+        while x > reversed_x:
+            x, tail = divmod(x, 10)
+            reversed_x = 10 * reversed_x + tail
+        # print(reversed_x, x, tail)
+        if reversed_x > x:
+            return reversed_x // 10 == x
+        return reversed_x == x
+
+# @lc code=end
+
 if __name__ == '__main__':
     # import ipdb; ipdb.set_trace()
     print(Solution().isPalindrome(12221))
+    print(Solution().isPalindrome(1221))
+    print(Solution().isPalindrome(10))

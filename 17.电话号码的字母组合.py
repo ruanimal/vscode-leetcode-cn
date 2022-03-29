@@ -29,7 +29,7 @@
 # 尽管上面的答案是按字典序排列的，但是你可以任意选择答案输出的顺序。
 #
 #
-class Solution(object):
+class Solution_A(object):
     def letterCombinations(self, digits):
         """
         :type digits: str
@@ -51,7 +51,32 @@ class Solution(object):
         from itertools import product
         return [''.join(j) for j in product(*[digits_map[i] for i in digits])]
 
+class Solution(object):
+    def letterCombinations(self, digits):
+        digits_map = {
+            '2': 'abc',
+            '3': 'def',
+            '4': 'ghi',
+            '5': 'jkl',
+            '6': 'mno',
+            '7': 'pqrs',
+            '8': 'tuv',
+            '9': 'wxyz',
+        }
+        data = [digits_map[i] for i in digits]
+        def helper(data):
+            if len(data) == 0:
+                return []
+            if len(data) == 1:
+                return list(data[0])
+            return [i + j for i in data[0] for j in helper(data[1:])]
+        return helper(data)
+
 if __name__ == "__main__":
+    s = Solution().letterCombinations('23')
+    print(s)
+    s = Solution().letterCombinations('2')
+    print(s)
     s = Solution().letterCombinations('234')
     print(s)
 

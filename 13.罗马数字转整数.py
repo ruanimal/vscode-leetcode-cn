@@ -83,33 +83,33 @@ class Solution(object):
         result += num_map[s[-1]]
         return result
 
-    # def IntToroman(self, num):
-    #     num_list = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]
-    #     num_map = {
-    #         1: 'I',
-    #         4: 'IV',
-    #         5: 'V',
-    #         9: 'IX',
-    #         10: 'X',
-    #         40: 'XL',
-    #         50: 'L',
-    #         90: 'XC',
-    #         100: 'C',
-    #         400: 'CD',
-    #         500: 'D',
-    #         900: 'CM',
-    #         1000: 'M',
-    #     }
+    def IntToroman(self, num):
+        num_list = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]
+        num_map = {
+            1: 'I',
+            4: 'IV',
+            5: 'V',
+            9: 'IX',
+            10: 'X',
+            40: 'XL',
+            50: 'L',
+            90: 'XC',
+            100: 'C',
+            400: 'CD',
+            500: 'D',
+            900: 'CM',
+            1000: 'M',
+        }
 
-    #     ans = []
-    #     for i in num_list:
-    #         if i > num:
-    #             continue
-    #         if num == 0:
-    #             break
-    #         a, num = divmod(num, i)
-    #         ans.append(a * num_map[i])
-    #     return ''.join(ans)
+        ans = []
+        for i in num_list:
+            if i > num:
+                continue
+            if num == 0:
+                break
+            a, num = divmod(num, i)
+            ans.append(a * num_map[i])
+        return ''.join(ans)
 
 if __name__ == "__main__":
     obj = Solution()

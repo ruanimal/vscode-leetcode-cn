@@ -67,7 +67,9 @@
 # 解释: M = 1000, CM = 900, XC = 90, IV = 4.
 #
 #
-class Solution(object):
+
+# @lc code=start
+class Solution_A(object):
     def intToRoman(self, num):
         """
         :type num: int
@@ -101,3 +103,29 @@ class Solution(object):
             ans.append(a * num_map[i])
         return ''.join(ans)
 
+
+from collections import OrderedDict
+
+mapping = OrderedDict([
+    [1000, ['', 'M', 'MM', 'MMM']],
+    [100, ['', 'C', 'CC', 'CCC', 'CD', 'D', 'DC', 'DCC', 'DCCC', 'CM']],
+    [10, ['', 'X', 'XX', 'XXX', 'XL', 'L', 'LX', 'LXX', 'LXXX', 'XC']],
+    [1, ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX']],
+])
+
+class Solution(object):
+    def intToRoman(self, num):
+        """
+        :type num: int
+        :rtype: str
+        """
+
+        ans = []
+        for i, romans in mapping.items():
+            head, num = divmod(num, i)
+            ans.append(romans[head])
+        return ''.join(ans)
+
+# @lc code=end
+s = Solution()
+print(s.intToRoman(1994))
