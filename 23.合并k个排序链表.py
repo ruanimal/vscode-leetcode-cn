@@ -29,10 +29,10 @@
 #     def __init__(self, x):
 #         self.val = x
 #         self.next = None
-try:
-    from comm import *
-except Exception:
-    pass
+
+from comm import *
+
+# @lc code=start
 
 from dataclasses import dataclass, field
 from typing import Any
@@ -46,6 +46,10 @@ class Solution_MinHeap:
     def mergeKLists(self, lists: List[ListNode]) -> ListNode:
         """
         采用优先队列(最小堆), 比归并排序慢
+
+        将每个链表的的第一个元素放到最小堆
+        取出最小元素, 放到新链表, 把后继元素放到堆中
+        直到堆空
         """
         import queue
         min_heap = queue.PriorityQueue()
@@ -96,6 +100,8 @@ class Solution:
             p = p.next
         p.next = p1 or p2
         return dummy.next
+
+# @lc code=end
 
 
 if __name__ == "__main__":

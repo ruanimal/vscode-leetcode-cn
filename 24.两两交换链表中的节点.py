@@ -53,8 +53,11 @@ def build_list_node(nums):
         node = node.next
     return head.next
 
-'''
-class Solution:
+
+# @lc code=start
+
+
+class Solution_A:
     def swapPairs(self, head: ListNode) -> ListNode:
         """
         使用一个长度为2的stack, 注意清理node的next指针,防止死循环
@@ -86,9 +89,9 @@ class Solution:
         if stack:
             p.next = stack.pop()
         return head_node.next
-'''
 
-class Solution(object):
+
+class Solution_B(object):
     def swapPairs(self, head):
         """
         :type head: ListNode
@@ -100,6 +103,22 @@ class Solution(object):
             pointer.val, pointer.next.val = pointer.next.val, pointer.val
             pointer = pointer.next.next
         return head
+
+class Solution(object):
+    def swapPairs(self, head):
+        dummy = ListNode(None)
+        dummy.next = head
+        p = dummy
+        while p.next and p.next.next:
+            temp = p.next.next
+            p.next.next = p.next.next.next
+            temp.next = p.next
+            p.next = temp
+            p = p.next.next
+        return dummy.next
+
+# @lc code=end
+
 
 if __name__ == "__main__":
     l = build_list_node([1,2,3,4])

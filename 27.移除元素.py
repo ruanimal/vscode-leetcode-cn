@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=27 lang=python
+# @lc app=leetcode.cn id=27 lang=python3
 #
 # [27] 移除元素
 #
@@ -57,14 +57,23 @@
 #
 #
 
+# @lc code=start
 
 class Solution(object):
     def removeElement(self, nums, val):
-        """
-        :type nums: List[int]
-        :type val: int
-        :rtype: int
-       粗暴解法
-        """
-        while val in nums:
-            nums.remove(val)
+        if len(nums) == 0:
+            return 0
+
+        slow = 0  # 新数组的末尾
+        fast = 0  # 老数组的头部
+        while fast < len(nums):
+            if nums[fast] != val:
+                nums[slow] = nums[fast]
+                slow += 1
+            fast += 1
+        # print(nums)
+        return slow
+# @lc code=end
+
+s = Solution()
+print(s.removeElement(nums = [0,1,2,2,3,0,4,2], val = 2,))

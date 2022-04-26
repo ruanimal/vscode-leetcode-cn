@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=28 lang=python
+# @lc app=leetcode.cn id=28 lang=python3
 #
 # [28] 实现strStr()
 #
@@ -41,8 +41,11 @@ class Solution(object):
         :type haystack: str
         :type needle: str
         :rtype: int
+        暴力法
         """
-        try:
-            return haystack.index(needle)
-        except ValueError:
-            return -1
+        if needle == '':
+            return 0
+        for i in range(0, len(haystack)-len(needle)+1):
+            if haystack[i:i+len(needle)] == needle:
+                return i
+        return -1

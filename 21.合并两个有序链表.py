@@ -71,6 +71,9 @@ def build_list_node(nums):
         node = node.next
     return head.next
 
+from comm import *
+# @lc code=start
+
 class Solution:
     def mergeTwoLists(self, l1: ListNode, l2: ListNode) -> ListNode:
         """
@@ -96,6 +99,9 @@ class Solution:
             p = p.next
         p.next = p1 or p2
         return head.next
+
+# @lc code=end
+
 
 if __name__ == "__main__":
     l1 = build_list_node([9])

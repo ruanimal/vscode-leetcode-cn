@@ -37,10 +37,10 @@
 #         self.val = x
 #         self.next = None
 
-try:
-    from comm import *
-except ImportError:
-    LOCAL_TEST = False
+from comm import *
+
+
+# @lc code=start
 
 
 class Solution_A:
@@ -93,9 +93,17 @@ class Solution:
         return new_head
 
     def reverseKGroup(self, head, k):
+        """
+        递归的方法
+
+        求出前k个的尾部, 反转
+        递归这个过程
+        """
+
         if not head or k <= 1:
             return head
 
+        # 求出前k个的尾部
         n = k
         p = head
         while n > 0 and p:
@@ -108,6 +116,8 @@ class Solution:
         if p:
             head.next = self.reverseKGroup(p, k)  # tail = head
         return new_head
+
+# @lc code=end
 
 if LOCAL_TEST:
     l = build_list_node(range(12))

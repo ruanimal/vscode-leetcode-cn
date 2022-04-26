@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=20 lang=python
+# @lc app=leetcode.cn id=20 lang=python3
 #
 # [20] 有效的括号
 #
@@ -67,11 +67,13 @@ class Solution(object):
             '}': '{',
             ']': '[',
         }
+        left_parts = set('[{(')
+        right_parts = set(']})')
         stack = []
         for i in s:
-            if i in set('[{('):
+            if i in left_parts:
                 stack.append(i)
-            elif i in set(']})'):
+            elif i in right_parts:
                 if not stack:
                     return False
                 elif stack.pop() != d[i]:
