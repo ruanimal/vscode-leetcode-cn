@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=46 lang=python
+# @lc app=leetcode.cn id=46 lang=python3
 #
 # [46] 全排列
 #
@@ -29,7 +29,11 @@
 # ]
 #
 #
-class Solution(object):
+
+from comm import *
+# @lc code=start
+
+class Solution_A(object):
     def permute(self, nums):
         """
         :type nums: List[int]
@@ -53,6 +57,31 @@ class Solution(object):
             return []
         dfs(0, [])
         return ans
+
+class Solution(object):
+    def permute(self, nums):
+        def backtrack(nums, level):
+            if level == len(nums):
+                ans.append(track[::])
+                return
+
+            for i in range(len(nums)):
+                if not used[i]:
+                    used[i] = 1
+                    track.append(nums[i])
+                    backtrack(nums, level+1)
+                    track.pop()
+                    used[i] = 0
+
+        if len(nums) == 0:
+            return []
+        ans = []
+        track = []
+        used = [0] * len(nums)
+        backtrack(nums, 0)
+        return ans
+
+# @lc code=end
 
 if __name__ == "__main__":
     s = Solution().permute([1,2,3])

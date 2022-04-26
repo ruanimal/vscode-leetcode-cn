@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=11 lang=python
+# @lc app=leetcode.cn id=11 lang=python3
 #
 # [11] 盛最多水的容器
 #
@@ -59,6 +59,7 @@ class Solution(object):
             else:
                 j -= 1
         return ans
+
 
 if __name__ == "__main__":
     s = Solution().maxArea([1,8,6,2,5,4,8,3,7])

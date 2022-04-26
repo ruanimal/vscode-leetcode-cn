@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=5 lang=python
+# @lc app=leetcode.cn id=5 lang=python3
 #
 # [5] 最长回文子串
 #
@@ -93,11 +93,6 @@ class Solution(object):
         这里我要提出一个疑问：为什么在动态规划的算法中，不用考虑回文串长度的奇偶性呢。想一想，答案就在状态转移方程里面。
 
         动态规划的方法事实上有点像“中心扩散法”的逆过程，想一想是不是这么回事。
-
-        作者：liweiwei1419
-        链接：https://leetcode-cn.com/problems/two-sum/solution/zhong-xin-kuo-san-dong-tai-gui-hua-by-liweiwei1419/
-        来源：力扣（LeetCode）
-        著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
         """
 
         # 动态规划

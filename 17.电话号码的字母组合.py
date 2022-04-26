@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=17 lang=python
+# @lc app=leetcode.cn id=17 lang=python3
 #
 # [17] 电话号码的字母组合
 #
@@ -51,7 +51,7 @@ class Solution_A(object):
         from itertools import product
         return [''.join(j) for j in product(*[digits_map[i] for i in digits])]
 
-class Solution(object):
+class Solution_B(object):
     def letterCombinations(self, digits):
         digits_map = {
             '2': 'abc',
@@ -71,6 +71,35 @@ class Solution(object):
                 return list(data[0])
             return [i + j for i in data[0] for j in helper(data[1:])]
         return helper(data)
+
+class Solution(object):
+    def letterCombinations(self, digits):
+        digits_map = {
+            '2': 'abc',
+            '3': 'def',
+            '4': 'ghi',
+            '5': 'jkl',
+            '6': 'mno',
+            '7': 'pqrs',
+            '8': 'tuv',
+            '9': 'wxyz',
+        }
+        def backtrack(idx):
+            if idx == len(strings):
+                ans.append(''.join(track))
+                return
+            for i in strings[idx]:
+                track.append(i)
+                backtrack(idx+1)
+                track.pop()
+
+        if len(digits) == 0:
+            return []
+        strings = [digits_map[i] for i in digits]
+        ans = []
+        track = []
+        backtrack(0)
+        return ans
 
 if __name__ == "__main__":
     s = Solution().letterCombinations('23')

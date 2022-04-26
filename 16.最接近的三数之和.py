@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=16 lang=python
+# @lc app=leetcode.cn id=16 lang=python3
 #
 # [16] 最接近的三数之和
 #
@@ -47,15 +47,15 @@ class Solution(object):
             j = i + 1
             k = len(nums) - 1
             while j < k:
-                tmp = nums[i] + nums[j] + nums[k]
-                if tmp > target:
+                total = nums[i] + nums[j] + nums[k]
+                if total > target:
                     k -= 1
                 else:
                     j += 1
-                tmp2 = abs(tmp - target)
-                if tmp2 < gap:
-                    gap = tmp2
-                    ans = tmp
+                new_gap = abs(total - target)
+                if new_gap < gap:
+                    gap = new_gap
+                    ans = total
         return ans
 
 if __name__ == "__main__":

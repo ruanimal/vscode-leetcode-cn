@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=8 lang=python
+# @lc app=leetcode.cn id=8 lang=python3
 #
 # [8] 字符串转换整数 (atoi)
 #

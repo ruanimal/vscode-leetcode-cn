@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=14 lang=python
+# @lc app=leetcode.cn id=14 lang=python3
 #
 # [14] 最长公共前缀
 #
@@ -71,17 +71,15 @@ class Solution_A(object):
             ans += k
         return ans
 
-        # # 更快的解法
-        # res = ""
-        # for i in zip(*strs):
-        #     if len(set(i)) == 1:
-        #         res += i[0]
-        #     else:
-        #         return res
-        # return res
 
 class Solution(object):
     def longestCommonPrefix(self, strs):
+        """
+        直接取所有字符串的第n位求交集
+            如果集合大小为1, 则前缀包含改字符
+            否则跳出
+        """
+
         res = []
         for i in range(min(len(i) for i in strs)):
             if len(set(s[i] for s in strs)) == 1:
