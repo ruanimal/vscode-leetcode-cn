@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=39 lang=python
+# @lc app=leetcode.cn id=39 lang=python3
 #
 # [39] 组合总和
 #
@@ -79,26 +79,29 @@ class Solution(object):
         :type target: int
         :rtype: List[List[int]]
         """
-        def bt(res, path, t):
+        def backtrack(nums, idx, t):
             if t == 0:
-                res.append(path[:])
+                ans.append(track[:])
                 return
-            for i in candidates:
-                if (not path or path[-1] <= i) and t-i >= 0:
-                    path.append(i)
-                    bt(res, path, t-i)
-                    path.pop()
+            if t < 0:
+                return
+
+            for i in range(idx, len(nums)):
+                track.append(nums[i])
+                backtrack(nums, i, t-nums[i])   # 同元素可复用, 可以一直在这层
+                track.pop()
 
         if not candidates:
             return []
-        res = []
-        bt(res, [], target)
-        return res
+        ans = []
+        track = []
+        backtrack(candidates, 0, target)
+        return ans
 
 
 if __name__ == "__main__":
-    s = Solution().combinationSum(candidates=[2, 3, 6, 7], target=7)
+    s = Solution().combinationSum(candidates=[7, 2, 3, 6], target=7)
     print(s)
-    s = Solution().combinationSum(candidates=[2, 3, 5], target=8)
+    s = Solution().combinationSum(candidates=[3, 2, 5], target=8)
     print(s)
 

@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=35 lang=python
+# @lc app=leetcode.cn id=35 lang=python3
 #
 # [35] 搜索插入位置
 #
@@ -41,35 +41,61 @@
 #
 #
 
-left = right = None
+# left = right = None
+# class Solution(object):
+#     def searchInsert(self, nums, target):
+#         """
+#         :type nums: List[int]
+#         :type target: int
+#         :rtype: int
+#         """
+#         def binary_search_loop_version(array, k):
+#             global left
+#             global right
+
+#             left = 0
+#             right = len(array) - 1
+#             while left <= right:
+#                 mid = (left + right) // 2
+#                 if array[mid] == k:
+#                     return mid
+#                 elif array[mid] > k:
+#                     right = mid - 1
+#                 else:
+#                     left = mid + 1
+#             return -1
+#         ret = binary_search_loop_version(nums, target)
+#         if ret == -1:
+#             # nums.insert(left, target)
+#             return left
+#         else:
+#             return ret
+
 class Solution(object):
     def searchInsert(self, nums, target):
         """
-        :type nums: List[int]
-        :type target: int
-        :rtype: int
-        """
-        def binary_search_loop_version(array, k):
-            global left
-            global right
+        二分查找, 找大于等于target的区间(支持有重复元素)
 
-            left = 0
-            right = len(array) - 1
-            while left <= right:
-                mid = (left + right) // 2
-                if array[mid] == k:
-                    return mid
-                elif array[mid] > k:
-                    right = mid - 1
-                else:
-                    left = mid + 1
-            return -1
-        ret = binary_search_loop_version(nums, target)
-        if ret == -1:
-            # nums.insert(left, target)
-            return left
-        else:
-            return ret
+        要记得left, right 构成的区间代表什么含义, 边界是怎么移动的, 最终会在什么位置
+        """
+
+        left = 0
+        right = len(nums)-1
+        while left < right:
+            mid = (left + right) >> 1
+            # (mid, right]
+            if nums[mid] < target:
+                left = mid + 1
+            else:
+                right = mid
+        if left == len(nums) - 1 and nums[left] < target:
+            left += 1
+        return left
+
 
 if __name__ == "__main__":
     print(Solution().searchInsert([1, 3, 5, 6], 2))
+    print(Solution().searchInsert([1, 1, 1, 1, 3, 5, 6], 2))
+    print(Solution().searchInsert([1, 1, 1, 1, 3, 5, 6], 1))
+    print(Solution().searchInsert([1, 1, 1, 1, 3, 5, 6], 3))
+    print(Solution().searchInsert([1, 1, 1, 1, 3, 5, 6], 0))

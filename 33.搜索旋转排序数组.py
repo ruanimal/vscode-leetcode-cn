@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=33 lang=python
+# @lc app=leetcode.cn id=33 lang=python3
 #
 # [33] 搜索旋转排序数组
 #
@@ -35,7 +35,7 @@
 # 输出: -1
 #
 #
-class Solution(object):
+class Solution_A(object):
     def search(self, nums, target):
         """
         :type nums: List[int]
@@ -74,15 +74,59 @@ class Solution(object):
                 return (mid + offset) % len(nums)   # 处理偏移后数值过大
         return -1
 
+class Solution(object):
+    @staticmethod
+    def get_offset(nums):
+        """
+        二分查找找到旋转的偏移量
+        """
+
+        if len(nums) <= 1:
+            return 0
+
+        if nums[0] < nums[-1]:  # 没有旋转
+            return 0
+
+        left = 0
+        right = len(nums) - 1
+        # [left, right] 代表无序区间
+        while left < right:
+            mid = (left + right) >> 1
+            if nums[mid] > nums[right]:
+                left = mid + 1
+            else:
+                right = mid
+            # print(left, right)
+        # 退出时 left == right, 且nums[left] 为原数组起点
+        return left
+
+    def search(self, nums, target):
+        offset = self.get_offset(nums)
+        get_val = lambda pos: nums[(pos + offset) % len(nums)]
+        left = 0
+        right = len(nums)-1
+        while left <= right:
+            mid = (left + right) >> 1
+            if get_val(mid) > target:
+                right = mid-1
+            elif get_val(mid) < target:
+                left = mid+1
+            else:
+                return (mid+offset) % len(nums)
+        return -1
+
 if __name__ == "__main__":
-    s = Solution().search([4,5,6,7,0,1,2], target=3)
-    print(s)
-    s = Solution().search([4,5,6,7,8,0,1,2], target=0)
-    print(s)
-    s = Solution().search([1,2,4,5,6,7,8,0,], target=0)
-    print(s)
-    s = Solution().search([1,0,], target=0)
-    print(s)
-    s = Solution().search([3, 1], target=3)
-    print(s)
+    # s = Solution().search([4,5,6,7,0,1,2], target=0)
+    # print(s)
+    # s = Solution().search([4,5,6,7,8,0,1,2], target=0)
+    # print(s)
+    # s = Solution().search([1,2,4,5,6,7,8,0,], target=0)
+    # print(s)
+    # s = Solution().search([1,0,], target=0)
+    # print(s)
+    # s = Solution().search([1, 3], target=1)
+    # print(s)
+    assert Solution().get_offset([4,5,6,7,0,1,2]) == 4
+    assert Solution().get_offset([4,5,6,7]) == 0
+    assert Solution().get_offset([3, 1]) == 1
 
