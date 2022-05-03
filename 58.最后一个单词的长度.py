@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=58 lang=python
+# @lc app=leetcode.cn id=58 lang=python3
 #
 # [58] 最后一个单词的长度
 #
@@ -24,59 +24,59 @@
 #
 #
 #
+
+class SolutionA(object):
+    def lengthOfLastWord(self, s):
+        """
+        :type s: str
+        :rtype: int
+
+        暴力法: 遍历字符串, 记录每个子字符串的长度
+        """
+        if not s:
+            return 0
+
+        last = 0
+        tmp = 0
+        in_space = False
+        for i in range(len(s)):
+            if s[i] != ' ':
+                in_space = False
+                tmp += 1
+            else:
+                if in_space == False:
+                    last = tmp
+                    tmp = 0
+                in_space = True
+        # print(last, tmp, in_space)
+        if tmp != 0:
+            return tmp
+        return last
+
 class Solution(object):
     def lengthOfLastWord(self, s):
         """
         :type s: str
         :rtype: int
 
-        """
-        # 解法一: 遍历字符串, 记录每个子字符串的长度
-        # if not s:
-        #     return 0
-
-        # last = 0
-        # tmp = 0
-        # in_space = False
-        # for i in range(len(s)):
-        #     if s[i] != ' ':
-        #         in_space = False
-        #         tmp += 1
-        #     else:
-        #         if in_space == False:
-        #             last = tmp
-        #             tmp = 0
-        #         in_space = True
-        # # print(last, tmp, in_space)
-        # if tmp != 0:
-        #     return tmp
-        # return last
-
-        """
-        总共两个变量, 当前字符是否空格, 当前是否在单词中; 组合产生4种状态
+        反向遍历, 同时简化状态
+        如果末尾的是空格, 左移一位, 直到以字符开头
         """
 
 
         if not s:
             return 0
 
+        i = len(s) - 1
+        SPACE = ' '
+        while i >= 0 and s[i] == SPACE:
+            i -= 1
         count = 0
-        in_word = False if (s[-1] == ' ') else True
-        is_space = False
-        for i in range(len(s)-1, -1, -1):
-            is_space = (s[i] == ' ')
-            if in_word and is_space:
-                in_word = False
-                break
-            elif in_word and not is_space:
-                count += 1
-            elif not in_word and is_space:
-                continue
-            else:
-                count = 1  # 第一个字符
-                in_word = True
+        while i >= 0 and s[i] != SPACE:
+            count += 1
+            i -= 1
         return count
 
 
 if __name__ == "__main__":
-    print(Solution().lengthOfLastWord('  hello  world   '))
+    print(SolutionA().lengthOfLastWord('  hello  world   '))

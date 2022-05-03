@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=53 lang=python
+# @lc app=leetcode.cn id=53 lang=python3
 #
 # [53] 最大子序和
 #
@@ -25,6 +25,8 @@
 # 如果你已经实现复杂度为 O(n) 的解法，尝试使用更为精妙的分治法求解。
 #
 #
+# TODO(rlj): 朴素动态规划.
+# TODO(rlj): log(n)的解法.
 class Solution(object):
     def maxSubArray(self, nums):
         """
@@ -36,8 +38,9 @@ class Solution(object):
             return
 
         res = -2**31
-        f_n = -1
+        f_n = -1  # 以i为终点的子序列和, 包含i
         for i in nums:
+            # 如果i大则说明, 子序列前面的和为负数, 那么从i开始重新计算只序列
             f_n = max(i, f_n + i)  # 单个子序列的和
             res = max(f_n, res)
         return res

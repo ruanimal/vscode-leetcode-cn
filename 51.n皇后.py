@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=51 lang=python
+# @lc app=leetcode.cn id=51 lang=python3
 #
 # [51] N皇后
 #
@@ -107,6 +107,11 @@ QUEEN = 'Q'
 
 class Solution(object):
     def solveNQueens(self, n):
+        """
+        回溯法判断矩阵的每个位置是否能够放置, 回溯每一行的每个位置
+        如果这个点所在位置的横竖撇捺的方向上都可以放置, 那么该点就是可以放置的, 否则直接剪枝.
+        """
+
         def can_put(i, j):
             return (heng.get(i, 0) == 0 and shu.get(j, 0) == 0
                     and pie.get(i+j, 0) == 0 and na.get(i-j, 0) == 0)

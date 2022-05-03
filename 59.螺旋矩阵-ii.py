@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=59 lang=python
+# @lc app=leetcode.cn id=59 lang=python3
 #
 # [59] 螺旋矩阵 II
 #
@@ -31,6 +31,7 @@ class Solution(object):
         """
         :type n: int
         :rtype: List[List[int]]
+        和第54题基本一致
         """
         ans = [[0 for _ in range(n)] for _ in range(n)]
         pos = [0, -1]

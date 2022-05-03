@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=54 lang=python
+# @lc app=leetcode.cn id=54 lang=python3
 #
 # [54] 螺旋矩阵
 #
@@ -51,9 +51,10 @@ class Solution(object):
         n = len(matrix[0])
         ans = []
         pos = [0, -1]
+        # 前进方向, 通过(坐标轴, 移动量)表示
         heads = [
-            (1, 1),
-            (0, 1),
+            (1, 1),  # y轴, 往下移动1
+            (0, 1),  # x轴, 往右移动1
             (1, -1),
             (0, -1),
         ]
@@ -61,6 +62,7 @@ class Solution(object):
         next_head = lambda h: heads[(heads.index(h)+1) % 4]
         for i in range(1, m * n + 1):
             pos[head[0]] += head[1]
+            # 一个方向越界了或者该位置已经走过, 说明需要换方向
             if pos[0] >= m or pos[1] >= n or pos[0] < 0 or pos[1] < 0 or matrix[pos[0]][pos[1]] is None:
                 pos[head[0]] -= head[1]
                 head = next_head(head)
