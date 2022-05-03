@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=42 lang=python
+# @lc app=leetcode.cn id=42 lang=python3
 #
 # [42] 接雨水
 #
@@ -26,7 +26,7 @@
 # 输出: 6
 #
 #
-class Solution(object):
+class SolutionB(object):
     def trap(self, height):
         """
         :type height: List[int]
@@ -58,7 +58,8 @@ class Solution(object):
             left_max = max(left_max, height[i])
         return ans
 
-    def trap2(self, height):
+class SolutionA(object):
+    def trap(self, height):
         """
         使用栈的解法, LeetCode官方答案, 不好理解
 
@@ -87,7 +88,10 @@ class Solution(object):
             current += 1
         return ans
 
-    def trap3(self, height):
+class Solution(object):
+    def trap(self, height):
+        """双指针法"""
+
         if not height:
             return 0
         ans = 0
@@ -108,16 +112,17 @@ class Solution(object):
                 else:
                     ans += (right_max - height[right])
                 right -= 1
-        return ans;
+        return ans
 
+# @lc code=end
 
 
 if __name__ == "__main__":
-    # s = Solution().trap([0,1,0,2,1,0,1,3,2,1,2,1])
-    # print(s)
-    # s = Solution().trap2([0,1,0,2,1,0,1,3,2,1,2,1])
-    # print(s)
-    s = Solution().trap3([0,1,0,2,1,0,1,3,2,1,2,1])
+    s = SolutionA().trap([0,1,0,2,1,0,1,3,2,1,2,1])
+    print(s)
+    s = SolutionB().trap([0,1,0,2,1,0,1,3,2,1,2,1])
+    print(s)
+    s = Solution().trap([0,1,0,2,1,0,1,3,2,1,2,1])
     print(s)
 
 

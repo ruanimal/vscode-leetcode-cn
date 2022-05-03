@@ -62,7 +62,7 @@ class Solution(object):
     def permute(self, nums):
         def backtrack(nums, level):
             if level == len(nums):
-                ans.append(track[::])
+                ans.append(track[:])
                 return
 
             for i in range(len(nums)):
