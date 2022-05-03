@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=98 lang=python
+# @lc app=leetcode.cn id=98 lang=python3
 #
 # [98] 验证二叉搜索树
 #

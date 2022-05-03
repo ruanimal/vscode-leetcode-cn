@@ -32,29 +32,9 @@
 #         self.val = x
 #         self.next = None
 
+from comm import *
 
-class ListNode:
-    def __init__(self, x):
-        self.val = x
-        self.next = None
-
-    def __str__(self):
-        tmp = []
-        node = self
-        while node:
-            tmp.append(repr(node.val))
-            node = node.next
-        return ' -> '.join(tmp)
-
-    __repr__ = __str__
-
-
-def build_list_node(nums):
-    head = node = ListNode(None)
-    for i in nums:
-        node.next = ListNode(i)
-        node = node.next
-    return head.next
+# @lc code=start
 
 
 class Solution:
@@ -70,6 +50,8 @@ class Solution:
                 continue
             ptr = ptr.next
         return head
+
+# @lc code=end
 
 if __name__ == "__main__":
     l = build_list_node([1,1,2,2,2,3,4,4,6,8])

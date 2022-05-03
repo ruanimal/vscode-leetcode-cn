@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=70 lang=python
+# @lc app=leetcode.cn id=70 lang=python3
 #
 # [70] 爬楼梯
 #
@@ -37,27 +37,9 @@
 #
 #
 
-
-class Solution(object):
-    def climbStairs(self, n):
+class SolutionA(object):
+    def climbStairs(self, n: int) -> int:
         """
-        :type n: int
-        :rtype: int
-
-        斐波那契数列
-        """
-        if n < 2:
-            return 1
-        a = b = 1
-        for i in range(1, n):
-            a, b = b, a + b
-        return b
-
-    def climbStairs2(self, n):
-        """
-        :type n: int
-        :rtype: int
-
         动态规划解法
         1. 最后一步可以是1级,也可以是2级, f(n) = f(n-1) + f(n-2) , n >=0
         2. f(0) = 1, f(1) = 1
@@ -69,8 +51,26 @@ class Solution(object):
             f[i] = f[i-1] + f[i-2]
         return f[n]
 
+class Solution(object):
+    def climbStairs(self, n: int) -> int:
+        """
+        :type n: int
+        :rtype: int
+
+        动态规划解法, 去除额外空间占用
+        也是斐波那契数列
+        """
+        if n < 2:
+            return 1
+        a = b = 1
+        for _ in range(1, n):
+            a, b = b, a + b
+        return b
+
+
+
 if __name__ == "__main__":
     s = Solution().climbStairs(22)
     print(s)
-    s = Solution().climbStairs2(22)
+    s = Solution().climbStairs(22)
     print(s)

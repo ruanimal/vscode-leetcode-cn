@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=66 lang=python
+# @lc app=leetcode.cn id=66 lang=python3
 #
 # [66] 加一
 #
@@ -34,11 +34,13 @@
 #
 
 
-class Solution(object):
+class SolutionA(object):
     def plusOne(self, digits):
         """
         :type digits: List[int]
         :rtype: List[int]
+
+        模拟加法
         """
         addtion = 1
         for i in range(len(digits)-1, -1, -1):
@@ -53,4 +55,26 @@ class Solution(object):
             digits.insert(0, 1)
         return digits
 
+class Solution(object):
+    def plusOne(self, digits: list) -> int:
+        """
+        优化一下, 找非9的位置
+        """
+        if digits[-1] != 9:
+            digits[-1] += 1
+            return digits
+
+        i = len(digits) - 1
+        while i >= 0 and digits[i] == 9:
+            digits[i] = 0
+            i -= 1
+        if i < 0:
+            digits.insert(0, 1)
+        else:
+            digits[i] += 1
+        return digits
+
+if __name__ == '__main__':
+    s = Solution().plusOne([4,3,2,9])
+    print(s)
 

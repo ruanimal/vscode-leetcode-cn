@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=69 lang=python
+# @lc app=leetcode.cn id=69 lang=python3
 #
 # [69] x 的平方根
 #
@@ -32,11 +32,11 @@
 #
 #
 #
+
 class Solution(object):
-    def mySqrt(self, x):
+    def mySqrt(self, x: int) -> int:
         """
-        :type x: int
-        :rtype: int
+        二分查找
         """
         left = 0
         right = x
@@ -50,27 +50,6 @@ class Solution(object):
             return left
         return left - 1
 
-    def mySqrt_v1(self, x):
-        """
-        :type x: int
-        :rtype: int
-        """
-        left = 0
-        right = x
-        ret = 0
-        while left <= right:
-            mid = (left + right) // 2
-            # print(mid)
-            if mid ** 2 < x:
-                left = mid + 1
-            elif x < mid ** 2:
-                right = mid - 1
-            else:
-                ret = mid
-                break
-        else:
-            ret = left - 1
-        return ret
 
 if __name__ == "__main__":
     s = Solution().mySqrt(8)

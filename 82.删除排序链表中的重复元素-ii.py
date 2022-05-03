@@ -32,31 +32,11 @@
 #         self.next = None
 
 
-class ListNode:
-    def __init__(self, x):
-        self.val = x
-        self.next = None
+from comm import *
 
-    def __str__(self):
-        tmp = []
-        node = self
-        while node:
-            tmp.append(repr(node.val))
-            node = node.next
-        return ' -> '.join(tmp)
+# @lc code=start
 
-    __repr__ = __str__
-
-
-def build_list_node(nums):
-    head = node = ListNode(None)
-    for i in nums:
-        node.next = ListNode(i)
-        node = node.next
-    return head.next
-
-
-class Solution:
+class SolutionA:
     def deleteDuplicates(self, head: ListNode) -> ListNode:
         if not head:
             return
@@ -80,9 +60,38 @@ class Solution:
             ptr.next = ptr.next.next
         return new_head.next
 
+class Solution:
+    def deleteDuplicates(self, head: ListNode) -> ListNode:
+        """简化逻辑, 便于理解
+
+        """
+
+        if not head or not head.next:
+            return head
+        new_head = p2 = ListNode(None)
+
+        p = head
+        count = 1  # 包含当前点时, 等于当前数字的点有多少个
+        while p and p.next:
+            if p.val == p.next.val:
+                count += 1
+            else:   # 数字发生了变化
+                if count == 1:   # 保留
+                    p2.next = p
+                    p2 = p2.next
+                count = 1  # 重置计数
+            p = p.next
+        if count == 1:
+            p2.next = p
+        else:
+            p2.next = None
+        return new_head.next
+
+# @lc code=end
+
 
 if __name__ == "__main__":
-    l = build_list_node([1, 1, 2, 2, 2, 3, 4, 4, 6, 8,8])
+    l = build_list_node([1, 1, 2, 2, 2, 3, 4, 4, 6, 8,8,9])
     #l = build_list_node([1, 1])
     print(l)
     print(Solution().deleteDuplicates(l))

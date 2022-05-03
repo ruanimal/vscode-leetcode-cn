@@ -35,30 +35,8 @@
 #
 # Definition for singly-linked list.
 
-
-class ListNode:
-    def __init__(self, x):
-        self.val = x
-        self.next = None
-
-    def __str__(self):
-        tmp = []
-        node = self
-        while node:
-            tmp.append(repr(node.val))
-            node = node.next
-        tmp.append('Null')
-        return ' -> '.join(tmp)
-
-    __repr__ = __str__
-
-
-def build_list_node(nums):
-    head = node = ListNode(None)
-    for i in nums:
-        node.next = ListNode(i)
-        node = node.next
-    return head.next
+from comm import *
+# @lc code=start
 
 class Solution:
     def rotateRight(self, head: ListNode, k: int) -> ListNode:
@@ -88,6 +66,8 @@ class Solution:
         p1.next = new_head.next
         new_head.next = tmp
         return new_head.next
+
+# @lc code=end
 
 if __name__ == "__main__":
     l = build_list_node(range(5))

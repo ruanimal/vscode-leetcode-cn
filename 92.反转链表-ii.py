@@ -29,11 +29,8 @@
 #         self.val = x
 #         self.next = None
 
-
-try:
-    from comm import *
-except ImportError:
-    LOCAL_TEST = False
+from comm import *
+# @lc code=start
 
 
 class Solution_A:
@@ -61,6 +58,10 @@ class Solution_A:
 
 class Solution:
     def reverseN(self, head: ListNode, n: int) -> ListNode:
+        """
+        递归法, 实现简单, 稍微有理解难度
+        """
+
         if n <= 1 or not head.next:
             self.successor = head.next
             return head
@@ -78,6 +79,8 @@ class Solution:
             return self.reverseN(head, n)
         head.next = self.reverseBetween(head.next, m-1, n-1)
         return head
+
+# @lc code=end
 
 
 if LOCAL_TEST:

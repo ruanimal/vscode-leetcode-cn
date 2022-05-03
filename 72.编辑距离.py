@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=72 lang=python
+# @lc app=leetcode.cn id=72 lang=python3
 #
 # [72] 编辑距离
 #
@@ -47,16 +47,13 @@
 #
 #
 class Solution(object):
-    def minDistance(self, word1, word2):
+    def minDistance(self, word1: str, word2: str) -> int:
         """
-        :type word1: str
-        :type word2: str
-        :rtype: int
         f[i][j] word1前i个字符变成word2的前j个字符需要的最小步数
         word1[i] == word2[j]:
             f[i][j]: f[i-1][j-1]
         word1[i] != word2[j]:
-            min(f[i-1][j], f[i+1][j], f[i-1][j-1]) + 1
+            min(f[i-1][j], f[i+1][j], f[i-1][j-1]) + 1   # min(插入, 删除, 替换) + 1
         """
         m, n = len(word1), len(word2)
         f = [[0 for _ in range(n+1)] for _ in range(m+1)]

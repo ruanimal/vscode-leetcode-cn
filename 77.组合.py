@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=77 lang=python
+# @lc app=leetcode.cn id=77 lang=python3
 #
 # [77] 组合
 #
@@ -30,6 +30,11 @@
 #
 #
 
+from comm import *
+
+# @lc code=start
+
+
 class SolutionV1(object):
     def combine(self, n, k):
         """
@@ -58,32 +63,27 @@ class SolutionV1(object):
 
 # @lc code=start
 class Solution(object):
-    def combine(self, n, k):
-        """
-        :type n: int
-        :type k: int
-        :rtype: List[List[int]]
-        """
-
-        def backtrack(start, k, res, path):
+    def combine(self, n: int, k: int) -> list:
+        def backtrack(start, k):
             if k == 0:
-                res.append(path[:])
+                res.append(track[:])
                 return
+            # 组合的话, 为了防止重复, 已遍历的数字不要重新遍历, 所以从start开始
             for i in range(start, n+1):
-                # 组合的话, 为了防止重复, 已遍历的数字不要重新遍历
-                path.append(i)
-                backtrack(path[-1]+1, k-1, res, path)
-                path.pop()
+                track.append(i)
+                backtrack(i+1, k-1)
+                track.pop()
 
         if (n < k) or n == 0 or k == 0:
             return []
         res = []
-        backtrack(1, k, res, [])
+        track = []
+        backtrack(1, k)
         return res
+
+# @lc code=end
 
 if __name__ == "__main__":
     s = Solution().combine(4,2)
     print(s)
-
-# @lc code=end
 

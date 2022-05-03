@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=89 lang=python
+# @lc app=leetcode.cn id=89 lang=python3
 #
 # [89] 格雷编码
 #
@@ -45,11 +45,10 @@
 #
 #
 #
-class Solution(object):
-    def grayCode(self, n):
+class SolutionA(object):
+    def grayCode(self, n: int) -> list:
         """
-        :type n: int
-        :rtype: List[int]
+        位运算, 从前面加, 已有的数能利用上, 比较绕
         """
         if n == 0:
             return [0]
@@ -57,11 +56,32 @@ class Solution(object):
         for i in range(2, n+1):
             tmp = 2 ** (i-1)
             ans = ans + [(x | tmp) for x in ans[::-1]]
-        # print([bin(i) for i in ans])
+        print(['{:0>32}'.format(bin(i)[2:])[-n:] for i in ans])
+        return ans
+
+class Solution(object):
+    def grayCode(self, n: int) -> list:
+        """
+        位运算, 直接生成(从后面加), 但是较慢
+        """
+        ans = [0]
+        for i in range(n):
+            new_ans = []
+            for idx, i in enumerate(ans):
+                # 往末尾追加的时候0, 1得交替放
+                if idx % 2 == 0:
+                    new_ans.append(i << 1 )
+                    new_ans.append((i << 1) | 1)
+                else:
+                    new_ans.append((i << 1) | 1)
+                    new_ans.append(i << 1 )
+            ans = new_ans
         return ans
 
 if __name__ == "__main__":
     s = Solution().grayCode(2)
+    print(s)
+    s = SolutionA().grayCode(3)
     print(s)
     s = Solution().grayCode(3)
     print(s)

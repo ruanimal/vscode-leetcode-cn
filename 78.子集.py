@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=78 lang=python
+# @lc app=leetcode.cn id=78 lang=python3
 #
 # [78] 子集
 #
@@ -33,7 +33,10 @@
 # ]
 #
 #
-class Solution(object):
+from comm import *
+
+# @lc code=start
+class Solution_A(object):
     def subsets(self, nums):
         """
         :type nums: List[int]
@@ -56,7 +59,31 @@ class Solution(object):
         recursion(0, [])
         return ans
 
+class Solution(object):
+    def subsets(self, nums):
+        """回溯法"""
+
+        def backtrack(nums: list, idx: int):
+            ans.append(track[:])
+            for i in range(idx, len(nums)):
+                track.append(nums[i])
+                backtrack(nums, i+1)
+                track.pop()
+
+        if len(nums) == 0:
+            return []
+
+        ans = []
+        track = []
+        backtrack(nums, 0)
+        return ans
+
+
+# @lc code=end
+
 if __name__ == "__main__":
+    s = Solution_A().subsets([1,2,3])
+    print(s)
     s = Solution().subsets([1,2,3])
     print(s)
 

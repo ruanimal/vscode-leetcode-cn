@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=94 lang=python
+# @lc app=leetcode.cn id=94 lang=python3
 #
 # [94] 二叉树的中序遍历
 #
@@ -36,23 +36,27 @@
 #         self.left = None
 #         self.right = None
 
+from comm import *
+# @lc code=start
+
+class SolutionA(object):
+    def inorderTraversal(self, root: TreeNode):
+        # v1 recurse version
+        if not root:
+            return []
+        if not root.right and not root.left:
+            return [root.val]
+
+        left = self.inorderTraversal(root.left) if root.left else []
+        right = self.inorderTraversal(root.right) if root.right else []
+        return left + [root.val] + right
+
 class Solution(object):
-    def inorderTraversal(self, root):
+    def inorderTraversal(self, root: TreeNode):
         """
-        :type root: TreeNode
-        :rtype: List[int]
+        用列表模拟系统栈
         """
-        # # v1 recurse version
-        # if not root:
-        #     return []
-        # if not root.right and not root.left:
-        #     return [root.val]
 
-        # left = self.inorderTraversal(root.left) if root.left else []
-        # right = self.inorderTraversal(root.right) if root.right else []
-        # return left + [root.val] + right
-
-        # # v2 loop version 模拟系统调用栈
         if not root:
             return []
 
@@ -70,3 +74,6 @@ class Solution(object):
             if node.left:
                 stack.append(( 1, node.left))
         return ans
+
+# @lc code=end
+
