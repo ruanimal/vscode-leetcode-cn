@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=169 lang=python
+# @lc app=leetcode.cn id=169 lang=python3
 #
 # [169] 求众数
 #
@@ -30,28 +30,10 @@
 
 
 class Solution(object):
-    def majorityElement(self, nums):
+    def majorityElement(self, nums: list) -> int:
         """
-        :type nums: List[int]
-        :rtype: int
+        哈希计数法
         """
-        ## solution 1
-        # 排序
-        # 遍历一次数组
-        # n = len(nums)
-        # if n == 1 or (n == 2 and nums[0] == nums[1]):
-        #     return nums[0]
-
-        # nums.sort()
-        # count = 1
-        # for i in range(n-1):
-        #     if nums[i] == nums[i+1]:
-        #         count += 1
-        #     else:
-        #         count = 1
-        #     if count > n/2.0:
-        #         return nums[i]
-
         n = len(nums)
         if n == 1 or (n == 2 and nums[0] == nums[1]):
             return nums[0]

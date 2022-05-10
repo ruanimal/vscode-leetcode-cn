@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=155 lang=python
+# @lc app=leetcode.cn id=155 lang=python3
 #
 # [155] 最小栈
 #
@@ -33,21 +33,17 @@
 #
 #
 #
+
+# @lc code=start
+
 class MinStack(object):
     """使用两个栈, 一个记录值, 一个记录当前最小值"""
 
     def __init__(self):
-        """
-        initialize your data structure here.
-        """
         self.min_stack = []
         self.stack = []
 
-    def push(self, x):
-        """
-        :type x: int
-        :rtype: None
-        """
+    def push(self, x: int):
         if not self.stack:
             self.min_stack.append(x)
         else:
@@ -55,31 +51,19 @@ class MinStack(object):
         self.stack.append(x)
 
     def pop(self):
-        """
-        :rtype: None
-        """
         if not self.stack:
             return
-
         self.min_stack.pop()
         return self.stack.pop()
 
-    def top(self):
-        """
-        :rtype: int
-        """
+    def top(self) -> int:
         if not self.stack:
             return
-
         return self.stack[-1]
 
-    def getMin(self):
-        """
-        :rtype: int
-        """
+    def getMin(self) -> int:
         if not self.stack:
             return
-
         return self.min_stack[-1]
 
 
@@ -89,6 +73,9 @@ class MinStack(object):
 # obj.pop()
 # param_3 = obj.top()
 # param_4 = obj.getMin()
+
+# @lc code=end
+
 if __name__ == "__main__":
     obj = MinStack()
     obj.push(1)

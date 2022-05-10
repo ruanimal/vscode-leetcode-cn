@@ -76,20 +76,16 @@
 #         self.val = x
 #         self.next = None
 
-try:
-    from comm import *
-except ImportError:
-    LOCAL_TEST = False
+
+from comm import *
+
+# @lc code=start
 
 class Solution_A(object):
-    def getIntersectionNode(self, headA, headB):
+    def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> ListNode:
         """
-        :type head1, head1: ListNode
-        :rtype: ListNode
-
         遍历一次链表, 记录两个链表的长度, a, b
         用两个指针, 让长的链表先走 abs(a-b)步, 然后两个指针同时遍历, 指针相等时, 值就为链表交点
-
         """
 
         if not (headA and headB):
@@ -185,4 +181,6 @@ class Solution(object):
             else:
                 p2 = p2.next
         return p1
+
+# @lc code=end
 

@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=168 lang=python
+# @lc app=leetcode.cn id=168 lang=python3
 #
 # [168] Excel表列名称
 #
@@ -47,10 +47,9 @@
 #
 #
 class Solution(object):
-    def convertToTitle(self, n):
+    def convertToTitle(self, n: int) -> str:
         """
-        :type n: int
-        :rtype: str
+        26进制实现
         """
         if n <= 0:
             return
