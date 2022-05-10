@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=111 lang=python
+# @lc app=leetcode.cn id=111 lang=python3
 #
 # [111] 二叉树的最小深度
 #
@@ -30,6 +30,9 @@
 # 返回它的最小深度  2.
 #
 #
+
+from comm import *
+# @lc code=start
 # Definition for a binary tree node.
 # class TreeNode(object):
 #     def __init__(self, x):
@@ -37,11 +40,11 @@
 #         self.left = None
 #         self.right = None
 
-class Solution(object):
-    def minDepth(self, root):
+
+class SolutionA(object):
+    def minDepth(self, root: TreeNode) -> int:
         """
-        :type root: TreeNode
-        :rtype: int
+        简单递归, 在后序位置, 要遍历完整颗树, 比较慢
         """
         if (root == None):
             return 0
@@ -52,4 +55,32 @@ class Solution(object):
         if (root.right == None):
             return 1 + self.minDepth(root.left)
         return 1 + min(self.minDepth(root.left), self.minDepth(root.right))
+
+class Solution(object):
+    def minDepth(self, root: TreeNode) -> int:
+        """
+        层次遍历, 有一个节点左右子节点都空, 则跳出
+        """
+        if (root == None):
+            return 0
+
+        level = [root]
+        deep = 1
+        while level:
+            new_level = []
+            for i in level:
+                if not i.left and not i.right:
+                    new_level = []
+                    break
+                if i.left:
+                    new_level.append(i.left)
+                if i.right:
+                    new_level.append(i.right)
+            level = new_level
+            deep += 1
+        if len(level) == 2 ** (deep-1):
+            return deep
+        return deep-1
+
+# @lc code=end
 

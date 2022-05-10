@@ -69,13 +69,11 @@
 #
 #
 
+
+
+from comm import *
+
 # @lc code=start
-
-try:
-    from comm import *
-except ImportError:
-    LOCAL_TEST = False
-
 class Node:
     def __init__(self, val: int = 0, left: 'Node' = None, right: 'Node' = None, next: 'Node' = None):
         self.val = val
@@ -123,7 +121,7 @@ class Solution_A:
     def connectTowNode(self, node1, node2):
         if node1 is None or node2 is None:
             return
-        node1.next = node2
+        node1.next = node2  # 前序位置
         self.connectTowNode(node1.left, node1.right)
         self.connectTowNode(node2.left, node2.right)
         self.connectTowNode(node1.right, node2.left)

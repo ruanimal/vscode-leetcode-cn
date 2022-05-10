@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=107 lang=python
+# @lc app=leetcode.cn id=107 lang=python3
 #
 # [107] 二叉树的层次遍历 II
 #
@@ -34,17 +34,19 @@
 #
 #
 # Definition for a binary tree node.
-class TreeNode(object):
-    def __init__(self, x):
-        self.val = x
-        self.left = None
-        self.right = None
+# class TreeNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+from comm import *
+# @lc code=start
 
 class Solution(object):
-    def levelOrderBottom(self, root):
+    def levelOrderBottom(self, root: TreeNode) -> List[List[int]]:
         """
-        :type root: TreeNode
-        :rtype: List[List[int]]
+        层次遍历然后反转
         """
         if not root:
             return []
@@ -62,6 +64,9 @@ class Solution(object):
                 ret.append([i.val for i in next_level])
             level = next_level
         return ret[::-1]
+
+# @lc code=end
+
 
 if __name__ == "__main__":
     n3 = TreeNode(3)

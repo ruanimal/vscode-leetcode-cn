@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=143 lang=python
+# @lc app=leetcode.cn id=143 lang=python3
 #
 # [143] 重排链表
 #
@@ -25,42 +25,15 @@
 # 给定链表 1->2->3->4->5, 重新排列为 1->5->2->4->3.
 #
 #
-class ListNode:
-    def __init__(self, x):
-        self.val = x
-        self.next = None
 
-    def __str__(self):
-        tmp = []
-        node = self
-        max_depth = 20
-        while node:
-            max_depth -= 1
-            if max_depth < 0:
-                break
-            tmp.append(repr(node.val))
-            node = node.next
-        else:
-            tmp.append('None')
-        return ' -> '.join(tmp)
+from comm import *
+# @lc code=start
 
-    __repr__ = __str__
-
-
-def build_list_node(nums):
-    head = node = ListNode(None)
-    for i in nums:
-        node.next = ListNode(i)
-        node = node.next
-    return head.next
 
 class Solution(object):
-    def reorderList(self, head):
+    def reorderList(self, head: ListNode) -> None:
         """
-        :type head: ListNode
-        :rtype: None Do not return anything, modify head in-place instead.
-
-        使用两个边界指针, 找到链表中点
+        使用两个边界指针, 找到链表中点,
         """
 
         if not head or not head.next:
@@ -72,7 +45,7 @@ class Solution(object):
             slow_ptr = slow_ptr.next
             fast_ptr = fast_ptr.next.next
 
-        # 翻转
+        # 翻转剩下一半
         ptr = slow_ptr.next
         slow_ptr.next = None
         stack = []
@@ -80,7 +53,7 @@ class Solution(object):
             stack.append(ptr)
             ptr = ptr.next
 
-        # 插入
+        # 逐个插入前半段
         ptr = head
         while stack:
             tmp = stack.pop()
@@ -88,6 +61,9 @@ class Solution(object):
             ptr.next = tmp
             ptr = tmp.next
         return head
+
+# @lc code=end
+
 if __name__ == "__main__":
     l = build_list_node(range(1,6))
     print(Solution().reorderList(l))

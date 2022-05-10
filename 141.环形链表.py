@@ -68,24 +68,17 @@
 #
 #
 
-# @lc code=start
 # Definition for singly-linked list.
 # class ListNode:
 #     def __init__(self, x):
 #         self.val = x
 #         self.next = None
 
-try:
-    from comm import *
-except ImportError:
-    LOCAL_TEST = False
+from comm import *
+# @lc code=start
 
 class Solution(object):
     def hasCycle(self, head: Optional[ListNode]) -> bool:
-        """
-        :type head: ListNode
-        :rtype: bool
-        """
         if not head or not head.next:
             return False
 

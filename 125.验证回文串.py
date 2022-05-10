@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=125 lang=python
+# @lc app=leetcode.cn id=125 lang=python3
 #
 # [125] 验证回文串
 #
@@ -30,12 +30,8 @@
 #
 #
 #
-class Solution(object):
-    def isPalindrome(self, s):
-        """
-        :type s: str
-        :rtype: bool
-        """
+class SolutionA(object):
+    def isPalindrome(self, s: str) -> bool:
         if not s:
             return True
 
@@ -53,6 +49,29 @@ class Solution(object):
             if fa or fb:
                 continue
             if a != b:
+                return False
+            i += 1
+            j -= 1
+        return True
+
+class Solution(object):
+    alpha_set = set('abcdefghijklmnopqrstuvwxyz'+'0123456789')
+
+    def isPalindrome(self, s: str) -> bool:
+        if not s:
+            return True
+
+        s = s.lower()
+        i = 0
+        j = len(s)-1
+        while i < j:
+            if s[i] not in self.alpha_set:
+                i += 1
+                continue
+            if s[j] not in self.alpha_set:
+                j -= 1
+                continue
+            if s[i] != s[j]:
                 return False
             i += 1
             j -= 1

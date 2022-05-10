@@ -48,7 +48,6 @@
 #
 #
 
-# @lc code=start
 # Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, val=0, left=None, right=None):
@@ -56,10 +55,10 @@
 #         self.left = left
 #         self.right = right
 
-try:
-    from comm import *
-except ImportError:
-    LOCAL_TEST = False
+from comm import *
+
+# @lc code=start
+
 
 class Solution:
     def buildTree(self, preorder: List[int], inorder: List[int]) -> TreeNode:
@@ -86,9 +85,9 @@ class Solution:
         root.right = self.helper(preorder, inorder, idx+1, right)
         return root
 
-if LOCAL_TEST:
-    s = Solution()
-    print(s.buildTree([3,9,20,15,7], [9,3,15,20,7]))
-
 # @lc code=end
+
+s = Solution()
+print(s.buildTree([3,9,20,15,7], [9,3,15,20,7]))
+
 

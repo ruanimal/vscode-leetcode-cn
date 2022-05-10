@@ -58,6 +58,7 @@
 #
 #
 
+from comm import *
 # @lc code=start
 # Definition for a binary tree node.
 # class TreeNode:
@@ -65,11 +66,6 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
-
-try:
-    from comm import *
-except ImportError:
-    LOCAL_TEST = False
 
 class Solution:
     def flatten(self, root: Optional[TreeNode]) -> None:

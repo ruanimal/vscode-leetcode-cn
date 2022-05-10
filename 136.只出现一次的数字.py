@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=136 lang=python
+# @lc app=leetcode.cn id=136 lang=python3
 #
 # [136] 只出现一次的数字
 #
@@ -29,17 +29,18 @@
 # 输出: 4
 #
 #
+
+from comm import *
+# @lc code=start
+
 class Solution(object):
-    def singleNumber(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: int
-        """
+    def singleNumber(self, nums: List[int]) -> int:
         ret = 0
         for i in nums:
             ret ^= i
         return ret
 
+# @lc code=end
 
 if __name__ == "__main__":
     s = Solution().singleNumber([4,1,2,1,2])

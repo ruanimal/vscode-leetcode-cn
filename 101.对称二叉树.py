@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=101 lang=python
+# @lc app=leetcode.cn id=101 lang=python3
 #
 # [101] 对称二叉树
 #
@@ -43,11 +43,13 @@
 #         self.left = None
 #         self.right = None
 
-class Solution(object):
-    def isSymmetric(self, root):
+from comm import *
+# @lc code=start
+
+class SolutionA(object):
+    def isSymmetric(self, root: TreeNode):
         """
-        :type root: TreeNode
-        :rtype: bool
+        层次遍历
         """
         if not root:
             return True
@@ -68,3 +70,21 @@ class Solution(object):
                         return False
             level = next_level
         return True
+
+class Solution(object):
+    def isSymmetric(self, root: TreeNode):
+        """递归法, 参考判断树相同"""
+        if not root:
+            return True
+        return self.helper(root.left, root.right)
+
+    def helper(self, root1: TreeNode, root2: TreeNode):
+        if not root1 and not root2:
+            return True
+        if (root1 and root2 and root1.val == root2.val
+            and self.helper(root1.left, root2.right) and self.helper(root1.right, root2.left)):
+            return True
+        return False
+
+# @lc code=end
+

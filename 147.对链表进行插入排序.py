@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 #
-# @lc app=leetcode.cn id=147 lang=python
+# @lc app=leetcode.cn id=147 lang=python3
 #
 # [147] 对链表进行插入排序
 #
@@ -44,39 +44,13 @@
 #
 #
 
+from comm import *
+# @lc code=start
 
-class ListNode:
-    def __init__(self, x):
-        self.val = x
-        self.next = None
-
-    def __repr__(self):
-        tmp = []
-        node = self
-        max_depth = 20
-        while node:
-            max_depth -= 1
-            if max_depth < 0:
-                break
-            tmp.append(repr(node.val))
-            node = node.next
-        else:
-            tmp.append('None')
-        return ' -> '.join(tmp)
-
-def build_list_node(nums):
-    head = node = ListNode(None)
-    for i in nums:
-        node.next = ListNode(i)
-        node = node.next
-    return head.next
 
 class Solution(object):
-    def insertionSortList(self, head):
+    def insertionSortList(self, head: ListNode) -> ListNode:
         """
-        :type head: ListNode
-        :rtype: ListNode
-
         采用头尾指针
         """
 
@@ -98,6 +72,8 @@ class Solution(object):
             if sub_ptr == ptr:
                 ptr = ptr.next
         return new_head.next
+
+# @lc code=end
 
 if __name__ == "__main__":
     l = build_list_node(range(9, 0, -1))

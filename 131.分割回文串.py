@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=131 lang=python
+# @lc app=leetcode.cn id=131 lang=python3
 #
 # [131] 分割回文串
 #
@@ -51,54 +51,13 @@ str:  a a b
 对于长度为N的字符串, 可选分割点有开区间(0, N), 也就是1到N-1, 每个点位有分割和不分割两种选项
 使用回溯法, 如果当前分割点构成的区间不是回文串,则剪枝
 
+可以给 vaild 判断函数加上缓存 (动态规划), 理论上更快
+
 """
 
-class SolutionV1(object):
-    def partition(self, s):
-        """
-        :type s: str
-        :rtype: List[List[str]]
-        """
-        def vaild(a, b):
-            b = b-1
-            while a < b:
-                if s[a] != s[b]:
-                    return False
-                a += 1
-                b -= 1
-            return True
 
-        def backtrack(res, path, level):
-            if level == length:
-                path.append(length)
-                if len(path) > 1 and vaild(path[-2], path[-1]):
-                    res.append([s[path[i]:path[i+1]] for i in range(len(path)-1)])
-                path.pop()
-                return
-
-            for i in [0, 1]:
-                if i == 1:
-                    if vaild(path[-1], level):
-                        path.append(level)
-                        backtrack(res, path, level+1)
-                        path.pop()
-                else:
-                    backtrack(res, path, level+1)
-
-        length = len(s)
-        if length == 0:
-            return []
-        res = []
-        backtrack(res, [0], 1)
-        return res
-
-# @lc code=start
 class Solution(object):
-    def partition(self, s):
-        """
-        :type s: str
-        :rtype: List[List[str]]
-        """
+    def partition(self, s: str) -> list:
         def vaild(a, b):
             b = b-1
             while a < b:

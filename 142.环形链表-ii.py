@@ -72,17 +72,14 @@
 #
 #
 
-# @lc code=start
 # Definition for singly-linked list.
 # class ListNode:
 #     def __init__(self, x):
 #         self.val = x
 #         self.next = None
 
-try:
-    from comm import *
-except ImportError:
-    LOCAL_TEST = False
+from comm import *
+# @lc code=start
 
 class Solution:
     def detectCycle(self, head: ListNode) -> ListNode:
@@ -99,7 +96,7 @@ class Solution:
                    X = K - Y
 
         也就是: 环起点距离 = 另一半环
-        那么从'起点'和'相遇点', 同时出发, 再次相遇的时候刚好就是换起点
+        那么从'起点'和'相遇点', 同时出发, 再次相遇的时候刚好就是环起点
         """
 
         if not head or not head.next:
@@ -119,5 +116,5 @@ class Solution:
             p1 = p1.next
             p2 = p2.next
         return p1
-# @lc code=end
 
+# @lc code=end

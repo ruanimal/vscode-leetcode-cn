@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=100 lang=python
+# @lc app=leetcode.cn id=100 lang=python3
 #
 # [100] 相同的树
 #
@@ -19,9 +19,7 @@ class Solution(object):
         """
         if not p and not q:
             return True
-        elif p and q:
-            if p.val == q.val:
-                if self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right):
-                    return True
+        if p and q and p.val == q.val and self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right):
+            return True
         return False
 

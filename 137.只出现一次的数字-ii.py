@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=137 lang=python
+# @lc app=leetcode.cn id=137 lang=python3
 #
 # [137] 只出现一次的数字 II
 #
@@ -31,11 +31,14 @@
 # 输出: 99
 #
 #
+
+from comm import *
+# @lc code=start
+
 class Solution(object):
-    def singleNumber(self, nums):
+    def singleNumber(self, nums: List[int]) -> int:
         """
-        :type nums: List[int]
-        :rtype: int
+        统计二进制位, 只出现一次的数二进制位取余3不等于0
         """
         bits = [0 for _ in range(32)]
         flags = 0
@@ -55,6 +58,8 @@ class Solution(object):
             if (bits[i] % 3) != 0:
                 ans |= 1
         return ans if (flags % 3 == 0) else -ans
+
+# @lc code=end
 
 
 if __name__ == "__main__":

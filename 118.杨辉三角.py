@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=118 lang=python
+# @lc app=leetcode.cn id=118 lang=python3
 #
 # [118] 杨辉三角
 #
@@ -33,11 +33,7 @@
 
 
 class Solution(object):
-    def generate(self, numRows):
-        """
-        :type numRows: int
-        :rtype: List[List[int]]
-        """
+    def generate(self, numRows: int) -> list:
         if numRows < 1:
             return []
         if numRows == 1:

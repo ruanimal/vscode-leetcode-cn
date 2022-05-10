@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=121 lang=python
+# @lc app=leetcode.cn id=121 lang=python3
 #
 # [121] 买卖股票的最佳时机
 #
@@ -34,10 +34,9 @@
 #
 #
 class Solution(object):
-    def maxProfit(self, prices):
+    def maxProfit(self, prices: list) -> int:
         """
-        :type prices: List[int]
-        :rtype: int
+        动态规划, 其实就是状态机, 要明确状态还有, 动作(状态是怎么转移的)
         1. f[x] 成本, 到x时的最小成本, lv[x], x时卖出获得的利润
         2. f[x] = min(prices[x], f[x-1]); lv[x] = max(prices[x] - f[x], lv[x-1])
         3. f[0] = prices[0]; lv[0] = 0
@@ -45,14 +44,14 @@ class Solution(object):
         if not prices:
             return 0
 
-        f = {}
-        lv = {}
+        f = [0] * len(prices)
+        lv = [0] * len(prices)
         f[0] = prices[0]
         lv[0] = 0
 
         for x in range(1, len(prices)):
-            f[x] = min(prices[x], f[x-1])
-            lv[x] = max(prices[x] - f[x], lv[x-1])
+            f[x] = min(prices[x], f[x-1])   # 在x买, 在x之前买
+            lv[x] = max(prices[x] - f[x], lv[x-1])  # 在x卖, 在x之前卖
         return lv[len(prices)-1]
 
 if __name__ == "__main__":

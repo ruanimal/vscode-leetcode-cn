@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=146 lang=python
+# @lc app=leetcode.cn id=146 lang=python3
 #
 # [146] LRU缓存机制
 #
@@ -40,34 +40,25 @@
 #
 #
 
+# @lc code=start
+
 from collections import OrderedDict
 
-class LRUCache(OrderedDict):
+class LRUCacheV1(OrderedDict):
+    """利用库函数实现"""
 
-    def __init__(self, capacity):
-        """
-        :type capacity: int
-        """
+    def __init__(self, capacity: int):
         OrderedDict.__init__(self)
         self._capacity = capacity
 
-    def get(self, key):
-        """
-        :type key: int
-        :rtype: int
-        """
+    def get(self, key: int) -> int:
         if key not in self:
             return -1
         val = self.pop(key)
         self[key] = val
         return val
 
-    def put(self, key, value):
-        """
-        :type key: int
-        :type value: int
-        :rtype: None
-        """
+    def put(self, key: int, value: int):
         if key in self:
             self.pop(key)
         self[key] = value
@@ -75,109 +66,109 @@ class LRUCache(OrderedDict):
             self.popitem(last=False)
 
 
-class DLinkedNode():
-    def __init__(self):
-        self.key = 0
-        self.value = 0
-        self.prev = None
+class Node:
+    def __init__(self, key, val=None):
+        self.key = key
+        self.val = val
         self.next = None
+        self.prev = None
 
-class LRUCache(object):
-    def _add_node(self, node):
-        """
-        Always add the new node right after head.
-        """
-        node.prev = self.head
-        node.next = self.head.next
+    def __repr__(self):
+        return 'Node({!r}, {!r})'.format(self.key, self.val)
 
-        self.head.next.prev = node
-        self.head.next = node
 
-    def _remove_node(self, node):
-        """
-        Remove an existing node from the linked list.
-        """
-        prev = node.prev
-        new = node.next
+class DoublyLink:
+    def __init__(self):
+        self.root = Node('root')
+        self.root.prev = self.root
+        self.root.next = self.root
+        self.length = 0
 
-        prev.next = new
-        new.prev = prev
+    @property
+    def tail(self) -> Node:
+        return self.root.prev
 
-    def _move_to_head(self, node):
-        """
-        Move certain node in between to the head.
-        """
-        self._remove_node(node)
-        self._add_node(node)
+    def append_head(self, node):
+        return self.insert_after(self.root, node)
 
-    def _pop_tail(self):
-        """
-        Pop the current tail.
-        """
-        res = self.tail.prev
-        self._remove_node(res)
-        return res
+    def append_tail(self, node):
+        return self.insert_after(self.tail, node)
 
+    def insert_after(self, pos: Node, node):
+        pos.next.prev = node
+        node.next = pos.next
+        pos.next = node
+        node.prev = pos
+        self.length += 1
+        return node
+
+    def find(self, key):
+        ptr = self.root
+        while ptr.next != self.root:
+            if ptr.next.key == key:
+                return ptr.next
+            ptr = ptr.next
+
+    def remove(self, node):
+        if node == self.root:
+            return False
+        node.next.prev = node.prev
+        node.prev.next = node.next
+        self.length -= 1
+        del node
+        return True
+
+    def __repr__(self):
+        tmp = ['Link(len={}):'.format(self.length)]
+        ptr = self.root
+        while ptr.next != self.root:
+            tmp.append(repr(ptr.next))
+            ptr = ptr.next
+        return ' -> '.join(tmp)
+
+
+class LRUCache:
     def __init__(self, capacity):
-        """
-        :type capacity: int
-        """
         self.cache = {}
-        self.size = 0
-        self.capacity = capacity
-        self.head, self.tail = DLinkedNode(), DLinkedNode()
+        self.dl = DoublyLink()
+        self.size = capacity
 
-        self.head.next = self.tail
-        self.tail.prev = self.head
+    def check_expired(self):
+        if self.dl.length == self.size:
+            self.cache.pop(self.dl.tail.key)
+            self.dl.remove(self.dl.tail)
 
+    def move_to_head(self, node):
+        self.dl.remove(node)
+        self.dl.append_head(node)
 
     def get(self, key):
-        """
-        :type key: int
-        :rtype: int
-        """
         node = self.cache.get(key, None)
         if not node:
             return -1
+        self.move_to_head(node)
+        return node.val
 
-        # move the accessed node to the head;
-        self._move_to_head(node)
+    def put(self, key, val):
+        node = self.cache.get(key, None)
+        if node:
+            node.val = val
+            self.move_to_head(node)
+            return
+        self.check_expired()
+        self.cache[key] = self.dl.append_head(Node(key, val))
 
-        return node.value
-
-    def put(self, key, value):
-        """
-        :type key: int
-        :type value: int
-        :rtype: void
-        """
-        node = self.cache.get(key)
-
-        if not node:
-            newNode = DLinkedNode()
-            newNode.key = key
-            newNode.value = value
-
-            self.cache[key] = newNode
-            self._add_node(newNode)
-
-            self.size += 1
-
-            if self.size > self.capacity:
-                # pop the tail
-                tail = self._pop_tail()
-                del self.cache[tail.key]
-                self.size -= 1
-        else:
-            # update the value.
-            node.value = value
-            self._move_to_head(node)
+    def __repr__(self):
+        return '<LRU maxsize={}, len={}> {!r}'.format(self.size, self.dl.length, self.cache)
 
 
 # Your LRUCache object will be instantiated and called as such:
 # obj = LRUCache(capacity)
 # param_1 = obj.get(key)
 # obj.put(key,value)
+
+# @lc code=end
+
 if __name__ == "__main__":
     cmds = [
         ["put","put","get","put","get","put","get","get","get"],
