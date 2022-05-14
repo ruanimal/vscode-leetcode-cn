@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=234 lang=python
+# @lc app=leetcode.cn id=234 lang=python3
 #
 # [234] 回文链表
 #
@@ -27,16 +27,14 @@
 # 进阶：
 # 你能否用 O(n) 时间复杂度和 O(1) 空间复杂度解决此题？
 
-try:
-    from comm import *
-except ImportError:
-    LOCAL_TEST = False
+from comm import *
+
+# @lc code=start
+
 
 class Solution(object):
-    def isPalindrome(self, head):
+    def isPalindrome(self, head: ListNode) -> bool:
         """
-        :type head: ListNode
-        :rtype: bool
         快慢指针法, 反转其中一半, 比较
         """
         if not head:
@@ -69,10 +67,12 @@ class Solution(object):
             ptr_b = ptr_b.next
         return True
 
-class Solution_B(object):
+class SolutionA(object):
     def traverse(self, right):
         """判断左右往里各移动移动一位之后是不是回文
-        性能比较差, 耗时为迭代法的2倍
+        性能比较差, 耗时为迭代法的2倍, 适合用来理解递归
+
+        后序遍历
         """
         if not right:
             return True
@@ -81,8 +81,7 @@ class Solution_B(object):
         self.left = self.left.next
         return res
 
-
-    def isPalindrome(self, head):
+    def isPalindrome(self, head: ListNode) -> bool:
         """
         递归法
         """
@@ -92,8 +91,4 @@ class Solution_B(object):
         self.left = head
         return self.traverse(head)
 
-if LOCAL_TEST:
-    ll = build_list_node([1,2,1])
-    print(Solution().isPalindrome(ll))
-
-
+# @lc code=end

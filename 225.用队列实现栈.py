@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=225 lang=python
+# @lc app=leetcode.cn id=225 lang=python3
 #
 # [225] 用队列实现栈
 #
@@ -31,10 +31,7 @@
 #
 #
 
-try:
-    from queue import Queue
-except ImportError:
-    from Queue import Queue
+from queue import Queue
 
 class MyStack(object):
 
@@ -45,18 +42,15 @@ class MyStack(object):
         self.stack_q = Queue()
         self.tmp_q = Queue()
 
-    def push(self, x):
+    def push(self, x: int):
         """
         Push element x onto stack.
-        :type x: int
-        :rtype: None
         """
         self.stack_q.put(x)
 
-    def pop(self):
+    def pop(self) -> int:
         """
         Removes the element on top of the stack and returns that element.
-        :rtype: int
         """
         if self.stack_q.empty():
             return
@@ -70,10 +64,9 @@ class MyStack(object):
         self.stack_q, self.tmp_q = self.tmp_q, self.stack_q
         return tmp
 
-    def top(self):
+    def top(self) -> int:
         """
         Get the top element.
-        :rtype: int
         """
         if self.stack_q.empty():
             return
@@ -82,10 +75,9 @@ class MyStack(object):
         self.push(t)
         return t
 
-    def empty(self):
+    def empty(self) -> int:
         """
         Returns whether the stack is empty.
-        :rtype: bool
         """
         return self.stack_q.empty()
 

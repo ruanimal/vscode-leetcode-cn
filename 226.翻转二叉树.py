@@ -53,6 +53,8 @@
 #
 #
 
+from comm import *
+
 # @lc code=start
 # Definition for a binary tree node.
 # class TreeNode:
@@ -61,16 +63,16 @@
 #         self.left = left
 #         self.right = right
 
-try:
-    from comm import *
-except ImportError:
-    LOCAL_TEST = False
 
 class Solution:
     def invertTree(self, root: Optional[TreeNode]) -> TreeNode:
+        """
+        递归解法
+        """
+
         if not root:
             return
         root.left, root.right = self.invertTree(root.right), self.invertTree(root.left)
         return root
-# @lc code=end
 
+# @lc code=end

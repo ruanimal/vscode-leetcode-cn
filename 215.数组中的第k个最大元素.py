@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=215 lang=python
+# @lc app=leetcode.cn id=215 lang=python3
 #
 # [215] 数组中的第K个最大元素
 #
@@ -72,9 +72,7 @@ class MinHeap(object):
 class Solution(object):
     def findKthLargest(self, nums, k):
         """
-        :type nums: List[int]
-        :type k: int
-        :rtype: int
+        最小堆
         """
         heap = MinHeap()
         for i in nums[:k]:

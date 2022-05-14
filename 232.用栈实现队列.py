@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=232 lang=python
+# @lc app=leetcode.cn id=232 lang=python3
 #
 # [232] 用栈实现队列
 #

@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=217 lang=python
+# @lc app=leetcode.cn id=217 lang=python3
 #
 # [217] 存在重复元素
 #
@@ -33,15 +33,10 @@
 #
 
 class Solution(object):
-    def containsDuplicate(self, nums):
+    def containsDuplicate(self, nums: list) -> bool:
         """
-        :type nums: List[int]
-        :rtype: bool
+        集合计数法
         """
-        # if len(set(nums)) != len(nums):
-        #     return True
-        # return False
-
         nums_set = set()
         count = 0
         for i in nums:

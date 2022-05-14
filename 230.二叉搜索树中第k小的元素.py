@@ -44,6 +44,10 @@
 # 如果二叉搜索树经常被修改（插入/删除操作）并且你需要频繁地查找第 k 小的值，你将如何优化 kthSmallest 函数？
 #
 #
+
+from comm import *
+# @lc code=start
+
 # Definition for a binary tree node.
 # class TreeNode(object):
 #     def __init__(self, x):
@@ -52,13 +56,10 @@
 #         self.right = None
 
 class Solution_A(object):
-    def kthSmallest(self, root, k):
+    def kthSmallest(self, root: TreeNode, k: int) -> int:
         """
-        :type root: TreeNode
-        :type k: int
-        :rtype: int
+        v1 非递归中序排序
         """
-        # v1 非递归中序排序
         if not root:
             return []
 
@@ -78,12 +79,9 @@ class Solution_A(object):
         return ans[-1] if len(ans) == k else None
 
 class Solution_B(object):
-    def kthSmallest(self, root, k):
+    def kthSmallest(self, root: TreeNode, k: int) -> int:
         """
         生成器法
-        :type root: TreeNode
-        :type k: int
-        :rtype: int
         """
 
         def mid_order(root):
@@ -99,7 +97,7 @@ class Solution_B(object):
         return ans
 
 class Solution(object):
-    def kthSmallest(self, root, k):
+    def kthSmallest(self, root: TreeNode, k: int) -> int:
         def inorder(root):
             if not root: return
             inorder(root.left)
@@ -112,4 +110,6 @@ class Solution(object):
         self.res, self.count = None, k
         inorder(root)
         return self.res
+
+# @lc code=end
 
