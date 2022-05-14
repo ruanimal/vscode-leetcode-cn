@@ -50,6 +50,10 @@ class Solution(object):
     def convertToTitle(self, n: int) -> str:
         """
         26进制实现
+
+        a * 26 ^ n + b * 26 ^ (n-1) ...
+
+        1 <= a <= 26
         """
         if n <= 0:
             return
@@ -63,6 +67,7 @@ class Solution(object):
                 tmp = 26
             ans.append(trans_map[tmp])
         return ''.join(ans[::-1])
+
 
 if __name__ == "__main__":
     s = Solution().convertToTitle(1)

@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=172 lang=python
+# @lc app=leetcode.cn id=172 lang=python3
 #
 # [172] 阶乘后的零
 #
@@ -31,17 +31,7 @@
 #
 #
 class Solution(object):
-    def trailingZeroes(self, n):
-        """
-        :type n: int
-        :rtype: int
-        """
-        # 太慢
-        # ans = 0
-        # for i in range(1, n+1):
-        #     if i % 5 == 0:
-        #         ans += 1
-        # return ans
+    def trailingZeroes(self, n: int) -> int:
         '''
         >>> 2 * 5 * 10 * 12 * 15 * 20 * 22 * 25
         198000000

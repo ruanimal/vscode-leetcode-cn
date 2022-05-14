@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=189 lang=python
+# @lc app=leetcode.cn id=189 lang=python3
 #
 # [189] 旋转数组
 #
@@ -41,13 +41,33 @@
 #
 
 
-class Solution(object):
-    def rotate(self, nums, k):
+class SolutionA(object):
+    def rotate(self, nums: list, k: int):
         """
-        :type nums: List[int]
-        :type k: int
-        :rtype: void Do not return anything, modify nums in-place instead.
+        暴力队列法
         """
-        for i in xrange(k):
+        k = k % len(nums)
+        for i in range(k):
             tmp = nums.pop()
             nums.insert(0, tmp)
+
+class Solution(object):
+    def reverse(self, nums, i, j):
+        while i < j:
+            nums[i], nums[j] = nums[j], nums[i]
+            i += 1
+            j -= 1
+
+    def rotate(self, nums: list, k: int):
+        """
+        三次翻转法
+        """
+
+        k = k % len(nums)
+        self.reverse(nums, 0, len(nums)-1)
+        self.reverse(nums, 0, k-1)
+        self.reverse(nums, k, len(nums)-1)
+
+nums = [1,2,3,4,5,6,7]
+Solution().rotate(nums, 3)
+print(nums)
