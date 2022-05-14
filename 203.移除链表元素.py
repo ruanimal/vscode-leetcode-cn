@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=203 lang=python
+# @lc app=leetcode.cn id=203 lang=python3
 #
 # [203] 移除链表元素
 #
@@ -26,6 +26,9 @@
 #         self.val = x
 #         self.next = None
 
+from comm import *
+# @lc code=start
+
 class Solution(object):
     def removeElements(self, head, val):
         """
@@ -43,4 +46,6 @@ class Solution(object):
             else:
                 ptr = ptr.next
         return new_head.next
+
+# @lc code=end
 

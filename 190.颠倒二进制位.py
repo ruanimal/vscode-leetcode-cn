@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=190 lang=python
+# @lc app=leetcode.cn id=190 lang=python3
 #
 # [190] 颠倒二进制位
 #
@@ -47,14 +47,7 @@
 #
 #
 class Solution:
-    # @param n, an integer
-    # @return an integer
-    def reverseBits(self, n):
-        # n = format(bin(n)[2:], '0>32')
-        # n = list(n)
-        # n.reverse()
-        # return int(''.join(n), 2)
-
+    def reverseBits(self, n: int) -> int:
         res = 0
         for i in range(32):
             res |= ((n >> i) & 1) << (31 - i)

@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=202 lang=python
+# @lc app=leetcode.cn id=202 lang=python3
 #
 # [202] 快乐数
 #
@@ -31,10 +31,9 @@
 
 
 class Solution(object):
-    def isHappy(self, n):
+    def isHappy(self, n: int) -> bool:
         """
-        :type n: int
-        :rtype: bool
+        暴力法
         """
         history = set()
         while (n != 1):

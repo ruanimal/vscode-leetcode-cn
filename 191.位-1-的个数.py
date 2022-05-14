@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=191 lang=python
+# @lc app=leetcode.cn id=191 lang=python3
 #
 # [191] 位1的个数
 #
@@ -51,15 +51,34 @@
 # 如果多次调用这个函数，你将如何优化你的算法？
 #
 #
-class Solution(object):
+class SolutionA(object):
     bases = [2**i for i in range(32)]
-    def hammingWeight(self, n):
+    def hammingWeight(self, n: int) -> int:
         """
-        :type n: int
-        :rtype: int
+        暴力法
         """
         count = 0
-        for i in Solution.bases:
+        for i in self.bases:
             if n & i:
                 count += 1
         return count
+
+class Solution(object):
+    def hammingWeight(self, n: int) -> int:
+        """
+        variable-precision SWAR 算法
+
+        http://ponder.work/2020/08/01/variable-precision-SWAR-algorithm/
+        """
+
+        M1 = 0b01010101010101010101010101010101
+        M2 = 0b00110011001100110011001100110011
+        M3 = 0b00001111000011110000111100001111
+
+        res = n
+        res = (res & M1) + ((res >> 1) & M1)
+        res = (res & M2) + ((res >> 2) & M2)
+        res = (res & M3) + ((res >> 4) & M3)
+        res = ((res * 0x01010101) & 0xFFFFFFFF) >> 24
+        return res
+

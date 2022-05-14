@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=198 lang=python
+# @lc app=leetcode.cn id=198 lang=python3
 #
 # [198] 打家劫舍
 #
@@ -35,24 +35,14 @@
 
 
 class Solution(object):
-    def rob(self, nums, money=0):
+    def rob(self, nums: list) -> int:
         """
-        :type nums: List[int]
-        :rtype: int
+        1. 状态: n间房时抢的钱, f(x)
+           最后一步: 抢这间 f(x-2) + nums[x]
+                    不抢这间 f(x-1)
+        2. f(x) = max(f(x-2) + nums[x], f(x-1))
+        3. f(0) = 0, f(1) = nums[0]
         """
-        # if len(nums) < 1:
-        #     return 0
-        # if len(nums) == 1:
-        #     return money + nums[0]
-        # elif len(nums) == 2:  # 只有两间房, 投多的那间
-        #     return money + max(nums)
-        # else:
-        #     if nums[0] >= nums[1]:
-        #         money += nums[0]
-        #         return self.rob(nums[2:], money)
-        #     else:
-        #         nums[2] = nums[0] + nums[2]
-        #         return self.rob(nums[1:], money)
 
         # 动态规划
         n = len(nums)
@@ -65,37 +55,7 @@ class Solution(object):
             memo[i] = max(memo[i-1], nums[i] + memo[i-2])
         return memo[n - 1]
 
-    def rob2(self, nums, money=0):
-        """
-        :type nums: List[int]
-        :rtype: int
-        1. 状态: n间房时抢的钱, f(x)
-           最后一步: 抢这间 f(x-2) + nums[x]
-                    不抢这间 f(x-1)
-        2. f(x) = max(f(x-2) + nums[x], f(x-1))
-        3. f(0) = 0, f(1) = nums[0]
-        """
-        # 动态规划
-        n = len(nums)
-        if n < 0:
-            return
-        if n == 0:
-            return 0
-        if n == 1:
-            return nums[0]
-
-        f = {}
-        f[-1] = 0
-        f[0] = nums[0]
-        for x in range(1, n):
-            f[x] = max(f[x-2] + nums[x], f[x-1])
-        return f[n - 1]
-
 if __name__ == "__main__":
     s = Solution().rob([2,7,9,3,1])
     print(s)
-    s = Solution().rob2([2,7,9,3,1])
-    print(s)
-
-
 

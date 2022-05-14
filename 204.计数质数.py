@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=204 lang=python
+# @lc app=leetcode.cn id=204 lang=python3
 #
 # [204] 计数质数
 #
@@ -24,10 +24,13 @@
 #
 #
 class Solution(object):
-    def countPrimes(self, n):
+    def countPrimes(self, n: int) -> int:
         """
-        :type n: int
-        :rtype: int
+        筛法求素数
+
+        依次去除已知素数的倍速
+
+        从i * i, 开始是因为 1 * i 到 (i-1) * i, 都被之前的数筛过了
         """
 
         if n < 2:
@@ -40,17 +43,6 @@ class Solution(object):
                 for j in range(i*i, n, i):
                     is_primes[j] = 0
         return sum(is_primes)
-
-        # # 抄的高分答案, 很快, 应该是由于数组的多段赋值
-        # if n < 3:       # 注意审题边界条件,是小于n,不包括n
-        #     return 0    # 注意 数组越界的情况
-
-        # primes = [1] * n
-        # primes[0] = primes[1] = 0
-        # for i in range(2, int(n**0.5)+1):    # 在选择除数时候的一个小技巧.大于一半的数是不可能做除数的
-        #     if primes[i]:
-        #         primes[i * i: n: i] = [0] * ((n - 1) // i - i + 1)  # 用埃氏筛法, 将每一个不是素数的数筛选掉.大大减少除法的数量.
-        # return sum(primes)
 
 if __name__ == "__main__":
     s = Solution().countPrimes(12)

@@ -28,10 +28,9 @@
 #         self.val = x
 #         self.next = None
 
-try:
-    from comm import *
-except ImportError:
-    LOCAL_TEST = False
+
+from comm import *
+# @lc code=start
 
 class Solution_A:
     def reverseList(self, head: ListNode) -> ListNode:
@@ -69,7 +68,8 @@ class Solution:
         others.next = head   # 反转之后others变成尾部
         return new_head
 
-if LOCAL_TEST:
-    n = build_list_node(range(5))
-    print(Solution().reverseList(n))
+# @lc code=end
+
+n = build_list_node(range(5))
+print(Solution().reverseList(n))
 
