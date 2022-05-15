@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=268 lang=python
+# @lc app=leetcode.cn id=268 lang=python3
 #
 # [268] 缺失数字
 #
@@ -30,12 +30,11 @@
 #
 #
 class Solution(object):
-    def missingNumber(self, nums):
+    def missingNumber(self, nums: list) -> int:
         """
-        :type nums: List[int]
-        :rtype: int
+        求和法
         """
         length = len(nums)
         tmp = (length * (length+1))/2
-        return tmp - sum(nums)
+        return int(tmp - sum(nums))
 

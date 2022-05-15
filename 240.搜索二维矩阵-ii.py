@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=240 lang=python
+# @lc app=leetcode.cn id=240 lang=python3
 #
 # [240] 搜索二维矩阵 II
 #
@@ -38,12 +38,13 @@
 # 给定 target = 20，返回 false。
 #
 #
+
+from comm import *
+# @lc code=start
+
 class Solution(object):
-    def searchMatrix(self, matrix, target):
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
         """
-        :type matrix: List[List[int]]
-        :type target: int
-        :rtype: bool
         二分查找加区间选择
         """
         if not matrix:
@@ -72,13 +73,12 @@ class Solution(object):
                 return True
         return False
 
-    def searchMatrix2(self, matrix, target):
+class SolutionA(object):
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
         """
-        :type matrix: List[List[int]]
-        :type target: int
-        :rtype: bool
-
         leetcode 最快解法
+
+        重复利用行和列的性质, 进行移动
         """
         if not matrix:
             return False
@@ -93,6 +93,8 @@ class Solution(object):
             else:
                 row += 1
         return False
+
+# @lc code=end
 
 if __name__ == "__main__":
     s = Solution().searchMatrix([

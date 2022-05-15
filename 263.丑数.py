@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=263 lang=python
+# @lc app=leetcode.cn id=263 lang=python3
 #
 # [263] 丑数
 #
@@ -43,24 +43,20 @@
 #
 #
 
-
 class Solution(object):
-    def isUgly(self, num):
+    def isUgly(self, num: int) -> bool:
         """
-        :type num: int
-        :rtype: bool
+        如果是丑数
+        则 num = 2 ** a * 3 ** b * 5 ** c
         """
-        div_map = [2, 3, 5]
-        while num > 1:
-            flags = map(lambda x: num % x, div_map)
-            try:
-                next_act = flags.index(0)
-            except ValueError:
-                return False
+
+        while num:
+            if num % 5 == 0:
+                num = num // 5
+            elif num % 3 == 0:
+                num = num // 3
+            elif num % 2 == 0:
+                num = num // 2
             else:
-                return self.isUgly(num/div_map[next_act])
-        if num == 1:
-            return True
-        return False
-
-
+                break
+        return (num == 1)

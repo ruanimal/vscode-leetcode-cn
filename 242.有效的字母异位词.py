@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=242 lang=python
+# @lc app=leetcode.cn id=242 lang=python3
 #
 # [242] 有效的字母异位词
 #
@@ -32,19 +32,20 @@
 #
 #
 
+from collections import Counter
+
+class SolutionA(object):
+    def isAnagram(self, s: str, t: str) -> bool:
+        """
+        排序法
+        """
+        return sorted(s) == sorted(t)
 
 class Solution(object):
-    def isAnagram(self, s, t):
+    def isAnagram(self, s: str, t: str) -> bool:
         """
-        :type s: str
-        :type t: str
-        :rtype: bool
+        计数法
         """
-        sl = [x for x in s]
-        tl = [x for x in t]
-        sl.sort()
-        tl.sort()
-        if sl == tl:
-            return True
-        else:
+        if len(s) != len(t):
             return False
+        return Counter(s) == Counter(t)

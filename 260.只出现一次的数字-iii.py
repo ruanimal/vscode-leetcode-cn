@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=260 lang=python
+# @lc app=leetcode.cn id=260 lang=python3
 #
 # [260] 只出现一次的数字 III
 #
@@ -29,12 +29,11 @@
 #
 #
 class Solution(object):
-    def singleNumber(self, nums):
+    def singleNumber(self, nums: list) -> list:
         """
-        :type nums: List[int]
-        :rtype: List[int]
+        转化成只有一个数字出现一次的情况
 
-        进行一次异或操作，a, b 代表最后结果，则xor = a ^ b
+        进行一轮异或操作，a, b 代表最后结果，则xor = a ^ b
         xor & (~(xor-1)) 取得a ^ b 的结果的最后一个1, 记为mask
         mask代表这一个位， a和b中有且只有一个为1
         通过mask & i, 可以将nums分为两个部分，这一位为0，和这一位为1，a和b分别在其中一组中

@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=278 lang=python
+# @lc app=leetcode.cn id=278 lang=python3
 #
 # [278] 第一个错误的版本
 #
@@ -30,6 +30,12 @@
 # 所以，4 是第一个错误的版本。 
 #
 #
+
+def isBadVersion(n) -> bool:
+    pass
+
+# @lc code=start
+
 # The isBadVersion API is already defined for you.
 # @param version, an integer
 # @return a bool
@@ -38,8 +44,7 @@
 class Solution(object):
     def firstBadVersion(self, n):
         """
-        :type n: int
-        :rtype: int
+        二分查找
         """
         left = 1
         right = n
@@ -55,4 +60,6 @@ class Solution(object):
         if not isBadVersion(n):
             return
         return left
+
+# @lc code=end
 
