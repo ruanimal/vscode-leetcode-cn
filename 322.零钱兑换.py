@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=322 lang=python
+# @lc app=leetcode.cn id=322 lang=python3
 #
 # [322] 零钱兑换
 #
@@ -30,12 +30,8 @@
 #
 #
 class Solution(object):
-    def coinChange(self, coins, amount):
-        """
-        :type coins: List[int]
-        :type amount: int
-        :rtype: int
-
+    def coinChange(self, coins: list, amount: int) -> int:
+        """动态规划
         1. f[x], 凑成金额x所需的硬币个数amount；
            到最后一个硬币是，有3总情况 f[x-1] + 1, f[x-2] + 1, f[x-5] + 1; 取最小
         2. f[x] = min(f[x-1] + 1, f[x-2] + 1, f[x-5] + 1)

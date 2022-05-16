@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=350 lang=python
+# @lc app=leetcode.cn id=350 lang=python3
 #
 # [350] 两个数组的交集 II
 #
@@ -40,12 +40,9 @@
 #
 #
 #
-class Solution(object):
-    def intersect(self, nums1, nums2):
-        """
-        :type nums1: List[int]
-        :type nums2: List[int]
-        :rtype: List[int]
+class SolutionA:
+    def intersect(self, nums1: list, nums2: list) -> list:
+        """使用第349题的暴力法
         """
         if not nums1 or not nums2:
             return
@@ -67,6 +64,20 @@ class Solution(object):
                 else:
                     j += 1
         return ret
+
+from collections import Counter
+
+class Solution:
+    def intersect(self, nums1: list, nums2: list) -> list:
+        """哈希计数法
+        """
+
+        cnt1 = Counter(nums1)
+        cnt2 = Counter(nums2)
+        res = []
+        for num, cnt in (cnt1 & cnt2).items():
+            res.extend([num] * cnt)
+        return res
 
 if __name__ == "__main__":
     t = Solution().intersect(nums1 = [4,4,4,9,5,8], nums2 = [9,4,9,8,4])

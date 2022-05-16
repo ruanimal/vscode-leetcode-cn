@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=349 lang=python
+# @lc app=leetcode.cn id=349 lang=python3
 #
 # [349] 两个数组的交集
 #
@@ -32,12 +32,10 @@
 #
 #
 #
-class Solution(object):
-    def intersection(self, nums1, nums2):
+class SolutionA:
+    def intersection(self, nums1: list, nums2: list) -> list:
         """
-        :type nums1: List[int]
-        :type nums2: List[int]
-        :rtype: List[int]
+        暴力法
         排序, 然后逐个比较大小, 用列表储存相同元素, 比较时记住上一轮结束比较的位置
         """
         if not nums1 or not nums2:
@@ -60,6 +58,14 @@ class Solution(object):
                 else:
                     j += 1
         return list(set(ret))
+
+
+class Solution:
+    def intersection(self, nums1: list, nums2: list) -> list:
+        """集合法"""
+
+        return list(set(nums1) & set(nums2))
+
 
 if __name__ == "__main__":
     t = Solution().intersection(nums1 = [4,9,5,8], nums2 = [9,4,9,8,4])

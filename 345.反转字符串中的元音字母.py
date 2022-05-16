@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=345 lang=python
+# @lc app=leetcode.cn id=345 lang=python3
 #
 # [345] 反转字符串中的元音字母
 #
@@ -30,11 +30,10 @@
 #
 
 
-class Solution(object):
-    def reverseVowels(self, s):
+class SolutionA(object):
+    def reverseVowels(self, s: str) -> str:
         """
-        :type s: str
-        :rtype: str
+        先找到元音的位置然后逐个交互
         """
         if len(s) < 2:
             return s
@@ -45,3 +44,33 @@ class Solution(object):
             string_list[vowels_list[i]], string_list[vowels_list[-i-1]] = string_list[vowels_list[-i-1]], string_list[vowels_list[i]]
             i += 1
         return ''.join(string_list)
+
+class Solution(object):
+    vowels = set('aeiouAEIOU')
+
+    def reverseVowels(self, s: str) -> str:
+        """
+        双指针
+        """
+
+        if len(s) < 2:
+            return s
+        tmp = list(s)
+        i = 0
+        j = len(tmp) - 1
+        while i < j:
+            if tmp[i] in self.vowels and tmp[j] in self.vowels:
+                tmp[i], tmp[j] = tmp[j], tmp[i]
+                i += 1
+                j -= 1
+            elif tmp[i] not in self.vowels:
+                i += 1
+            elif tmp[j] not in self.vowels:
+                j -= 1
+            else:
+                i += 1
+                j -= 1
+        return ''.join(tmp)
+
+s = Solution().reverseVowels('leetcode')
+print(s)

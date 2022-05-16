@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=342 lang=python
+# @lc app=leetcode.cn id=342 lang=python3
 #
 # [342] 4的幂
 #
@@ -28,13 +28,31 @@
 # 你能不使用循环或者递归来完成本题吗？
 #
 #
-class Solution(object):
-    powers = {1, 4, 16, 64, 256, 1024, 4096, 16384, 65536, 262144,
-                1048576, 4194304, 16777216, 67108864, 268435456, 1073741824}
-    def isPowerOfFour(self, num):
+class SolutionA(object):
+    powers = {4 ** i for i in range(16)}
+    def isPowerOfFour(self, num: int) -> bool:
+        """查表法
+        4 ** 15 == 1073741824, 是int32范围内的4的最次方
         """
-        :type num: int
-        :rtype: bool
-        """
-        return num in Solution.powers
+        return num in self.powers
 
+
+class SolutionB(object):
+    def isPowerOfFour(self, num: int) -> bool:
+        """暴力法, 超时
+        4 ** 15 == 1073741824, 是int32范围内的4的最次方
+        """
+        while (num & 0b11) == 0:
+            num >>= 2
+        return num == 1
+
+class Solution(object):
+    def isPowerOfFour(self, num: int) -> bool:
+        """二进制法
+        只有一个1, 而且1的位置出现在1, 3, 5...的位置上
+        """
+
+        mask = 0b01010101010101010101010101010101
+        return  num > 0 and (num & mask) == num and (num & (num-1)) == 0
+s = Solution().isPowerOfFour(16)
+print(s)

@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=367 lang=python
+# @lc app=leetcode.cn id=367 lang=python3
 #
 # [367] 有效的完全平方数
 #
@@ -27,31 +27,37 @@
 #
 #
 #
-class Solution(object):
+class SolutionA:
     all_nums = {i**2: i for i in range(65536)}
 
-    def isPerfectSquare(self, num):
+    def isPerfectSquare(self, num: int) -> bool:
+        """查表法
         """
-        :type num: int
-        :rtype: bool
-        """
-        # 二分查找比较慢
-        # all_nums = [i for i in range(65536)]
+        return num in self.all_nums
 
-        # def binary_search(target):
-        #     left = 0
-        #     right = len(all_nums) - 1
-        #     while left <= right:
-        #         mid = (left+right) // 2
-        #         if all_nums[mid] ** 2 < target:
-        #             left = mid + 1
-        #         elif target < all_nums[mid] ** 2:
-        #             right = mid - 1
-        #         else:
-        #             return mid
-        #     return -1
-        # ret = binary_search(num)
-        return num in Solution.all_nums
+import math
+
+class SolutionB:
+    def isPerfectSquare(self, num: int) -> bool:
+        """库函数pow法
+        """
+        pow = math.pow(num, 0.5)
+        return int(pow) == pow
+
+class Solution:
+    def isPerfectSquare(self, num: int) -> bool:
+        """二分查找法
+        """
+
+        left = 0
+        right = 65536
+        while left < right:
+            mid = (left + right) >> 1
+            if mid * mid < num:
+                left = mid + 1
+            else:
+                right = mid
+        return left * left == num
 
 if __name__ == "__main__":
     s = Solution().isPerfectSquare(9)

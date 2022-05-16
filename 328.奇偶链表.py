@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=328 lang=python
+# @lc app=leetcode.cn id=328 lang=python3
 #
 # [328] 奇偶链表
 #
@@ -32,39 +32,16 @@
 # 应当保持奇数节点和偶数节点的相对顺序。
 # 链表的第一个节点视为奇数节点，第二个节点视为偶数节点，以此类推。
 
+from comm import *
+# @lc code=start
 
-class ListNode:
-    def __init__(self, x):
-        self.val = x
-        self.next = None
-
-    def __repr__(self):
-        tmp = []
-        node = self
-        max_depth = 20
-        while node:
-            max_depth -= 1
-            if max_depth < 0:
-                break
-            tmp.append(repr(node.val))
-            node = node.next
-        else:
-            tmp.append('None')
-        return ' -> '.join(tmp)
-
-
-def build_list_node(nums):
-    head = node = ListNode(None)
-    for i in nums:
-        node.next = ListNode(i)
-        node = node.next
-    return head.next
 
 class Solution(object):
-    def oddEvenList(self, head):
+    def oddEvenList(self, head: ListNode) -> ListNode:
         """
-        :type head: ListNode
-        :rtype: ListNode
+        使用dummyhead, 将偶数节点逐个取下, 练到新偶数链表末尾
+
+        将新偶数链表连到原链表末尾
         """
         if not head or not head.next or not head.next.next:
             return head
@@ -81,6 +58,8 @@ class Solution(object):
         ptr2.next = None
         ptr.next = new_head.next
         return head
+
+# @lc code=end
 
 if __name__ == "__main__":
     l = build_list_node(range(1, 10))

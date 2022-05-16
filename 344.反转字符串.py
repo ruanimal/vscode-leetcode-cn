@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=344 lang=python
+# @lc app=leetcode.cn id=344 lang=python3
 #
 # [344] 反转字符串
 #
@@ -34,21 +34,10 @@
 
 
 class Solution(object):
-    def reverseString(self, s):
+    def reverseString(self, s: list) -> list:
         """
-        :type s: str
-        :rtype: str
+        双指针法
         """
-        # # v1
-        # if len(s) < 2:
-        #     return s
-        # i = 0
-        # while i < len(s)/2:
-        #     s[i], s[-i-1] = s[-i-1], s[i]
-        #     i += 1
-        # return s
-
-        # v2
         if len(s) < 2:
             return s
         i = 0

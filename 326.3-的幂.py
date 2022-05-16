@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=326 lang=python
+# @lc app=leetcode.cn id=326 lang=python3
 #
 # [326] 3的幂
 #
@@ -40,11 +40,17 @@
 #
 
 
-class Solution(object):
-    def isPowerOfThree(self, n):
+class SolutionA(object):
+    def isPowerOfThree(self, n: int) -> bool:
         """
-        :type n: int
-        :rtype: bool
+        3 ** 19 = 1162261467, int32范围内最大的3的次方
+        由于3是素数, 如果1162261467能被n整除, 说明n是3的0-19次幂, 否则不是.
         """
-        # 3 ** 19 = 1162261467, int32 最大的3的次方
         return (n > 0 and 1162261467 % n == 0)
+
+class Solution(object):
+    nums = {3 ** i for i in range(20)}
+    def isPowerOfThree(self, n: int) -> bool:
+        """查表法"""
+        return n in self.nums
+
