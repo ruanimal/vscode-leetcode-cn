@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=283 lang=python
+# @lc app=leetcode.cn id=283 lang=python3
 #
 # [283] 移动零
 #
@@ -27,12 +27,14 @@
 #
 #
 
+from comm import *
+# @lc code=start
 
-class Solution(object):
-    def moveZeroes(self, nums):
+
+class SolutionA(object):
+    def moveZeroes(self, nums: List[int]) -> None:
         """
-        :type nums: List[int]
-        :rtype: void Do not return anything, modify nums in-place instead.
+        暴力法
         """
         end = len(nums) - 1
         x = 0
@@ -44,4 +46,23 @@ class Solution(object):
                 end -= 1
             x += 1
 
+class Solution(object):
+    def moveZeroes(self, nums: List[int]) -> None:
+        """
+        双指针法
+        """
+
+        p1 = 0   # 非0区间末尾
+        p2 = 0   # 未判断区间开头
+        while p2 < len(nums):
+            if (nums[p2] != 0):
+                nums[p1], nums[p2] = nums[p2], nums[p1]
+                p1 += 1
+            p2 += 1
+
+# @lc code=end
+
+nums = [0,1,0,3,12]
+Solution().moveZeroes(nums)
+print(nums)
 

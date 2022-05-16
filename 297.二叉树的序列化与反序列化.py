@@ -63,6 +63,7 @@
 #
 #
 
+from comm import *
 # @lc code=start
 # Definition for a binary tree node.
 # class TreeNode(object):
@@ -72,11 +73,9 @@
 #         self.right = None
 
 class Codec_A:
-    def serialize(self, root):
+    def serialize(self, root: TreeNode) -> str:
         """Encodes a tree to a single string.
         层次遍历
-        :type root: TreeNode
-        :rtype: str
         """
         if root is None:
             return '#'
@@ -96,11 +95,8 @@ class Codec_A:
         return ','.join(res)
 
 
-    def deserialize(self, data):
+    def deserialize(self, data: str) -> TreeNode:
         """Decodes your encoded data to tree.
-
-        :type data: str
-        :rtype: TreeNode
         """
         if data == '#':
             return
@@ -129,7 +125,7 @@ class Codec_A:
 
 
 class Codec:
-    def serialize(self, root):
+    def serialize(self, root: TreeNode) -> str:
         """Encodes a tree to a single string.
         前序遍历
         :type root: TreeNode
@@ -141,17 +137,14 @@ class Codec:
 
     def serialize_helper(self, root):
         if root is None:
-            self.res.append('')
+            self.res.append('')   # 补足叶子节点
             return
         self.res.append(str(root.val))
         self.serialize_helper(root.left)
         self.serialize_helper(root.right)
 
-    def deserialize(self, data):
+    def deserialize(self, data: str) -> TreeNode:
         """Decodes your encoded data to tree.
-
-        :type data: str
-        :rtype: TreeNode
         """
         if not data:
             return
@@ -173,8 +166,3 @@ class Codec:
 # deser = Codec()
 # ans = deser.deserialize(ser.serialize(root))
 # @lc code=end
-
-from comm import *
-if __name__ == '__main__':
-    pass
-

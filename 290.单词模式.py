@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=290 lang=python
+# @lc app=leetcode.cn id=290 lang=python3
 #
 # [290] 单词模式
 #
@@ -40,15 +40,15 @@
 #
 #
 
+# @lc code=start
 
-class Solution(object):
-    def wordPattern(self, pattern, str):
+
+class SolutionA(object):
+    def wordPattern(self, pattern: str, string: str) -> bool:
         """
-        :type pattern: str
-        :type str: str
-        :rtype: bool
+        暴力法
         """
-        words = str.split()
+        words = string.split()
         if len(set(pattern)) != len(set(words)):
             return False
         p_len = len(pattern)
@@ -61,4 +61,34 @@ class Solution(object):
                     return False
         return True
 
+class Solution(object):
+    def wordPattern(self, pattern: str, string: str) -> bool:
+        """
+        hash法
+        """
 
+        words = string.split()
+        if len(pattern) != len(words):
+            return False
+
+        mapping = {}
+        order = 0
+        for i in words:
+            key = i + '#'  # 防止i只有一个字符的情况
+            if key not in mapping:
+                mapping[key] = order
+                order += 1
+
+        order = 0
+        for i, j in zip(pattern, words):
+            if i not in mapping:
+                mapping[i] = order
+                order += 1
+            if mapping[i] != mapping[j + '#']:
+                return False
+        return True
+
+# @lc code=end
+
+s = Solution().wordPattern("abba", "dog cat cat dog")
+print(s)

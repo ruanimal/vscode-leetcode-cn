@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=289 lang=python
+# @lc app=leetcode.cn id=289 lang=python3
 #
 # [289] 生命游戏
 #
@@ -53,12 +53,13 @@
 #
 #
 #
-class Solution(object):
-    def gameOfLife2(self, board):
-        """
-        :type board: List[List[int]]
-        :rtype: None Do not return anything, modify board in-place instead.
 
+from comm import *
+# @lc code=start
+
+class SolutionA(object):
+    def gameOfLife(self, board: List[List[int]]):
+        """
         通过额外的数组记录周围的细胞个数
         """
         def count_cell(x, y):
@@ -95,12 +96,13 @@ class Solution(object):
                         board[i][j] = 1
         return board
 
-    def gameOfLife(self, board):
+class Solution(object):
+    def gameOfLife(self, board: List[List[int]]):
         """
-        :type board: List[List[int]]
-        :rtype: None Do not return anything, modify board in-place instead.
-
         通过原数组加位运算
+
+        将原数组除最低一位之外的其他位用于储存周围细胞的数量
+        然后二次遍历该数组并判断状态
         """
 
         def count_cell(x, y):
@@ -138,6 +140,8 @@ class Solution(object):
                     if count == 3:
                         board[i][j] = 1
         return board
+
+# @lc code=end
 
 
 if __name__ == "__main__":
