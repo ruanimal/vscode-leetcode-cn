@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=409 lang=python
+# @lc app=leetcode.cn id=409 lang=python3
 #
 # [409] 最长回文串
 #
@@ -35,18 +35,18 @@
 #
 #
 class Solution(object):
-    def longestPalindrome(self, s):
-        """
-        :type s: str
-        :rtype: int
+    def longestPalindrome(self, s: str) -> int:
+        """计数法
+        如果是偶数则全部可用, 是奇数则取偶数的部分.
+        如果存在一个及以上的奇数, 则最终结果加一
         """
         from collections import Counter
 
         count_s = Counter(s)
         ret = 0
         odd = 0
-        for k, v in count_s.items():
-            if (v & 1) == 0:
+        for _, v in count_s.items():
+            if v % 2 == 0:   # 偶数
                 ret += v
             else:
                 ret += (v-1)

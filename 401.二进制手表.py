@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=401 lang=python
+# @lc app=leetcode.cn id=401 lang=python3
 #
 # [401] 二进制手表
 #
@@ -40,10 +40,8 @@
 #
 #
 class Solution(object):
-    def readBinaryWatch(self, num):
-        """
-        :type num: int
-        :rtype: List[str]
+    def readBinaryWatch(self, num: int) -> list:
+        """位运算
         """
         ret = []
         for i in range(2**10):

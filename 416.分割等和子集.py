@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=416 lang=python
+# @lc app=leetcode.cn id=416 lang=python3
 #
 # [416] 分割等和子集
 #
@@ -43,11 +43,9 @@
 #
 #
 #
-class Solution(object):
-    def canPartition(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: bool
+class Solution:
+    def canPartition(self, nums: list) -> bool:
+        """动态规划, 背包问题
         1. f[x], 使用给定长度为n的数组nums里的元素能不能拼出x；
             最后一步有2种情况,
                 前面已经拼出x了， nums[:n] 能拼出 f[x]
@@ -65,14 +63,12 @@ class Solution(object):
         f = [{} for _ in range(len(nums))]
         f[0] = {i:(nums[0] == i) for i in range(target+1)}
 
-        # print(f)
         for n in range(1, len(nums)):
             for x in range(target+1):
                 if (nums[n] == x):
                     f[n][x] = True
                 else:
-                    f[n][x] = f[n-1][x] or f[n-1].get(x-nums[n], False)
-            # print(f)
+                    f[n][x] = (f[n-1][x] or f[n-1].get(x-nums[n], False))
         return f[len(nums)-1][target]
 
 if __name__ == "__main__":

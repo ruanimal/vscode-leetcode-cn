@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=400 lang=python
+# @lc app=leetcode.cn id=400 lang=python3
 #
 # [400] 第N个数字
 #
@@ -43,46 +43,9 @@
 #
 #
 class Solution(object):
-    def findNthDigit_v1(self, n):
-        """
-        :type n: int
-        :rtype: int
-        """
+    def findNthDigit(self, n: int) -> int:
+        """二分查找法
 
-        def func(x):
-            if x == 0: return 0
-            a = len(str(x))
-            return x * a + a - sum(10**i for i in range(a))
-
-        if n < 1:
-            return
-
-        left = 0
-        right = 2 ** 31
-        target = n
-        mid = None
-        found = False
-        while left < right-1:
-            mid = (left + right)//2
-            mid_val = func(mid)
-            if mid_val > target:
-                right = mid
-            elif mid_val < target:
-                left = mid
-            else:
-                found = True
-                break
-        if found:
-            return str(mid)[-1]
-        if func(mid) > target:
-            right = mid
-        offset = func(right) - n
-        return str(right)[-1-offset]
-
-    def findNthDigit(self, n):
-        """
-        :type n: int
-        :rtype: int
         """
 
         def func(x):
@@ -112,6 +75,4 @@ if __name__ == "__main__":
     s = Solution().findNthDigit(15384)
     print(s)
     s = Solution().findNthDigit(11)
-    print(s)
-    s = Solution().findNthDigit_v1(11)
     print(s)

@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=405 lang=python
+# @lc app=leetcode.cn id=405 lang=python3
 #
 # [405] 数字转换为十六进制数
 #
@@ -44,20 +44,15 @@
 #
 #
 class Solution(object):
-    def toHex(self, num):
-        """
-        :type num: int
-        :rtype: str
+    def toHex(self, num: int) -> str:
+        """位运算
         """
         if num == 0:
             return '0'
 
-        MAX = 0x7FFFFFFF
-        # 32 bits interger min
-        MIN = 0x80000000
         # mask to get last 32 bits
         mask = 0xFFFFFFFF
-        num = num if num >= 0  else ~(num ^ mask)
+        num = num if num >= 0 else ~(num ^ mask)
 
         tmp = []
         while num > 0:

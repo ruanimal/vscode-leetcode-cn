@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=414 lang=python
+# @lc app=leetcode.cn id=414 lang=python3
 #
 # [414] 第三大的数
 #
@@ -45,11 +45,9 @@
 #
 #
 #
-class Solution(object):
-    def thirdMax(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: int
+class Solution:
+    def thirdMax(self, nums: list) -> int:
+        """用三个变量标记
         """
         first = second = third = None
         for i in nums:

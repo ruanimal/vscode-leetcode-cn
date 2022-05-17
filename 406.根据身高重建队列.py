@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=406 lang=python
+# @lc app=leetcode.cn id=406 lang=python3
 #
 # [406] 根据身高重建队列
 #
@@ -30,22 +30,28 @@
 #
 #
 #
+
+from comm import *
+
+# @lc code=start
+
+
 class Solution(object):
-    def reconstructQueue(self, people):
-        """
-        :type people: List[List[int]]
-        :rtype: List[List[int]]
+    def reconstructQueue(self, people: List[List[int]]) -> List[List[int]]:
+        """排序法
         """
         if len(people) <= 1:
             return people
         # h代表身高, k代表插队权
         # 按身高倒序, 插队权正序; 根据插队权插到对应的位置, 不影响他前面的人的插队权
         people.sort(key=lambda x: [-x[0], x[1]])
-        print(people)
         res = []
         for p in people:
             res.insert(p[1], p)
         return res
+
+# @lc code=end
+
 
 if __name__ == "__main__":
     s = Solution().reconstructQueue(
