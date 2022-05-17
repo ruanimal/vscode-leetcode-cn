@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=374 lang=python
+# @lc app=leetcode.cn id=374 lang=python3
 #
 # [374] 猜数字大小
 #
@@ -27,28 +27,30 @@
 # 输出: 6
 #
 #
+
+def guess(num: int) -> bool:
+    pass
+
+# @lc code=start
+
 # The guess API is already defined for you.
 # @param num, your guess
 # @return -1 if my number is lower, 1 if my number is higher, otherwise return 0
 # def guess(num):
 
 class Solution(object):
-    def guessNumber(self, n):
+    def guessNumber(self, n: int) -> int:
+        """二分查找
         """
-        :type n: int
-        :rtype: int
-        """
-        def binary_search(target):
-            left = 0
-            right = 2 ** 32
-            while left <= right:
-                mid = (left+right) // 2
-                if guess(mid) > 0:
-                    left = mid + 1
-                elif guess(mid) < 0:
-                    right = mid - 1
-                else:
-                    return mid
-            return -1
-        return binary_search(n)
+        left = 0
+        right = 2 ** 32
+        while left < right:
+            mid = (left+right) >> 1
+            if guess(mid) > 0:   # mid < target
+                left = mid + 1
+            else:
+                right = mid
+        return left if guess(left) == 0 else -1
+
+# @lc code=end
 

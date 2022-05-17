@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=389 lang=python
+# @lc app=leetcode.cn id=389 lang=python3
 #
 # [389] 找不同
 #
@@ -34,11 +34,9 @@
 #
 #
 class Solution(object):
-    def findTheDifference(self, s, t):
-        """
-        :type s: str
-        :type t: str
-        :rtype: str
+    def findTheDifference(self, s: str, t: str) -> str:
+        """异或法
+        转化为只有一个数字出现了1次, 其他数字都出现2次, 求该数字
         """
         tmp = 0
         for i in (s + t):

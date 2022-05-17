@@ -1,36 +1,50 @@
 #
-# @lc app=leetcode.cn id=371 lang=python
+# @lc app=leetcode.cn id=371 lang=python3
 #
 # [371] 两整数之和
 #
 # https://leetcode-cn.com/problems/sum-of-two-integers/description/
 #
 # algorithms
-# Easy (57.56%)
-# Total Accepted:    8.7K
-# Total Submissions: 16.3K
+# Medium (61.38%)
+# Likes:    610
+# Dislikes: 0
+# Total Accepted:    92.9K
+# Total Submissions: 151.2K
 # Testcase Example:  '1\n2'
 #
-# 不使用运算符 + 和 - ​​​​​​​，计算两整数 ​​​​​​​a 、b ​​​​​​​之和。
-#
-# 示例 1:
-#
-# 输入: a = 1, b = 2
-# 输出: 3
+# 给你两个整数 a 和 b ，不使用 运算符 + 和 - ​​​​​​​，计算并返回两整数之和。
 #
 #
-# 示例 2:
 #
-# 输入: a = -2, b = 3
-# 输出: 1
+# 示例 1：
 #
 #
-class Solution(object):
-    def getSum1(self, a, b):
+# 输入：a = 1, b = 2
+# 输出：3
+#
+#
+# 示例 2：
+#
+#
+# 输入：a = 2, b = 3
+# 输出：5
+#
+#
+#
+#
+# 提示：
+#
+#
+# -1000 <= a, b <= 1000
+#
+#
+#
+
+# @lc code=start
+class SolutionA:
+    def getSum(self, a: int, b: int) -> int:
         """
-        :type a: int
-        :type b: int
-        :rtype: int
         半加器就是2bit的异或
         通过两个半加器实现全加器
         https://blog.csdn.net/mote0714/article/details/42292299
@@ -61,11 +75,10 @@ class Solution(object):
             ret = ret | (bit_c << count)
         return ret
 
-    def getSum(self, a, b):
+class Solution(object):
+    def getSum(self, a: int, b: int) -> int:
         # 32 bits integer max
         MAX = 0x7FFFFFFF
-        # 32 bits interger min
-        MIN = 0x80000000
         # mask to get last 32 bits
         mask = 0xFFFFFFFF
         while b != 0:
@@ -79,4 +92,6 @@ if __name__ == "__main__":
     # import ipdb; ipdb.set_trace()
     s = Solution().getSum(-11,999)
     print(s)
+
+# @lc code=end
 
