@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=429 lang=python
+# @lc app=leetcode.cn id=429 lang=python3
 #
 # [429] N-ary Tree Level Order Traversal
 #
@@ -39,48 +39,17 @@
 # 树的节点总数不会超过 5000。
 #
 #
-"""
-# Definition for a Node.
-class Node(object):
+
+from comm import *
+# @lc code=start
+
+class Node:
     def __init__(self, val, children):
         self.val = val
         self.children = children
-"""
-class Node(object):
-    def __init__(self, val, children):
-        self.val = val
-        self.children = children
 
-class Solution(object):
-    def levelOrder1(self, root):
-        """
-        :type root: Node
-        :rtype: List[List[int]]
-        广度优先搜索
-        """
-        from collections import deque
-
-        if not root:
-            return []
-
-        ret = []
-        que = deque()
-        que.append(root)
-        while que:
-            level_size = len(que)
-            level = []
-            for i in range(level_size):
-                t = que.popleft()
-                que.extend(t.children)
-                level.append(t.val)
-            ret.append(level)
-        return ret
-
-    def levelOrder(self, root):
-        """
-        :type root: Node
-        :rtype: List[List[int]]
-        """
+class Solution:
+    def levelOrder(self, root: Node) -> List[List[int]]:
         if not root:
             return []
 
@@ -94,6 +63,8 @@ class Solution(object):
                 ret.append([i.val for i in next_level])
             level = next_level
         return ret
+
+# @lc code=end
 
 if __name__ == "__main__":
     n1 = Node(1, [Node(2, []), Node(3, [Node(4, [])])])

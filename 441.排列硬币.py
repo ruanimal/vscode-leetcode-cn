@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=441 lang=python
+# @lc app=leetcode.cn id=441 lang=python3
 #
 # [441] 排列硬币
 #
@@ -45,13 +45,10 @@
 #
 #
 #
-class Solution(object):
-    def arrangeCoins(self, n):
-        """
-        :type n: int
-        :rtype: int
-        n = ret(ret+1)/2
-        ret =
+class Solution:
+    def arrangeCoins(self, n: int) -> int:
+        """数学法, 使用求根公式
+        n = ret(ret+1)/2 = 1/2 * ret ** 2 + 1/2 * ret
         """
         import math
 
@@ -61,5 +58,4 @@ class Solution(object):
 if __name__ == "__main__":
     s = Solution().arrangeCoins(10)
     print(s)
-        # ret = binary_search(num)
 

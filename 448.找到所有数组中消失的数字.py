@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=448 lang=python
+# @lc app=leetcode.cn id=448 lang=python3
 #
 # [448] 找到所有数组中消失的数字
 #
@@ -28,26 +28,26 @@
 #
 #
 #
-class Solution(object):
-    def findDisappearedNumbers(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: List[int]
-        """
-        # # v1 计数法, 使用额外空间
-        # tmp = {i:0 for i in xrange(1, len(nums)+1)}
-        # for num in nums:
-        #     tmp[num] = 1
-        # return [key for key,val in tmp.iteritems() if val == 0]
+class SolutionA:
+    def findDisappearedNumbers(self, nums: list) -> list:
+        # v1 计数法, 使用额外空间
+        tmp = {i:0 for i in range(1, len(nums)+1)}
+        for num in nums:
+            tmp[num] = 1
+        return [key for key,val in tmp.iteritems() if val == 0]
 
-        # # v2 bitmap
-        # import array
-        # bitmap = array.array('B', [0 for i in range(len(nums))])
-        # for i in nums:
-        #     bitmap[i-1] = 1
-        # ans = [idx+1 for idx, i in enumerate(bitmap) if not i]
-        # return ans
+class SolutionB:
+    def findDisappearedNumbers(self, nums: list) -> list:
+        # v2 bitmap
+        import array
+        bitmap = array.array('B', [0 for i in range(len(nums))])
+        for i in nums:
+            bitmap[i-1] = 1
+        ans = [idx+1 for idx, i in enumerate(bitmap) if not i]
+        return ans
 
+class Solution:
+    def findDisappearedNumbers(self, nums: list) -> list:
         # v3 原位排序, 时间复杂度n, 空间复杂度1
         idx = 0
         while idx < len(nums):

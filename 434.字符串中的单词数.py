@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=434 lang=python
+# @lc app=leetcode.cn id=434 lang=python3
 #
 # [434] 字符串中的单词数
 #
@@ -25,10 +25,8 @@
 #
 #
 class Solution(object):
-    def countSegments(self, s):
-        """
-        :type s: str
-        :rtype: int
+    def countSegments(self, s: str) -> int:
+        """注意对状态的思考
         """
         in_word = False
         ans = 0

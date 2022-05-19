@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=443 lang=python
+# @lc app=leetcode.cn id=443 lang=python3
 #
 # [443] 压缩字符串
 #
@@ -76,11 +76,9 @@
 #
 #
 #
-class Solution(object):
-    def compress(self, chars):
+class Solution:
+    def compress(self, chars: list) -> int:
         """
-        :type chars: List[str]
-        :rtype: int
         类似链表处理的操作
         """
         cnt = 1

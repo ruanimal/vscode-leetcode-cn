@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=440 lang=python
+# @lc app=leetcode.cn id=440 lang=python3
 #
 # [440] 字典序的第K小数字
 #
@@ -32,13 +32,11 @@
 #
 #
 
-# https://leetcode.com/problems/k-th-smallest-in-lexicographical-order/discuss/92242/ConciseEasy-to-understand-Java-5ms-solution-with-Explaination
+# TODO(rlj): something to do.
 class Solution(object):
-    def findKthNumber(self, n, k):
-        """
-        :type n: int
-        :type k: int
-        :rtype: int
+    def findKthNumber(self, n: int, k: int) -> int:
+        """不太理解, 抄的答案
+        https://leetcode.com/problems/k-th-smallest-in-lexicographical-order/discuss/92242/ConciseEasy-to-understand-Java-5ms-solution-with-Explaination
         """
         def calSteps(n, n1, n2):
             steps = 0
