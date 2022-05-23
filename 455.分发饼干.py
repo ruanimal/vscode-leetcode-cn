@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=455 lang=python
+# @lc app=leetcode.cn id=455 lang=python3
 #
 # [455] 分发饼干
 #
@@ -49,12 +49,9 @@
 #
 #
 #
-class Solution(object):
-    def findContentChildren(self, g, s):
-        """
-        :type g: List[int]
-        :type s: List[int]
-        :rtype: int
+class Solution:
+    def findContentChildren(self, g: list, s: list) -> int:
+        """排序, 双指针, 暴力求解
         """
         g.sort()
         s.sort()

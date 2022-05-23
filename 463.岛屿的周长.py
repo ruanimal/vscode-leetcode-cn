@@ -1,47 +1,83 @@
 #
-# @lc app=leetcode.cn id=463 lang=python
+# @lc app=leetcode.cn id=463 lang=python3
 #
 # [463] 岛屿的周长
 #
-class Solution(object):
-    def islandPerimeter(self, grid):
-        """
-        :type grid: List[List[int]]
-        :rtype: int
-        """
+# https://leetcode-cn.com/problems/island-perimeter/description/
+#
+# algorithms
+# Easy (70.32%)
+# Likes:    552
+# Dislikes: 0
+# Total Accepted:    98.3K
+# Total Submissions: 139.9K
+# Testcase Example:  '[[0,1,0,0],[1,1,1,0],[0,1,0,0],[1,1,0,0]]'
+#
+# 给定一个 row x col 的二维网格地图 grid ，其中：grid[i][j] = 1 表示陆地， grid[i][j] = 0 表示水域。
+#
+# 网格中的格子 水平和垂直 方向相连（对角线方向不相连）。整个网格被水完全包围，但其中恰好有一个岛屿（或者说，一个或多个表示陆地的格子相连组成的岛屿）。
+#
+# 岛屿中没有“湖”（“湖” 指水域在岛屿内部且不和岛屿周围的水相连）。格子是边长为 1 的正方形。网格为长方形，且宽度和高度均不超过 100
+# 。计算这个岛屿的周长。
+#
+#
+#
+# 示例 1：
+#
+#
+#
+#
+# 输入：grid = [[0,1,0,0],[1,1,1,0],[0,1,0,0],[1,1,0,0]]
+# 输出：16
+# 解释：它的周长是上面图片中的 16 个黄色的边
+#
+# 示例 2：
+#
+#
+# 输入：grid = [[1]]
+# 输出：4
+#
+#
+# 示例 3：
+#
+#
+# 输入：grid = [[1,0]]
+# 输出：4
+#
+#
+#
+#
+# 提示：
+#
+#
+# row == grid.length
+# col == grid[i].length
+# 1
+# grid[i][j] 为 0 或 1
+#
+#
+#
 
-        marks_map = []
-        begin = None
-        for x in range(len(grid)):
-            marks_map.append([])
-            for y in range(len(grid[0])):
-                marks_map[x].append(False)
-                if not begin and grid[x][y] == 1:
-                    begin = (x, y)
+from comm import *
+# @lc code=start
+class Solution:
+    def islandPerimeter(self, grid: List[List[int]]) -> int:
+        """
+        每个陆地块对边长的贡献为4, 如果上下左右是否有1块陆地则边长减一,
+        """
 
         length = 0
-        level = []
-        marks_map[begin[0]][begin[1]] = True
-        level.append(begin)
-        while level:
-            next_level = []
-            for x, y in level:
+        for x in range(len(grid)):
+            for y in range(len(grid[0])):
+                if grid[x][y] == 0:
+                    continue
                 length += 4
                 for nx, ny in [(x+1, y), (x-1, y), (x, y+1), (x, y-1),]:
                     if (0 <= nx < len(grid)) and (0 <= ny < len(grid[0])):
                         if grid[nx][ny] == 1:
                             length -= 1
-                            if not marks_map[nx][ny]:
-                                next_level.append((nx, ny))
-                                marks_map[nx][ny] = True
-            level = next_level
         return length
 
-if __name__ == "__main__":
-    s = Solution().islandPerimeter([[0,1,0,0],
-        [1,1,1,0],
-        [0,1,0,0],
-        [1,1,0,0]])
-    print(s)
-    s = Solution().islandPerimeter([[1,1], [1,1]])
-    print(s)
+# @lc code=end
+s = Solution().islandPerimeter([[0,1,0,0],[1,1,1,0],[0,1,0,0],[1,1,0,0]])
+print(s)
