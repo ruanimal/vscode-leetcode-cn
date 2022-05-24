@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=482 lang=python
+# @lc app=leetcode.cn id=482 lang=python3
 #
 # [482] 密钥格式化
 #
@@ -53,13 +53,10 @@
 #
 #
 #
-class Solution(object):
-    def licenseKeyFormatting(self, S, K):
+class Solution:
+    def licenseKeyFormatting(self, S: str, K: int) -> str:
         """
-        :type S: str
-        :type K: int
-        :rtype: str
-        \w+(-\w{k})*
+        正则表示: \w+(-\w{k})*
         """
         ss = ''.join([i for i in S if i != '-'])
         ans = []

@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=475 lang=python
+# @lc app=leetcode.cn id=475 lang=python3
 #
 # [475] 供暖器
 #
@@ -43,76 +43,50 @@
 #
 #
 #
-class Solution(object):
-    def findRadius(self, houses, heaters):
+
+
+from comm import *
+# @lc code=start
+
+
+class Solution:
+    def findRadius(self, houses: list, heaters: list) -> int:
+        """分查找法
+
+        每个节点用的是距离最近的供暖器, 则最大距离就是供暖器的半径
         """
-        :type houses: List[int]
-        :type heaters: List[int]
-        :rtype: int
-        """
-        # 超时了
-        # def all_can_cover(x):
-        #     ret = set()
-        #     need_houses = set(houses)
-        #     for k, v in can_hourses_map.items():
-        #         if k < x:
-        #             need_houses -= v
-        #     for house in need_houses:
-        #         for heater in heaters:
-        #             if heater - x <= house <= heater + x:
-        #                 ret.add(house)
-        #                 break
-        #     can_hourses_map[x] = ret
-        #     return len(ret) == len(need_houses)
+        def binary_search(nums, target):
+            """求小于等于target的最大数"""
 
-        # def binary_search():
-        #     left = 0
-        #     right = 10**9
-        #     while left <= right:
-        #         mid = (left+right) // 2
-        #         if all_can_cover(mid):
-        #             right = mid - 1
-        #         else:
-        #             left = mid + 1
-        #     return left
+            left = 0
+            right = len(nums)-1
+            while left <= right:
+                mid = (left+right) >> 1
+                if nums[mid] <= target:
+                    left = mid + 1
+                else:
+                    right = mid - 1
+            return right
 
-        # if not houses or not heaters:
-        #     return
-        # heaters.sort()
-        # houses.sort()
-        # can_hourses_map = {}
-        # return binary_search()
-
-        houses.sort()
+        if not houses or not heaters:
+            return
         heaters.sort()
-        l1 = len(heaters)
-        l2 = len(houses)
-        if l1 == 1:
-            return max(abs(houses[0] - heaters[0]), abs(houses[-1] - heaters[0]))
+        # houses.sort()
         res = 0
-        j = 0
-        m = l2 - 1
-        while m >= 0 and houses[m] >= heaters[-1]:
-            m -= 1
-        if m != l2 - 1:
-            res = houses[-1] - heaters[-1]
-        n = 0
-        while n < l2 and houses[n] <= heaters[0]:
-            n += 1
-        if n != 0:
-            res = max(res, heaters[0] - houses[0] )
-        for i in range(n, m + 1):
-            while houses[i] > heaters[j]:
-                j += 1
-            if houses[i] == heaters[j]:
-                continue
-            res = max(res, min(houses[i] - heaters[j - 1], heaters[j] - houses[i]))
+        for i in houses:
+            h = binary_search(heaters, i)
+            # print(i, h)
+            if h == -1:   # 所有都大于i
+                distance = abs(i - heaters[0])
+            elif h == len(heaters)-1:
+                distance = abs(i - heaters[-1])
+            else:
+                distance = min(abs(i-heaters[h]), abs(i-heaters[h+1]))
+            res = max(distance, res)
         return res
 
+# @lc code=end
 
 if __name__ == "__main__":
     s = Solution().findRadius([1,2,3,4],[1,4])
     print(s)
-    s = Solution().findRadius([1,2,3], [1])
-    print(s)
-

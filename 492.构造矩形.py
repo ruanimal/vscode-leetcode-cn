@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=492 lang=python
+# @lc app=leetcode.cn id=492 lang=python3
 #
 # [492] 构造矩形
 #
@@ -43,11 +43,9 @@
 #
 #
 #
-class Solution(object):
-    def constructRectangle(self, area):
-        """
-        :type area: int
-        :rtype: List[int]
+class Solution:
+    def constructRectangle(self, area: int) -> list:
+        """数学法, 考虑正方形的情况, 然后找出最接近的一对整数
         """
         from math import sqrt
         base = int(sqrt(area))

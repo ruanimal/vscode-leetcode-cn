@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=485 lang=python
+# @lc app=leetcode.cn id=485 lang=python3
 #
 # [485] 最大连续1的个数
 #
@@ -29,22 +29,15 @@
 #
 #
 #
-class Solution(object):
-    def findMaxConsecutiveOnes(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: int
-        """
-        max_len = 0
-        tmp = 0
+class Solution:
+    def findMaxConsecutiveOnes(self, nums: list) -> int:
+        ans = 0
+        length = 0
         for i in nums:
             if i == 1:
-                tmp += 1
+                length += 1
             else:
-                if tmp > max_len:
-                    max_len = tmp
-                tmp = 0
-        if tmp > max_len:
-            max_len = tmp
-        return max_len
+                ans = max(ans, length)
+                length = 0
+        return max(ans, length)
 

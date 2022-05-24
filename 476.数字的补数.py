@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=476 lang=python
+# @lc app=leetcode.cn id=476 lang=python3
 #
 # [476] 数字的补数
 #
@@ -37,26 +37,19 @@
 #
 #
 #
-class Solution(object):
-    bits = [2**i for i in range(32)]
-    def findComplement(self, num):
-        """
-        :type num: int
-        :rtype: int
-        """
+
+class Solution:
+    bits = [2**i for i in range(1, 32)]
+    def findComplement(self, num: int) -> int:
         ret = 0
         for i in Solution.bits:
-            if i > num:
-                break
-            if (num & i) == i:
+            if i <= num:
                 continue
-            else:
-                # print(bin(ret))
-                ret = ret | i
-        return ret
+            return num ^ (i-1)
+        return ret  # num > 2 ** 31
 
 
 if __name__ == "__main__":
-    s = Solution().findComplement(5)
+    s = Solution().findComplement(2)
     print(s)
 

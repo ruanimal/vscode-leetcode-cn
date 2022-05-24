@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=470 lang=python
+# @lc app=leetcode.cn id=470 lang=python3
 #
 # [470] Implement Rand10() Using Rand7()
 #
@@ -64,10 +64,15 @@
 # def rand7():
 # @return a random integer in the range 1 to 7
 
-class Solution(object):
-    def rand10(self):
+def rand7() -> int:
+    return 1
+
+
+# @lc code=start
+
+class Solution:
+    def rand10(self) -> int:
         """
-        :rtype: int
         枚举如下：
             a	1	2	3	4	5	6	7
         b
@@ -88,11 +93,10 @@ class Solution(object):
         所以程序思路就很明了,当结果扫到右上角的时候进行递归调用，直到输出其他结果
         平均调用2.3次rand7()
         """
-        a=rand7()
-        b=rand7()
-        if(a>4 and b<4):
+        a = rand7()
+        b = rand7()
+        if a > 4 and b < 4:
             return self.rand10()
         else:
-            return (a+b)%10+1
-
-
+            return (a + b) % 10 + 1
+# @lc code=end

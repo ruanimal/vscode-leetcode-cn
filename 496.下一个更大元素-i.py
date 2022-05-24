@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=496 lang=python
+# @lc app=leetcode.cn id=496 lang=python3
 #
 # [496] 下一个更大元素 I
 #
@@ -45,12 +45,8 @@
 #
 #
 class Solution(object):
-    def nextGreaterElement(self, nums1, nums2):
+    def nextGreaterElement(self, nums1: list, nums2: list) -> list:
         """
-        :type nums1: List[int]
-        :type nums2: List[int]
-        :rtype: List[int]
-
         遍历大数组, 如果当前元素小于栈顶则将该元素放入栈, 如果大于栈顶则将栈顶弹出, 当前元素就是栈顶的下一个最大值.
         重复该操作, 直到栈为空或者当前元素小于栈顶,
         所以全层栈里面是降序的.
