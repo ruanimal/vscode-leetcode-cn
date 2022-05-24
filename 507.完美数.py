@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=507 lang=python
+# @lc app=leetcode.cn id=507 lang=python3
 #
 # [507] 完美数
 #
@@ -34,11 +34,9 @@
 # 输入的数字 n 不会超过 100,000,000. (1e8)
 #
 #
-class Solution(object):
-    def checkPerfectNumber(self, num):
-        """
-        :type num: int
-        :rtype: bool
+class Solution:
+    def checkPerfectNumber(self, num: int) -> bool:
+        """暴力法
         """
         if num == 1:
             return False

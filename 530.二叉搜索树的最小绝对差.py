@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=530 lang=python
+# @lc app=leetcode.cn id=530 lang=python3
 #
 # [530] 二叉搜索树的最小绝对差
 #
@@ -42,54 +42,29 @@ class TreeNode(object):
         self.left = None
         self.right = None
 
+# @lc code=start
+
 class Solution(object):
-    def getMinimumDifference(self, root):
-        """
-        :type root: TreeNode
-        :rtype: int
-        """
+    def getMinimumDifference(self, root: TreeNode) -> int:
+        self.pre_val = None
+        self.ans = float('inf')
+        self.traverse(root)
+        return self.ans
 
-        def tree_max(node):
-            if node.right is None:
-                return node.val
-            m = tree_max(node.right)
-            return m
-
-        def tree_min(node):
-            if node.left is None:
-                return node.val
-            m = tree_min(node.left)
-            return m
-
-        level = [root]
-        min_abs = None
-        while level:
-            next_level = []
-            for node in level:
-                if not node.right and not node.left:
-                    continue
-                elif node.right and node.left:
-                    next_level.append(node.right)
-                    next_level.append(node.left)
-                    node_abs = min(abs(node.val - tree_min(node.right)), abs(node.val - tree_max(node.left)))
-                elif node.right:
-                    next_level.append(node.right)
-                    node_abs = abs(node.val - tree_min(node.right))
-                else:
-                    next_level.append(node.left)
-                    node_abs = abs(node.val - tree_max(node.left))
-
-                if min_abs is None:
-                    min_abs = node_abs
-                else:
-                    min_abs = min(min_abs, node_abs)
-            level = next_level
-        return min_abs
+    def traverse(self, root: TreeNode):
+        if not root:
+            return
+        self.traverse(root.left)
+        if self.pre_val is not None:
+            self.ans = min(self.ans, abs(root.val - self.pre_val))
+        self.pre_val = root.val
+        self.traverse(root.right)
+# @lc code=end
 
 if __name__ == "__main__":
     n1 = TreeNode(1)
     n2 = TreeNode(2)
-    n3 = TreeNode(2)
+    n3 = TreeNode(3)
     n4 = TreeNode(4)
 
     n1.right = n3

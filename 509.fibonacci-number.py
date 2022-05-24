@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=509 lang=python
+# @lc app=leetcode.cn id=509 lang=python3
 #
 # [509] Fibonacci Number
 #
@@ -51,14 +51,12 @@
 #
 #
 #
-class Solution(object):
-    def fib(self, N):
-        """
-        :type N: int
-        :rtype: int
+class Solution:
+    def fib(self, N: int) -> int:
+        """迭代法
         """
         f0, f1 = 0, 1
-        for i in range(N):
+        for _ in range(N):
             f1, f0 = f1+f0, f1
         return f0
 

@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=518 lang=python
+# @lc app=leetcode.cn id=518 lang=python3
 #
 # [518] 零钱兑换 II
 #
@@ -59,9 +59,13 @@
 #
 #
 
+from comm import *
+# @lc code=start
 
-class Solution(object):
-    def change(self, amount, coins):
+class Solution:
+    def change(self, amount: int, coins: List[int]) -> int:
+        """动态规划, 背包问题"""
+
         # 以amount=10, coins=[2,3] 为例
         dp = [0] * (amount + 1)    # dp[x]: 拼成x的组合数
         dp[0] = 1   # 要凑成0, 只有一种情况
@@ -70,6 +74,8 @@ class Solution(object):
                 if dp[i]:
                     dp[i + coin] = dp[i + coin] + dp[i]   # 用这个coin的情况 + 不用这个coin的情况
         return dp[amount]
+
+# @lc code=end
 
 if __name__ == "__main__":
     s = Solution().change(amount = 10, coins = [1, 2, 5])
