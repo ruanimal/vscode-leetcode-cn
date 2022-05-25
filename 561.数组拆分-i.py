@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=561 lang=python
+# @lc app=leetcode.cn id=561 lang=python3
 #
 # [561] 数组拆分 I
 #
@@ -31,14 +31,15 @@
 #
 #
 #
-class Solution(object):
-    def arrayPairSum(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: int
+
+from comm import *
+# @lc code=start
+
+class Solution:
+    def arrayPairSum(self, nums: List[int]) -> int:
+        """排序法
         """
         nums.sort()
         return sum(nums[::2])
 
-if __name__ == "__main__":
-    pass
+# @lc code=end
