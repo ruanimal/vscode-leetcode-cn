@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=551 lang=python
+# @lc app=leetcode.cn id=551 lang=python3
 #
 # [551] 学生出勤记录 I
 #
@@ -39,10 +39,8 @@
 #
 #
 class Solution(object):
-    def checkRecord(self, s):
-        """
-        :type s: str
-        :rtype: bool
+    def checkRecord(self, s: str) -> bool:
+        """直接按题目逻辑,分清情况
         """
         if not s:
             return

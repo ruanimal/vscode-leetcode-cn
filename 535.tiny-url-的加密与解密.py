@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=535 lang=python
+# @lc app=leetcode.cn id=535 lang=python3
 #
 # [535] TinyURL 的加密与解密
 #
@@ -21,24 +21,20 @@
 #
 #
 
+# @lc code=start
+
 class Codec:
     cache = {}
 
-    def encode(self, longUrl):
+    def encode(self, longUrl: str) -> str:
         """Encodes a URL to a shortened URL.
-
-        :type longUrl: str
-        :rtype: str
         """
         cache_key = hash(longUrl)
         self.cache[str(cache_key)] = longUrl
         return 'http://tinyurl.com/{}'.format(cache_key)
 
-    def decode(self, shortUrl):
+    def decode(self, shortUrl: str) -> str:
         """Decodes a shortened URL to its original URL.
-
-        :type shortUrl: str
-        :rtype: str
         """
         x = shortUrl.split('/')[-1]
         if x in self.cache:
@@ -48,6 +44,9 @@ class Codec:
 # Your Codec object will be instantiated and called as such:
 # codec = Codec()
 # codec.decode(codec.encode(url))
+
+# @lc code=end
+
 
 if __name__ == "__main__":
     codec = Codec()

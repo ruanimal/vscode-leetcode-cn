@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=532 lang=python
+# @lc app=leetcode.cn id=532 lang=python3
 #
 # [532] 数组中的K-diff数对
 #
@@ -50,17 +50,19 @@
 #
 #
 #
-class Solution(object):
-    def findPairs(self, nums, k):
-        """
-        :type nums: List[int]
-        :type k: int
-        :rtype: int
+
+from comm import *
+# @lc code=start
+
+from collections import Counter
+
+class Solution:
+    def findPairs(self, nums: List[int], k: int) -> int:
+        """hash计数法
         """
         if k < 0:
             return 0
 
-        from collections import Counter
         nums_set = Counter(nums)
 
         if k == 0:
@@ -71,6 +73,9 @@ class Solution(object):
             if (i - k) in nums_set:
                 ans += 1
         return ans
+
+# @lc code=end
+
 
 if __name__ == "__main__":
     s = Solution().findPairs([1, 2, 3, 4, 5], k = 1)

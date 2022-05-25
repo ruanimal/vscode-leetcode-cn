@@ -31,6 +31,9 @@
 # 注意：两结点之间的路径长度是以它们之间边的数目表示。
 #
 #
+
+from comm import *
+# @lc code=start
 # Definition for a binary tree node.
 # class TreeNode(object):
 #     def __init__(self, x):
@@ -38,11 +41,9 @@
 #         self.left = None
 #         self.right = None
 
-class Solution(object):
-    def diameterOfBinaryTree(self, root):
-        """
-        :type root: TreeNode
-        :rtype: int
+class Solution:
+    def diameterOfBinaryTree(self, root: TreeNode) -> int:
+        """当前直径为子树直径的较大者, 再加一
         """
         if not root:
             return 0
@@ -63,5 +64,7 @@ class Solution(object):
         right_depth = self.find_width(node.right)
         self.ans = max(self.ans, left_depth + right_depth)
         return max(left_depth, right_depth) + 1   # 当前直径为子树直径的较大者, 再加一
+
+# @lc code=end
 
 
