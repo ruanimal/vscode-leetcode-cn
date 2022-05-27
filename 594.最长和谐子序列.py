@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=594 lang=python
+# @lc app=leetcode.cn id=594 lang=python3
 #
 # [594] 最长和谐子序列
 #
@@ -28,11 +28,15 @@
 # 说明: 输入的数组长度最大不超过20,000.
 #
 #
-class Solution(object):
-    def findLHS(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: int
+
+from comm import *
+# @lc code=start
+
+class Solution:
+    def findLHS(self, nums: List[int]) -> int:
+        """计数排序法
+
+        如果排序后相邻的数字之差为1, 则长度就是这两个数字个数之和
         """
         from collections import Counter
 
@@ -47,6 +51,9 @@ class Solution(object):
                 continue
             max_val = max(max_val, a[1] + b[1])
         return max_val
+
+# @lc code=end
+
 
 if __name__ == "__main__":
     s = Solution().findLHS([1,3,2,2,5,2,3,7])

@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=605 lang=python
+# @lc app=leetcode.cn id=605 lang=python3
 #
 # [605] 种花问题
 #
@@ -41,35 +41,30 @@
 #
 #
 #
-class Solution(object):
-    def canPlaceFlowers(self, flowerbed, n):
-        """
-        :type flowerbed: List[int]
-        :type n: int
-        :rtype: bool
+
+from comm import *
+# @lc code=start
+class Solution:
+    def canPlaceFlowers(self, flowerbed: List[int], n: int) -> bool:
+        """程序模拟法
+        每个空地分块处理
         """
         if not flowerbed:
             return
-        in_space = flowerbed[0] == 0
-        space_len = 1 if in_space else 0   # 处理开头为空地的情况
+        space_len = 1 if (flowerbed[0] == 0) else 0   # 处理开头为空地的情况
         ans = 0
         for i in flowerbed:
-            if in_space:
-                if i == 0:
-                    space_len += 1
-                else:
-                    ans += (space_len-1) // 2
-                    space_len = 0
-                    in_space = False
-            else:
-                if i == 0:
-                    in_space = True
-                    space_len += 1
+            if i == 0:
+                space_len += 1
+            elif i == 1 and space_len > 0:
+                ans += (space_len-1) // 2     # -1 是因为两侧都要有1个空位
+                space_len = 0
         if space_len:  # 处理末尾为空地的情况
             ans += space_len // 2
         return ans >= n
 
+# @lc code=end
 if __name__ == "__main__":
-    s = Solution().canPlaceFlowers(flowerbed = [0, 0, 0, 0, 1,0,0,0,1,0,0], n = 2)
+    s = Solution().canPlaceFlowers(flowerbed = [1, 0, 0, 1], n = 1)
     print(s)
 

@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=599 lang=python
+# @lc app=leetcode.cn id=599 lang=python3
 #
 # [599] 两个列表的最小索引总和
 #
@@ -45,19 +45,13 @@
 #
 #
 #
-class Solution(object):
-    def findRestaurant(self, list1, list2):
-        """
-        :type list1: List[str]
-        :type list2: List[str]
-        :rtype: List[str]
-        f[i] 当前位置的最小索引和
-        最后一步时：
-        1. 前面已经找到最小索引和， 则结果为 f[i-1]
-        2. 前面没有找到，则
-            list1[i] 是否在 list2[:i] 中
-            list2[i] 是否在 list1[:i] 中
-            取两者的最小值
+
+from comm import *
+# @lc code=start
+
+class Solution:
+    def findRestaurant(self, list1: List[str], list2: List[str]) -> List[str]:
+        """哈希记录index
         """
         if not list1 or not list2:
             return
@@ -73,6 +67,8 @@ class Solution(object):
                 min_index = map_a[i][0] + idx
                 tmp.append((min_index, i))
         return [i[1] for i in tmp if i[0]==min_index]
+
+# @lc code=end
 
 if __name__ == "__main__":
     s = Solution().findRestaurant(["Shogun","Tapioca Express","Burger King","KFC"], ["KFC","Burger King","Tapioca Express","Shogun"])

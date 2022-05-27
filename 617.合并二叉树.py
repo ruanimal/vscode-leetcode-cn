@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=617 lang=python
+# @lc app=leetcode.cn id=617 lang=python3
 #
 # [617] 合并二叉树
 #
@@ -39,18 +39,15 @@
 #
 #
 # Definition for a binary tree node.
-# class TreeNode(object):
-#     def __init__(self, x):
-#         self.val = x
-#         self.left = None
-#         self.right = None
+class TreeNode(object):
+    def __init__(self, x):
+        self.val = x
+        self.left = None
+        self.right = None
 
 class Solution(object):
-    def mergeTrees(self, t1, t2):
-        """
-        :type t1: TreeNode
-        :type t2: TreeNode
-        :rtype: TreeNode
+    def mergeTrees(self, t1: TreeNode, t2: TreeNode) -> TreeNode:
+        """递归处理
         """
         if not t1:
             return t2

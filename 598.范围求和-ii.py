@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=598 lang=python
+# @lc app=leetcode.cn id=598 lang=python3
 #
 # [598] 范围求和 II
 #
@@ -55,15 +55,17 @@
 #
 #
 #
-class Solution(object):
-    def maxCount(self, m, n, ops):
-        """
-        :type m: int
-        :type n: int
-        :type ops: List[List[int]]
-        :rtype: int
+
+from comm import *
+# @lc code=start
+
+class Solution:
+    def maxCount(self, m: int, n: int, ops: List[List[int]]) -> int:
+        """求出所有操作的面积的交集
         """
         if not ops:
             return m * n
         return min(i[0] for i in ops) * min(i[1] for i in ops)
+
+# @lc code=end
 
