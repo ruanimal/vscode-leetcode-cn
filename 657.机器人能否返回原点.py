@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=657 lang=python
+# @lc app=leetcode.cn id=657 lang=python3
 #
 # [657] 机器人能否返回原点
 #
@@ -33,29 +33,26 @@
 # 解释：机器人向左移动两次。它最终位于原点的左侧，距原点有两次 “移动” 的距离。我们返回 false，因为它在移动结束时没有返回原点。
 #
 #
-class Solution(object):
-    def judgeCircle(self, moves):
-        """
-        :type moves: str
-        :rtype: bool
-        直接判断 R和L的数目是否相等， 且UD的数目是否相等
+class Solution:
+    def judgeCircle(self, moves: str) -> bool:
+        """直接判断 R和L的数目是否相等， 且UD的数目是否相等
         """
         if not moves:
             return True
 
-        self.x = 0
-        self.y = 0
+        x = 0
+        y = 0
         # R（右），L（左），U（上）和 D（下）
         for i in moves:
             if i == 'R':
-                self.x += 1
+                x += 1
             elif i == 'L':
-                self.x -= 1
+                x -= 1
             elif i == 'U':
-                self.y -= 1
+                y -= 1
             elif i == 'D':
-                self.y += 1
-        return (self.x, self.y) == (0, 0)
+                y += 1
+        return (x, y) == (0, 0)
 
 if __name__ == "__main__":
     s = Solution().judgeCircle("UD")

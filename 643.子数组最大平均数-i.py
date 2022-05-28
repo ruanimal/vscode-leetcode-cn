@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=643 lang=python
+# @lc app=leetcode.cn id=643 lang=python3
 #
 # [643] 子数组最大平均数 I
 #
@@ -33,55 +33,30 @@
 #
 #
 
+from comm import *
+# @lc code=start
 class Solution(object):
-    def findMaxAverage(self, nums, k):
+    def findMaxAverage(self, nums: List[int], k: int) -> float:
+        """模拟队列, 用一个字段模拟队列总和, 模拟入队出队操作
         """
-        :type nums: List[int]
-        :type k: int
-        :rtype: float
-        """
-        # v1 用一个队列, 占用额外的空间, 速度比较慢, 1468 ms 17.31 %
-        # from collections import deque
-        # if len(nums) == 0:
-        #     return
-
-        # k = float(k)
-        # que = deque()
-        # total = 0
-        # ans = None
-        # for i in nums:
-        #     if len(que) < k:
-        #         que.append(i)
-        #         total += i
-        #         ans = total / k
-        #         continue
-        #     if ans is None:
-        #         ans = total / k
-        #     que.append(i)
-        #     total += i
-        #     total -= que[0]
-        #     que.popleft()
-        #     ans = max(ans, total / k)
-        # return ans
-
         if len(nums) == 0:
             return
         tmp = 0
         k = float(k)
-        ans = None
+        ans = float('-inf')
         total = 0
         for idx, i in enumerate(nums):
             if tmp < k:
                 tmp += 1
                 total += i
                 ans = total
-                continue
-            if ans is None:
-                ans = total
-            total += i
-            total -= nums[idx-tmp]
-            ans = max(ans, total)
+            else:
+                total += i   # 模拟入队和出队
+                total -= nums[idx-tmp]
+                ans = max(ans, total)
         return ans / k
+
+# @lc code=end
 
 if __name__ == "__main__":
     s = Solution().findMaxAverage([1,12,-5,-6,50,3], k = 4)

@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=645 lang=python
+# @lc app=leetcode.cn id=645 lang=python3
 #
 # [645] 错误的集合
 #
@@ -33,22 +33,15 @@
 #
 #
 #
-class Solution(object):
-    def findErrorNums(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: List[int]
-        """
-        # v1  396 ms, beats 8.06 % of python submissions
-        # tmp = set(range(1, len(nums)+1))
-        # for i in nums:
-        #     if i in tmp:
-        #         tmp.remove(i)
-        #     else:
-        #         tmp.add(-i)
-        # return [abs(i) for i in sorted(tmp)]
 
-        # v2   256 ms, beats 36.29 % of python submissions
+from comm import *
+# @lc code=start
+
+class SolutionA:
+    def findErrorNums(self, nums: List[int]) -> List[int]:
+        """dict计数法
+        """
+
         n = len(nums)
         dup = lose = None
         tmp = {}
@@ -60,14 +53,40 @@ class Solution(object):
         lose = n*(n+1)//2 + dup - sum(nums)
         return [dup, lose]
 
+class SolutionB:
+    def findErrorNums(self, nums: List[int]) -> List[int]:
+        """原地排序法
+        """
+
+        i = 0
+        dup = lose = None
+        while i < len(nums):
+            if nums[nums[i]-1] != nums[i]:  # 使 nums[i] 上的数字回到正确的位置上
+                nums[nums[i]-1], nums[i] = nums[i], nums[nums[i]-1]
+            else:  # nums[i] 已经在正确的位置上, 或者 nums[i] 就是重复元素
+                if nums[i] != i + 1:   # nums[i] 的位置不对, 就是重复元素
+                    dup = nums[i]
+                    lose = i + 1   # 最后重复元素所在位置就是缺少的元素
+                i += 1
+        return [dup, lose]
+
+class Solution:
+    def findErrorNums(self, nums: List[int]) -> List[int]:
+        """数学法
+        sum(nums) - dup + lose = (1 + length) * length / 2
+        dup = sum(nums) - sum(set(nums))
+        lose = (1 + length) * length / 2 - sum(nums) + dup
+        """
+
+        sum_nums = sum(nums)
+        dup = sum_nums - sum(set(nums))
+        lose = (1 + len(nums)) * len(nums) // 2 - sum_nums + dup
+        return [dup, lose]
+ # @lc code=end
 
 if __name__ == "__main__":
-    s = Solution().findErrorNums(nums = [1,3,3,4])
+    s = Solution().findErrorNums(nums = [8,7,3,5,3,6,1,4])
     print(s)
-    s = Solution().findErrorNums(nums = [1,2,2,4])
-    print(s)
-    s = Solution().findErrorNums(nums = [3,2,3,4,6,5])
-    print(s)
-    s = Solution().findErrorNums(nums = [1,5,3,2,2,7,6,4,8,9])
+    s = Solution().findErrorNums(nums = [1, 2, 2, 3, 5, 6, 7, 8, 9, 4])
     print(s)
 
