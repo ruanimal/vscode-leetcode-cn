@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=674 lang=python
+# @lc app=leetcode.cn id=674 lang=python3
 #
 # [674] 最长连续递增序列
 #
@@ -36,13 +36,12 @@
 #
 #
 
+from comm import *
 # @lc code=start
 class Solution_A(object):
-    def findLengthOfLCIS(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: int
-        """
+    def findLengthOfLCIS(self, nums: List[int]) -> int:
+        """记录递增区间的长度"""
+
         if not nums:
             return 0
 
@@ -52,26 +51,23 @@ class Solution_A(object):
             if nums[i-1] < nums[i]:
                 count += 1
             else:
-                # print(max_count, count)
                 max_count = max(max_count, count)
                 count = 1
         max_count = max(max_count, count)
         return max_count
 
 
-class Solution(object):
-    def findLengthOfLCIS(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: int
+class Solution:
+    def findLengthOfLCIS(self, nums: List[int]) -> int:
+        """用两个指针表示递增序列区间
         """
 
         if len(nums) <= 1:
             return len(nums)
 
         i, j = 0, 1
-        length = 0
-        while i < j < len(nums):
+        length = 1
+        while j < len(nums):
             if nums[j-1] >= nums[j]:
                 length = max(j-i, length)
                 i = j

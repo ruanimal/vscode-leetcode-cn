@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=682 lang=python
+# @lc app=leetcode.cn id=682 lang=python3
 #
 # [682] 棒球比赛
 #
@@ -56,14 +56,15 @@
 #
 #
 #
+
+from comm import *
+# @lc code=start
 class Solution(object):
-    def calPoints(self, ops):
-        """
-        :type ops: List[str]
-        :rtype: int
-        """
+    def calPoints(self, ops: List[str]) -> int:
+        """简单模拟题目逻辑"""
+
         ret = []
-        for idx, i in enumerate(ops):
+        for _, i in enumerate(ops):
             if i == '+':
                 ret.append(sum(ret[-2:]))
             elif i == 'D':
@@ -73,8 +74,9 @@ class Solution(object):
                     ret.pop()
             else:
                 ret.append(int(i))
-        # print(ret)
         return sum(ret)
+
+# @lc code=end
 
 if __name__ == "__main__":
     s = Solution().calPoints(["5","2","C","D","+"])

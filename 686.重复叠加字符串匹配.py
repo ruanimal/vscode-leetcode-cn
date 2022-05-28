@@ -1,60 +1,65 @@
 #
-# @lc app=leetcode.cn id=686 lang=python
+# @lc app=leetcode.cn id=686 lang=python3
 #
 # [686] 重复叠加字符串匹配
 #
 # https://leetcode-cn.com/problems/repeated-string-match/description/
 #
 # algorithms
-# Easy (28.92%)
-# Likes:    45
+# Medium (40.13%)
+# Likes:    269
 # Dislikes: 0
-# Total Accepted:    3.4K
-# Total Submissions: 10.8K
+# Total Accepted:    45.1K
+# Total Submissions: 112.5K
 # Testcase Example:  '"abcd"\n"cdabcdab"'
 #
-# 给定两个字符串 A 和 B, 寻找重复叠加字符串A的最小次数，使得字符串B成为叠加后的字符串A的子串，如果不存在则返回 -1。
+# 给定两个字符串 a 和 b，寻找重复叠加字符串 a 的最小次数，使得字符串 b 成为叠加后的字符串 a 的子串，如果不存在则返回 -1。
 #
-# 举个例子，A = "abcd"，B = "cdabcdab"。
-#
-# 答案为 3， 因为 A 重复叠加三遍后为 “abcdabcdabcd”，此时 B 是其子串；A 重复叠加两遍后为"abcdabcd"，B 并不是其子串。
-#
-# 注意:
-#
-# A 与 B 字符串的长度在1和10000区间范围内。
+# 注意：字符串 "abc" 重复叠加 0 次是 ""，重复叠加 1 次是 "abc"，重复叠加 2 次是 "abcabc"。
 #
 #
-class Solution(object):
-    def repeatedStringMatch(self, A, B):
-        """
-        :type A: str
-        :type B: str
-        :rtype: int
-        """
-        # # 有bug
-        # idx = B.find(A)
+#
+# 示例 1：
+#
+# 输入：a = "abcd", b = "cdabcdab"
+# 输出：3
+# 解释：a 重复叠加三遍后为 "abcdabcdabcd", 此时 b 是其子串。
+#
+#
+# 示例 2：
+#
+# 输入：a = "a", b = "aa"
+# 输出：2
+#
+#
+# 示例 3：
+#
+# 输入：a = "a", b = "a"
+# 输出：1
+#
+#
+# 示例 4：
+#
+# 输入：a = "abc", b = "wxyz"
+# 输出：-1
+#
+#
+#
+#
+# 提示：
+#
+#
+# 1 <= a.length <= 10^4
+# 1 <= b.length <= 10^4
+# a 和 b 由小写英文字母组成
+#
+#
+#
 
-        # if len(A) > len(B):
-        #     if B in A:
-        #         return 1
-        #     elif B in A*2:
-        #         return 2
-        #     else:
-        #         return -1
-        # if not A or not B:
-        #     return -1
-        # if idx == -1:
-        #     return -1
-        # if idx != 0 and B[:idx] not in A:
-        #     return -1
-        # cnt = 0 if idx == 0 else 1
-        # for i in range(idx, len(B), len(A)):
-        #     print(B[i:i+len(A)])
-        #     if A.find(B[i:i+len(A)]) != 0:
-        #         return -1
-        #     else:
-        #         cnt += 1
-        # return cnt
+# @lc code=start
+class SolutionA:
+    def repeatedStringMatch(self, A: str, B: str) -> int:
+        """抄的答案, 不太懂"""
 
         if not A or not B:
             return -1
@@ -69,15 +74,52 @@ class Solution(object):
                 a += A
         return -1
 
+# TODO(rlj): Rabin-Karp.
+# TODO(rlj): KMP.
+class Solution:
+    def repeatedStringMatch(self, A: str, B: str) -> int:
+        """
+        B = subfix(A) + A * n + prefix(A), 其中n>=0
+        """
+        if not A or not B:
+            return -1
+        if B in A:      # subfix(A), A, prefix(A) 三者有其中之一的情况
+            return 1
+        if B in (A+A):  # subfix(A), A, prefix(A) 三者有其中之二的情况
+            return 2
+
+        ans = 0
+        head_index = B.find(A)
+        if head_index < 0:
+            return -1
+        i = head_index
+        while i < len(B):   # 求完整A的个数
+            if B.find(A, i) == i:
+                i += len(A)
+                ans += 1
+            else:
+                break
+        tail_index = head_index + ans * len(A)
+        if head_index > 0:   # n > 0 且有subfix
+            if A.endswith(B[:head_index]):
+                ans += 1
+            else:
+                return -1
+        if tail_index < len(B):   # n > 0 有subfix
+            if A.startswith(B[tail_index:]):
+                ans += 1
+            else:
+                return -1
+        return ans
+
+# @lc code=end
+
 if __name__ == "__main__":
-    s = Solution().repeatedStringMatch('abcd', 'cdabcdab')
+    s = Solution().repeatedStringMatch('abcd', 'cdabcdabcdab')
     print(s)
-    s = Solution().repeatedStringMatch('abcd', '')
+    s = Solution().repeatedStringMatch('abcd', 'abcdabcdab')
     print(s)
-    s = Solution().repeatedStringMatch('', 'abc')
+    s = Solution().repeatedStringMatch('abcd', 'cdabcdacdabcda')
     print(s)
     s = Solution().repeatedStringMatch('aaaaaaaaaaaaaaaaaaaaaab', 'ba')
     print(s)
-    s = Solution().repeatedStringMatch("abcd", "cdabcdab")
-    print(s)
-

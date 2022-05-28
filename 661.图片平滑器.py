@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=661 lang=python
+# @lc app=leetcode.cn id=661 lang=python3
 #
 # [661] 图片平滑器
 #
@@ -41,11 +41,12 @@
 #
 #
 #
+
+from comm import *
+# @lc code=start
 class Solution(object):
-    def imageSmoother(self, M):
-        """
-        :type M: List[List[int]]
-        :rtype: List[List[int]]
+    def imageSmoother(self, M: List[List[int]]) -> List[List[int]]:
+        """按题目逻辑直接实现
         """
         I = len(M)
         J = len(M[0])
@@ -74,6 +75,8 @@ class Solution(object):
                 tmp = get_avg(i, j)
                 ret[i].append(tmp)
         return ret
+
+# @lc code=end
 
 if __name__ == "__main__":
     s = Solution().imageSmoother([[1,1,1],

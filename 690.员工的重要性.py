@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=690 lang=python
+# @lc app=leetcode.cn id=690 lang=python3
 #
 # [690] 员工的重要性
 #
@@ -52,20 +52,15 @@ class Employee(object):
     def __repr__(self):
         return 'Employee(%r, %r, %r)' % (self.id, self.importance, self.subordinates)
 
+
 class Solution(object):
-    def getImportance(self, employees, id):
-        """
-        :type employees: Employee
-        :type id: int
-        :rtype: int
+    def getImportance(self, employees: Employee, id: int) -> int:
+        """深度优先搜索
         """
         def count_total(node):
             if not node.subordinates:
-                node.total_importance = node.importance
-                return node.total_importance
-
-            node.total_importance = node.importance + sum([count_total(e_map[i]) for i in node.subordinates])
-            return node.total_importance
+                return node.importance
+            return node.importance + sum([count_total(e_map[i]) for i in node.subordinates])
 
         e_map = {i.id:i for i in employees}
         e = e_map[id]
