@@ -1,39 +1,63 @@
 #
-# @lc app=leetcode.cn id=703 lang=python
+# @lc app=leetcode.cn id=703 lang=python3
 #
-# [703] Kth Largest Element in a Stream
+# [703] 数据流中的第 K 大元素
 #
 # https://leetcode-cn.com/problems/kth-largest-element-in-a-stream/description/
 #
 # algorithms
-# Easy (34.43%)
-# Total Accepted:    3.3K
-# Total Submissions: 9K
-# Testcase Example:  '["KthLargest","add","add","add","add","add"]\n[[3,[4,5,8,2]],[3],[5],[10],[9],[4]]'
+# Easy (51.68%)
+# Likes:    353
+# Dislikes: 0
+# Total Accepted:    73.4K
+# Total Submissions: 141K
+# Testcase Example:  '["KthLargest","add","add","add","add","add"]\n' +
+#   '[[3,[4,5,8,2]],[3],[5],[10],[9],[4]]'
 #
-# 设计一个找到数据流中第K大元素的类（class）。注意是排序后的第K大元素，不是第K个不同的元素。
+# 设计一个找到数据流中第 k 大元素的类（class）。注意是排序后的第 k 大元素，不是第 k 个不同的元素。
 #
-# 你的 KthLargest 类需要一个同时接收整数 k 和整数数组nums 的构造器，它包含数据流中的初始元素。每次调用
-# KthLargest.add，返回当前数据流中第K大的元素。
-#
-# 示例:
-#
-#
-# int k = 3;
-# int[] arr = [4,5,8,2];
-# KthLargest kthLargest = new KthLargest(3, arr);
-# kthLargest.add(3);   // returns 4
-# kthLargest.add(5);   // returns 5
-# kthLargest.add(10);  // returns 5
-# kthLargest.add(9);   // returns 8
-# kthLargest.add(4);   // returns 8
+# 请实现 KthLargest 类：
 #
 #
-# 说明:
-# 你可以假设 nums 的长度≥ k-1 且k ≥ 1。
+# KthLargest(int k, int[] nums) 使用整数 k 和整数流 nums 初始化对象。
+# int add(int val) 将 val 插入数据流 nums 后，返回当前数据流中第 k 大的元素。
+#
+#
+#
+#
+# 示例：
+#
+#
+# 输入：
+# ["KthLargest", "add", "add", "add", "add", "add"]
+# [[3, [4, 5, 8, 2]], [3], [5], [10], [9], [4]]
+# 输出：
+# [null, 4, 5, 5, 8, 8]
+#
+# 解释：
+# KthLargest kthLargest = new KthLargest(3, [4, 5, 8, 2]);
+# kthLargest.add(3);   // return 4
+# kthLargest.add(5);   // return 5
+# kthLargest.add(10);  // return 5
+# kthLargest.add(9);   // return 8
+# kthLargest.add(4);   // return 8
+#
+#
+#
+# 提示：
+#
+#
+# 1
+# 0
+# -10^4
+# -10^4
+# 最多调用 add 方法 10^4 次
+# 题目数据保证，在查找第 k 大元素时，数组中至少有 k 个元素
+#
 #
 #
 
+# @lc code=start
 class MinHeap(object):
     def __init__(self):
         self._items = [None]
@@ -73,22 +97,17 @@ class MinHeap(object):
             return self._items[1]
 
 class KthLargest(object):
+    """利用最小堆
+    还可以优化, 初始化用快排, 交换的时候用快排找到对应位置
+    """
 
     def __init__(self, k, nums):
-        """
-        :type k: int
-        :type nums: List[int]
-        """
         self.max_length = k
         self.min_heap = MinHeap()
         for i in nums:
             self.add(i)
 
     def add(self, val):
-        """
-        :type val: int
-        :rtype: int
-        """
         heap = self.min_heap
         if heap.length < self.max_length:
             heap.Insert(val)
@@ -107,10 +126,5 @@ class KthLargest(object):
 # Your KthLargest object will be instantiated and called as such:
 # obj = KthLargest(k, nums)
 # param_1 = obj.add(val)
-if __name__ == "__main__":
-    obj = KthLargest(3,[4,5,8,2])
-    print(obj.add(3))
-    print(obj.add(5))
-    print(obj.add(10))
-    print(obj.add(9))
-    print(obj.add(4))
+# @lc code=end
+

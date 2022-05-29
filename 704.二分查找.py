@@ -1,14 +1,16 @@
 #
-# @lc app=leetcode.cn id=704 lang=python
+# @lc app=leetcode.cn id=704 lang=python3
 #
-# [704] Binary Search
+# [704] 二分查找
 #
 # https://leetcode-cn.com/problems/binary-search/description/
 #
 # algorithms
-# Easy (46.86%)
-# Total Accepted:    9K
-# Total Submissions: 18.6K
+# Easy (54.35%)
+# Likes:    838
+# Dislikes: 0
+# Total Accepted:    609.9K
+# Total Submissions: 1.1M
 # Testcase Example:  '[-1,0,3,5,9,12]\n9'
 #
 # 给定一个 n 个元素有序的（升序）整型数组 nums 和一个目标值 target  ，写一个函数搜索 nums 中的
@@ -40,17 +42,15 @@
 #
 #
 #
-class Solution(object):
-    def search(self, nums, target):
-        """
-        :type nums: List[int]
-        :type target: int
-        :rtype: int
-        """
+
+from comm import *
+# @lc code=start
+class Solution:
+    def search(self, nums: List[int], target: int) -> int:
         left = 0
         right = len(nums) - 1
         while left < right:
-            mid = (left + right) // 2
+            mid = (left + right) >> 1
             if nums[mid] < target:
                 left = mid + 1
             else:
@@ -58,27 +58,5 @@ class Solution(object):
         if nums[left] == target:
             return left
         return -1
-
-    def search_v1(self, nums, target):
-        """
-        :type nums: List[int]
-        :type target: int
-        :rtype: int
-        """
-        left = 0
-        right = len(nums) - 1
-        while left <= right:
-            mid = (left + right) // 2
-            if target < nums[mid]:
-                right = mid - 1
-            elif nums[mid] < target:
-                left = mid + 1
-            else:
-                return mid
-        return -1
-
-if __name__ == "__main__":
-    s = Solution().search([-1,0,3,5,9,12], 9)
-    print(s)
-
+# @lc code=end
 

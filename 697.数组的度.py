@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=697 lang=python
+# @lc app=leetcode.cn id=697 lang=python3
 #
 # [697] 数组的度
 #
@@ -44,21 +44,24 @@
 #
 #
 #
+
+from comm import *
+# @lc code=start
 class Solution(object):
-    def findShortestSubArray(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: int
+    def findShortestSubArray(self, nums: List[int]) -> int:
+        """hash计数统计法
         """
         nums_map = {}
         for idx, num in enumerate(nums):
             nums_map.setdefault(num, []).append(idx)
         ans = 50000
         max_len = max(len(i) for i in nums_map.values())
-        for k, v in nums_map.items():
+        for _, v in nums_map.items():
             if len(v) == max_len:
                 ans = min(ans, v[-1] - v[0] + 1)
         return ans
+
+# @lc code=end
 
 if __name__ == "__main__":
     s = Solution().findShortestSubArray([1,2,2,3,1,4,2])

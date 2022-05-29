@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=693 lang=python
+# @lc app=leetcode.cn id=693 lang=python3
 #
 # [693] 交替位二进制数
 #
@@ -50,15 +50,13 @@
 #
 #
 #
-class Solution(object):
+class SolutionA:
     bits = [2**i for i in range(32)]
-    def hasAlternatingBits(self, n):
-        """
-        :type n: int
-        :rtype: bool
+    def hasAlternatingBits(self, n: int) -> bool:
+        """模拟法
         """
         pre = None
-        for i in Solution.bits:
+        for i in self.bits:
             if i > n:
                 break
             if (n & i) == i:
@@ -74,6 +72,26 @@ class Solution(object):
             pre = bit
         return True
 
+class SolutionB:
+    def hasAlternatingBits(self, n: int) -> bool:
+        pre = None
+        while n > 0:
+            bit = n & 1
+            if bit == pre:
+                return False
+            n >>= 1
+            pre = bit
+        return True
+
+class Solution:
+    def hasAlternatingBits(self, n: int) -> bool:
+        """官方题解"""
+
+        a = n ^ (n >> 1)   # a 的所有位都应该是1
+        return a & (a+1) == 0  # a+1进位了, 按位与为0
+
 if __name__ == "__main__":
     s = Solution().hasAlternatingBits(5)
+    print(s)
+    s = Solution().hasAlternatingBits(4)
     print(s)

@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=696 lang=python
+# @lc app=leetcode.cn id=696 lang=python3
 #
 # [696] 计数二进制子串
 #
@@ -45,12 +45,9 @@
 #
 #
 #
-class Solution(object):
-    cache = {}
-    def countBinarySubstrings(self, s):
-        """
-        :type s: str
-        :rtype: int
+class WrongSolution:
+    def countBinarySubstrings(self, s: str) -> int:
+        """暴力法, 超时
         """
         ret = []
         for i in range(len(s)):
@@ -79,6 +76,22 @@ class Solution(object):
             pre = i
         return change_count == 1 and zero_count == one_count
 
+class Solution:
+    def countBinarySubstrings(self, s: str) -> int:
+        """分段统计
+        相邻的两个段构成子字符串的数量, 是两者长度的较小值"""
+
+        pre_count = 0
+        count = 1
+        ans = 0
+        for i in range(1, len(s)):
+            if s[i] == s[i-1]:
+                count += 1
+            else:
+                ans += min(count, pre_count)
+                pre_count = count
+                count = 1
+        return ans + min(count, pre_count)
 
 if __name__ == "__main__":
     s = Solution().countBinarySubstrings("00110011")
