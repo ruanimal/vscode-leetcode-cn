@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=836 lang=python
+# @lc app=leetcode.cn id=836 lang=python3
 #
 # [836] 矩形重叠
 #
@@ -39,16 +39,16 @@
 #
 #
 #
+
+from comm import *
+# @lc code=start
 class Solution(object):
-    def isRectangleOverlap(self, rec1, rec2):
-        """
-        :type rec1: List[int]
-        :type rec2: List[int]
-        :rtype: bool
-        """
+    def isRectangleOverlap(self, rec1: List[int], rec2: List[int]) -> bool:
         x1, y1, x2, y2 = rec1
         a1, b1, a2, b2 = rec2
         return not (a1 >= x2 or x1 >= a2 or b1 >= y2 or y1 >= b2)
+
+# @lc code=end
 
 if __name__ == "__main__":
     s = Solution()
