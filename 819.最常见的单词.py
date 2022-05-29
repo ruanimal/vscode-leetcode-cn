@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=819 lang=python
+# @lc app=leetcode.cn id=819 lang=python3
 #
 # [819] 最常见的单词
 #
@@ -48,12 +48,14 @@
 #
 #
 #
+
+from comm import *
+# @lc code=start
 class Solution(object):
-    def mostCommonWord(self, paragraph, banned):
-        """
-        :type paragraph: str
-        :type banned: List[str]
-        :rtype: str
+    def mostCommonWord(self, paragraph: str, banned: List[str]) -> str:
+        """遍历+hash计数
+
+        代码可简化
         """
         paragraph = paragraph.lower()
         tmp = {}
@@ -79,6 +81,7 @@ class Solution(object):
             else:
                 return k
 
+# @lc code=end
 if __name__ == "__main__":
     s = Solution().mostCommonWord("Bob hit a ball, the hit BALL flew far after it was hit.", ['hit'])
     print(s)

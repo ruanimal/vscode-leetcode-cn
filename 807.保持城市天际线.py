@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=807 lang=python
+# @lc app=leetcode.cn id=807 lang=python3
 #
 # [807] 保持城市天际线
 #
@@ -52,11 +52,12 @@
 #
 #
 #
-class Solution(object):
-    def maxIncreaseKeepingSkyline(self, grid):
-        """
-        :type grid: List[List[int]]
-        :rtype: int
+
+from comm import *
+# @lc code=start
+class Solution:
+    def maxIncreaseKeepingSkyline(self, grid: List[List[int]]) -> int:
+        """模拟题意
         """
         max_x = [max(i) for i in grid]
         max_y = [max(i) for i in zip(*grid)]
@@ -66,6 +67,7 @@ class Solution(object):
                 ans += (min(max_x[i], max_y[j]) - grid[i][j])
         return ans
 
+# @lc code=end
 if __name__ == "__main__":
     s = Solution().maxIncreaseKeepingSkyline( [[3,0,8,4],[2,4,5,7],[9,2,6,3],[0,3,1,0]])
     print(s)

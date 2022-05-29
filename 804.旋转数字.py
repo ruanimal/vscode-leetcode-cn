@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=804 lang=python
+# @lc app=leetcode.cn id=804 lang=python3
 #
 # [804] 旋转数字
 #
@@ -48,11 +48,12 @@
 #
 #
 #
-class Solution(object):
-    def uniqueMorseRepresentations(self, words):
-        """
-        :type words: List[str]
-        :rtype: int
+
+from comm import *
+# @lc code=start
+class Solution:
+    def uniqueMorseRepresentations(self, words: List[str]) -> int:
+        """集合去重法
         """
         if not words:
             return 0
@@ -64,6 +65,7 @@ class Solution(object):
             ret.add(''.join([codes_map[i] for i in word]))
         return len(ret)
 
+# @lc code=end
 if __name__ == "__main__":
     s = Solution().uniqueMorseRepresentations( ["gin", "zen", "gig", "msg"])
     print(s)
