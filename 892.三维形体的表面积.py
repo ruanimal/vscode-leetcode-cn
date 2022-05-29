@@ -1,21 +1,26 @@
 #
-# @lc app=leetcode.cn id=892 lang=python
+# @lc app=leetcode.cn id=892 lang=python3
 #
-# [892] 和至少为 K 的最短子数组
+# [892] 三维形体的表面积
 #
 # https://leetcode-cn.com/problems/surface-area-of-3d-shapes/description/
 #
 # algorithms
-# Easy (48.26%)
-# Total Accepted:    1.5K
-# Total Submissions: 3K
+# Easy (63.89%)
+# Likes:    160
+# Dislikes: 0
+# Total Accepted:    35.3K
+# Total Submissions: 55.3K
 # Testcase Example:  '[[2]]'
 #
-# 在 N * N 的网格上，我们放置一些 1 * 1 * 1  的立方体。
+# 给你一个 n * n 的网格 grid ，上面放置着一些 1 x 1 x 1 的正方体。每个值 v = grid[i][j] 表示 v
+# 个正方体叠放在对应单元格 (i, j) 上。
 #
-# 每个值 v = grid[i][j] 表示 v 个正方体叠放在单元格 (i, j) 上。
+# 放置好正方体后，任何直接相邻的正方体都会互相粘在一起，形成一些不规则的三维形体。
 #
-# 返回结果形体的总表面积。
+# 请你返回最终这些形体的总表面积。
+#
+# 注意：每个形体的底面也需要计入表面积中。
 #
 #
 #
@@ -24,31 +29,22 @@
 #
 # 示例 1：
 #
-# 输入：[[2]]
-# 输出：10
+#
+# 输入：grid = [[1,2],[3,4]]
+# 输出：34
 #
 #
 # 示例 2：
 #
-# 输入：[[1,2],[3,4]]
-# 输出：34
+#
+# 输入：grid = [[1,1,1],[1,0,1],[1,1,1]]
+# 输出：32
 #
 #
 # 示例 3：
 #
-# 输入：[[1,0],[0,2]]
-# 输出：16
 #
-#
-# 示例 4：
-#
-# 输入：[[1,1,1],[1,0,1],[1,1,1]]
-# 输出：32
-#
-#
-# 示例 5：
-#
-# 输入：[[2,2,2],[2,1,2],[2,2,2]]
+# 输入：grid = [[2,2,2],[2,1,2],[2,2,2]]
 # 输出：46
 #
 #
@@ -57,16 +53,19 @@
 # 提示：
 #
 #
-# 1 <= N <= 50
+# n == grid.length
+# n == grid[i].length
+# 1 <= n <= 50
 # 0 <= grid[i][j] <= 50
 #
 #
 #
-class Solution(object):
-    def surfaceArea(self, grid):
-        """
-        :type grid: List[List[int]]
-        :rtype: int
+
+from comm import *
+# @lc code=start
+class Solution:
+    def surfaceArea(self, grid: List[List[int]]) -> int:
+        """暴力法
         按层次计算每个块对面积的贡献度
         """
         self.res = 0
@@ -111,11 +110,23 @@ class Solution(object):
 
         return self.res
 
-if __name__ == "__main__":
-    # data = [[2]]
-    # data = [[1,0],[0,2]]
-    data = [[2,2,2],[2,1,2],[2,2,2]]
-    s = Solution().surfaceArea(data)
-    print(s)
+class WrongSolution:
+    def surfaceArea(self, grid: List[List[int]]) -> int:
+        """3视图法, 有bug无法解决向内凹的情况"""
 
+        X = len(grid)
+        Y = len(grid[0])
+        ans = X * Y    # 俯视图
+        x_maxes = [0] * X
+        y_maxes = [0] * Y
+        for x in range(X):
+            for y in range(Y):
+                x_maxes[x] = max(x_maxes[x], grid[x][y])   # 正视图
+                y_maxes[y] = max(y_maxes[y], grid[x][y])  # 左视图
+        return (ans + sum(x_maxes) + sum(y_maxes)) * 2   # 加上对面的面积
+# @lc code=end
 
+s = Solution().surfaceArea([[2]])
+print(s)
+s = Solution().surfaceArea([[1,2],[3,4]])
+print(s)

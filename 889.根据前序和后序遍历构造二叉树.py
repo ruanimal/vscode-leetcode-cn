@@ -52,6 +52,8 @@
 #
 #
 
+from comm import *
+
 # @lc code=start
 # Definition for a binary tree node.
 # class TreeNode:
@@ -59,11 +61,6 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
-
-try:
-    from comm import *
-except ImportError:
-    LOCAL_TEST = False
 
 class Solution:
     def constructFromPrePost(self, preorder: List[int], postorder: List[int]) -> TreeNode:
@@ -95,11 +92,6 @@ class Solution:
                                  self.preorder_index[rroot_val], pre_high,
                                  self.preorder_index[rroot_val]+1, post_high-1)
         return root
-
-if LOCAL_TEST:
-    s = Solution()
-    s.constructFromPrePost(preorder = [1,2,4,5,3,6,7], postorder = [4,5,2,6,7,3,1])
-
 
 # @lc code=end
 
