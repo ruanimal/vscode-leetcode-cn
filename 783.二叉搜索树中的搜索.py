@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=783 lang=python
+# @lc app=leetcode.cn id=783 lang=python3
 #
 # [783] 二叉搜索树中的搜索
 #
@@ -46,11 +46,11 @@
 #         self.left = None
 #         self.right = None
 
-class Solution(object):
+from comm import *
+
+class SolutionA(object):
     def minDiffInBST(self, root):
-        """
-        :type root: TreeNode
-        :rtype: int
+        """层次遍历, 过于复杂, 没有很好地利用BST性质
         """
         def tree_max(node):
             if node.right is None:
@@ -89,3 +89,45 @@ class Solution(object):
             level = next_level
         return min_abs
 
+# @lc code=start
+
+class SolutionB:
+    def minDiffInBST(self, root: TreeNode):
+        """纯递归解法, 后序遍历, 用于加深对递归理解
+        注意: 如果获取同级节点的结果则用返回值
+              如果获取全局信息则用全局变量
+
+        min(self.ans, root.val-lmax, rmin-root.val)
+        """
+
+        self.ans = float('inf')
+        self.travese(root)
+        return self.ans
+
+    def travese(self, root: TreeNode):
+        if not root:
+            return float('inf'), float('-inf')
+        lmin, lmax = self.travese(root.left)
+        rmin, rmax = self.travese(root.right)
+        self.ans = min(self.ans, root.val-lmax, rmin-root.val)
+        return min(root.val, lmin), max(root.val, rmax)
+
+class Solution:
+    def minDiffInBST(self, root: TreeNode):
+        """纯递归解法, 中序遍历"""
+        self.pre = None
+        self.ans = float('inf')
+        self.travese(root)
+        return self.ans
+
+    def travese(self, root: TreeNode):
+        if not root:
+            return
+
+        self.travese(root.left)
+        if self.pre:
+            self.ans = min(self.ans, root.val-self.pre.val)
+        self.pre = root
+        self.travese(root.right)
+
+# @lc code=end
