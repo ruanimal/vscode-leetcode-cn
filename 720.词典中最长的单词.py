@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=720 lang=python
+# @lc app=leetcode.cn id=720 lang=python3
 #
 # [720] 词典中最长的单词
 #
@@ -72,6 +72,8 @@ class trie:
         return repr(self.root)
 
 class Solution:
+    """使用前缀树"""
+
     def getWord(self, nd):
         if not nd.hasKey:
             return []  # 这个节点本身没有单词, 只是在路径上
@@ -83,11 +85,7 @@ class Solution:
         li.sort()
         return [nd.key]+li[0]
 
-    def longestWord(self, words):
-        """
-        :type words: List[str]
-        :rtype: str
-        """
+    def longestWord(self, words: list) -> str:
         tr = trie()
         for word in words:
             tr.insert(word)

@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=725 lang=python
+# @lc app=leetcode.cn id=725 lang=python3
 #
 # [725] 分隔链表
 #
@@ -64,44 +64,20 @@
 #         self.val = x
 #         self.next = None
 
-class ListNode:
-    def __init__(self, x):
-        self.val = x
-        self.next = None
 
-    def __repr__(self):
-        tmp = []
-        node = self
-        max_depth = 20
-        while node:
-            max_depth -= 1
-            if max_depth < 0:
-                break
-            tmp.append(repr(node.val))
-            node = node.next
-        else:
-            tmp.append('None')
-        return ' -> '.join(tmp)
-
-
-def build_list_node(nums):
-    head = node = ListNode(None)
-    for i in nums:
-        node.next = ListNode(i)
-        node = node.next
-    return head.next
-
+from comm import *
+# @lc code=start
 
 class Solution(object):
-    def splitListToParts(self, root, k):
+    def splitListToParts(self, root: ListNode, k: int) -> List[ListNode]:
+        """模拟发扑克牌
+        写得比较啰嗦, 有优化空间
         """
-        :type root: ListNode
-        :type k: int
-        :rtype: List[ListNode]
-        """
+
         if not root:
             return [None] * k
 
+        # 求总长度
         count = 0
         ptr = root
         while ptr:
@@ -134,6 +110,8 @@ class Solution(object):
             ptr = tmp
         ret.extend([None]*(k-len(ret)))
         return ret
+
+# @lc code=end
 
 if __name__ == "__main__":
     l = build_list_node(range(4))

@@ -1,35 +1,32 @@
 #
-# @lc app=leetcode.cn id=754 lang=python
+# @lc app=leetcode.cn id=754 lang=python3
 #
 # [754] 到达终点数字
 #
 # https://leetcode-cn.com/problems/reach-a-number/description/
 #
 # algorithms
-# Easy (35.80%)
-# Likes:    57
+# Medium (43.71%)
+# Likes:    176
 # Dislikes: 0
-# Total Accepted:    1.8K
-# Total Submissions: 4.8K
-# Testcase Example:  '1'
+# Total Accepted:    10.2K
+# Total Submissions: 23K
+# Testcase Example:  '2'
 #
 # 在一根无限长的数轴上，你站在0的位置。终点在target的位置。
 #
-# 每次你可以选择向左或向右移动。第 n 次移动（从 1 开始），可以走 n 步。
+# 你可以做一些数量的移动 numMoves :
 #
-# 返回到达终点需要的最小移动次数。
+#
+# 每次你可以选择向左或向右移动。
+# 第 i 次移动（从  i == 1 开始，到 i == numMoves ），在选择的方向上走 i 步。
+#
+#
+# 给定整数 target ，返回 到达目标所需的 最小 移动次数(即最小 numMoves ) 。
+#
+#
 #
 # 示例 1:
-#
-#
-# 输入: target = 3
-# 输出: 2
-# 解释:
-# 第一次移动，从 0 到 1 。
-# 第二次移动，从 1 到 3 。
-#
-#
-# 示例 2:
 #
 #
 # 输入: target = 2
@@ -40,13 +37,28 @@
 # 第三次移动，从 -1 到 2 。
 #
 #
-# 注意:
+# 示例 2:
 #
 #
-# target是在[-10^9, 10^9]范围中的非零整数。
+# 输入: target = 3
+# 输出: 2
+# 解释:
+# 第一次移动，从 0 到 1 。
+# 第二次移动，从 1 到 3 。
 #
 #
 #
+#
+# 提示:
+#
+#
+# -10^9 <= target <= 10^9
+# target != 0
+#
+#
+#
+
+# @lc code=start
 
 '''给你一个数，第n次可以向左走，也可以向右走，问你最少多少次可以走到目的地
 
@@ -61,12 +73,18 @@ a1,a2,a3…an,假如a1到an都是正数，那么它一定是最好的方案，
     当n为奇数的时候，可以证明当把a1,a2..an里面一个数变成负数之后只要在加两个个数就能到达target，也就是a1+a2…an+an+1+an+2,所以有以下算法
 '''
 
+# TODO(rlj): 分成往左和往右两个数组, 转化为0-1背包问题
+
 class Solution(object):
     def reachNumber(self, target):
+        """抄的答案"""
+
         target = abs(target)
         k = 0
         while target > 0:
             k += 1
             target -= k
         return k if (target % 2 == 0) else (k + 1 + k%2)
+
+# @lc code=end
 

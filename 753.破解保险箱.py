@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=753 lang=python
+# @lc app=leetcode.cn id=753 lang=python3
 #
 # [753] 破解保险箱
 #
@@ -53,11 +53,8 @@
 #
 #
 class Solution(object):
-    def crackSafe(self, n, k):
-        """
-        :type n: int
-        :type k: int
-        :rtype: str
+    def crackSafe(self, n: int, k: int) -> str:
+        """暴力回溯法
         """
         if n == 1:
             return ''.join(str(i) for i in range(k))
@@ -66,7 +63,6 @@ class Solution(object):
         visited = set()
         visited.add(tuple(ans))
         self.dfs(ans, total, visited, n, k)
-        #print(ans)
         return ''.join(str(i) for i in ans)
 
     @staticmethod

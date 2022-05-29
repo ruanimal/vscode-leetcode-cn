@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=747 lang=python
+# @lc app=leetcode.cn id=747 lang=python3
 #
 # [747] 至少是其他数字两倍的最大数
 #
@@ -48,11 +48,13 @@
 #
 #
 #
-class Solution(object):
-    def dominantIndex(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: int
+
+from comm import *
+# @lc code=start
+
+class SolutionA:
+    def dominantIndex(self, nums: List[int]) -> int:
+        """暴力模拟法
         """
         if not nums:
             return
@@ -70,6 +72,23 @@ class Solution(object):
             if max_val < i * 2:
                 return -1
         return max_idx
+
+class Solution:
+    def dominantIndex(self, nums: List[int]) -> int:
+        """遍历一次, 记录第一大和第二大"""
+        if len(nums) == 1:
+            return 0
+        first, second = (0, 1) if nums[0] >= nums[1] else (1, 0)
+        for i in range(2, len(nums)):
+            if nums[i] >= nums[first]:
+                first, second = i, first
+            elif nums[i] >= nums[second]:
+                second = i
+            else:
+                continue
+        return first if (nums[first] >= nums[second] * 2) else -1
+
+# @lc code=end
 
 if __name__ == "__main__":
     s = Solution().dominantIndex([1,2,3,6])
