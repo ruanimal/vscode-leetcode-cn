@@ -48,6 +48,8 @@
 #
 #
 
+from comm import *
+
 # @lc code=start
 # Definition for singly-linked list.
 # class ListNode:
@@ -55,10 +57,6 @@
 #         self.val = val
 #         self.next = next
 
-try:
-    from comm import *
-except ImportError:
-    LOCAL_TEST = False
 
 class Solution:
     def middleNode(self, head: ListNode) -> ListNode:
@@ -73,11 +71,4 @@ class Solution:
             fast = fast.next.next
         return slow
 
-if LOCAL_TEST:
-    n = build_list_node(range(5))
-    print(Solution().middleNode(n).val)
-    n = build_list_node(range(6))
-    print(Solution().middleNode(n).val)
-
 # @lc code=end
-

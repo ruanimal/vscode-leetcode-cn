@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=859 lang=python
+# @lc app=leetcode.cn id=859 lang=python3
 #
 # [859] 亲密字符串
 #
@@ -59,12 +59,10 @@
 #
 #
 #
-class Solution(object):
-    def buddyStrings(self, A, B):
-        """
-        :type A: str
-        :type B: str
-        :rtype: bool
+class Solution:
+    def buddyStrings(self, A: str, B: str) -> bool:
+        """计数法
+        可改进
         """
         if len(A) != len(B):
             return False
