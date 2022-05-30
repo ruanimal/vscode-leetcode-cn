@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=1018 lang=python
+# @lc app=leetcode.cn id=1018 lang=python3
 #
 # [1018] 可被 5 整除的二进制前缀
 #
@@ -56,11 +56,12 @@
 #
 #
 #
+
+from comm import *
+# @lc code=start
 class Solution(object):
-    def prefixesDivBy5(self, A):
-        """
-        :type A: List[int]
-        :rtype: List[bool]
+    def prefixesDivBy5(self, A: List[int]) -> bool:
+        """暴力法
         """
         tmp = 0
         ans = []
@@ -74,6 +75,8 @@ class Solution(object):
             else:
                 ans.append(False)
         return ans
+
+# @lc code=end
 
 if __name__ == "__main__":
     s = Solution().prefixesDivBy5([0,1,1])

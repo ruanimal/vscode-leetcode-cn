@@ -57,6 +57,7 @@
 # 相同
 #
 #
+from comm import *
 
 # @lc code=start
 # Definition for a binary tree node.
@@ -78,6 +79,3 @@ class Solution:
 
 # @lc code=end
 
-from comm import *
-if __name__ == '__main__':
-    pass

@@ -1,29 +1,77 @@
 #
-# @lc app=leetcode.cn id=1030 lang=python
+# @lc app=leetcode.cn id=1030 lang=python3
 #
 # [1030] 距离顺序排列矩阵单元格
 #
-class Solution(object):
-    def allCellsDistOrder(self, R, C, r0, c0):
-        """
-        :type R: int
-        :type C: int
-        :type r0: int
-        :type c0: int
-        :rtype: List[List[int]]
-        """
+# https://leetcode-cn.com/problems/matrix-cells-in-distance-order/description/
+#
+# algorithms
+# Easy (70.91%)
+# Likes:    127
+# Dislikes: 0
+# Total Accepted:    43.5K
+# Total Submissions: 61.3K
+# Testcase Example:  '1\n2\n0\n0'
+#
+# 给定四个整数 row ,   cols ,  rCenter 和 cCenter 。有一个 rows x cols 的矩阵，你在单元格上的坐标是
+# (rCenter, cCenter) 。
+#
+# 返回矩阵中的所有单元格的坐标，并按与 (rCenter, cCenter) 的 距离 从最小到最大的顺序排。你可以按 任何 满足此条件的顺序返回答案。
+#
+# 单元格(r1, c1) 和 (r2, c2) 之间的距离为|r1 - r2| + |c1 - c2|。
+#
+#
+#
+# 示例 1：
+#
+#
+# 输入：rows = 1, cols = 2, rCenter = 0, cCenter = 0
+# 输出：[[0,0],[0,1]]
+# 解释：从 (r0, c0) 到其他单元格的距离为：[0,1]
+#
+#
+# 示例 2：
+#
+#
+# 输入：rows = 2, cols = 2, rCenter = 0, cCenter = 1
+# 输出：[[0,1],[0,0],[1,1],[1,0]]
+# 解释：从 (r0, c0) 到其他单元格的距离为：[0,1,1,2]
+# [[0,1],[1,1],[0,0],[1,0]] 也会被视作正确答案。
+#
+#
+# 示例 3：
+#
+#
+# 输入：rows = 2, cols = 3, rCenter = 1, cCenter = 2
+# 输出：[[1,2],[0,2],[1,1],[0,1],[1,0],[0,0]]
+# 解释：从 (r0, c0) 到其他单元格的距离为：[0,1,1,2,2,3]
+# 其他满足题目要求的答案也会被视为正确，例如 [[1,2],[1,1],[0,2],[1,0],[0,1],[0,0]]。
+#
+#
+#
+#
+# 提示：
+#
+#
+# 1 <= rows, cols <= 100
+# 0 <= rCenter < rows
+# 0 <= cCenter < cols
+#
+#
+#
+
+from comm import *
+# @lc code=start
+class Solution:
+    def allCellsDistOrder(self, rows: int, cols: int,
+                          rCenter: int, cCenter: int) -> List[List[int]]:
+        """暴力法"""
+
         dis_map = {}
-        for x in range(0, R):
-            for y in range(0, C):
-                dis_map[(x, y)] = abs(x-r0) + abs(y-c0)
+        for x in range(0, rows):
+            for y in range(0, cols):
+                dis_map[(x, y)] = abs(x-rCenter) + abs(y-cCenter)
         return [list(i[0]) for i in sorted(dis_map.items(), key=lambda i: i[1])]
 
-if __name__ == "__main__":
-    s = Solution().allCellsDistOrder(R = 1, C = 2, r0 = 0, c0 = 0)
-    print(s)
-    s = Solution().allCellsDistOrder(R = 2, C = 2, r0 = 0, c0 = 1)
-    print(s)
-    s = Solution().allCellsDistOrder(R = 3, C = 5, r0 = 2, c0 = 3)
-    print(s)
-
+# @lc code=end
 

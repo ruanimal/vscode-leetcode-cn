@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=1029 lang=python
+# @lc app=leetcode.cn id=1029 lang=python3
 #
 # [1029] 两地调度
 #
@@ -43,11 +43,12 @@
 #
 #
 #
-class Solution(object):
-    def twoCitySchedCost(self, costs):
-        """
-        :type costs: List[List[int]]
-        :rtype: int
+
+from comm import *
+# @lc code=start
+class Solution:
+    def twoCitySchedCost(self, costs: List[List[int]]) -> int:
+        """动态规划
         f[i][a] 第i个人时, 有a个人去A城市时的费用(a<=i and a <= N)
         第i个人有两种选择:
         1. 去A, 则前面就a-1个人去了A
@@ -71,6 +72,7 @@ class Solution(object):
                     f[i][a] = min(f[i-1][a-1] + costs[i-1][0], f[i-1][a] + costs[i-1][1])
         return f[len(costs)][N]
 
+# @lc code=end
 if __name__ == "__main__":
     s = Solution().twoCitySchedCost([[918,704],[77,778],[239,457],[284,263],[872,779],[976,416],[860,518],[13,351],[137,238],[557,596],[890,227],[548,143],[384,585],[165,54]])
     print(s)

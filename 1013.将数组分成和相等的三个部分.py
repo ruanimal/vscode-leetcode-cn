@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=1013 lang=python
+# @lc app=leetcode.cn id=1013 lang=python3
 #
 # [1013] 将数组分成和相等的三个部分
 #
@@ -52,23 +52,32 @@
 #
 class Solution(object):
     def canThreePartsEqualSum(self, A):
-        """
-        :type A: List[int]
-        :rtype: bool
-        """
-        sum_a = sum(A)
-        if sum_a % 3 != 0:
-            return False
+        """求和
+        依次累加, 判断是否等于 sum_a // 3
 
-        tmp = 0
-        target = sum_a // 3
-        for i in A:
-            tmp += i
-            if tmp == target:
-                tmp = 0
-        return tmp == 0
+        边界case处理比较麻烦, 直接抄官方题解
+        """
+        s = sum(A)
+        if s % 3 != 0:
+            return False
+        target = s // 3
+        n, i, cur = len(A), 0, 0
+        while i < n:
+            cur += A[i]
+            if cur == target:
+                break
+            i += 1
+        if cur != target:
+            return False
+        j = i + 1
+        while j + 1 < n:  # 需要满足最后一个数组非空
+            cur += A[j]
+            if cur == target * 2:
+                return True
+            j += 1
+        return False
 
 if __name__ == "__main__":
-    s = Solution().canThreePartsEqualSum([3,3,6,5,-2,2,5,1,-9])
+    s = Solution().canThreePartsEqualSum([0,2,1,-6,6,-7,9,1,2,0,1])
     print(s)
 
