@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=949 lang=python
+# @lc app=leetcode.cn id=949 lang=python3
 #
 # [949] 给定数字能组成的最大时间
 #
@@ -43,11 +43,13 @@
 #
 #
 #
+
+from comm import *
+
+# @lc code=start
 class Solution(object):
-    def largestTimeFromDigits(self, A):
-        """
-        :type A: List[int]
-        :rtype: str
+    def largestTimeFromDigits(self, A: List[int]) -> str:
+        """暴力模拟
         """
 
         import itertools
@@ -62,6 +64,8 @@ class Solution(object):
                 max_val = total_minute
                 ans = '{}{}:{}{}'.format(a, b, c, d)
         return ans
+
+# @lc code=end
 
 if __name__ == "__main__":
     s = Solution().largestTimeFromDigits([1,2,3,4])

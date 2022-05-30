@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=941 lang=python
+# @lc app=leetcode.cn id=941 lang=python3
 #
 # [941] 有效的山脉数组
 #
@@ -60,12 +60,15 @@
 #
 #
 #
-class Solution(object):
-    def validMountainArray(self, A):
+
+from comm import *
+# @lc code=start
+class Solution:
+    def validMountainArray(self, A: List[int]):
+        """暴力法
+        可用二分查找
         """
-        :type A: List[int]
-        :rtype: bool
-        """
+
         if len(A) < 3:
             return False
         peak_cnt = 0
@@ -78,16 +81,7 @@ class Solution(object):
                 return False
         return peak_cnt == 1
 
-    # def validMountainArray(self, A):
-    #     if len(A) < 3:
-    #         return False
-    #     i, j = 0, len(A)-1
-    #     while i < len(A)-1 and A[i] < A[i+1]:
-    #         i+=1
-    #     while j > 0 and A[j-1] > A[j]:
-    #         j-=1
-    #     return i==j and i != 0 and i != len(A)-1
-
+# @lc code=end
 if __name__ == "__main__":
     s = Solution().validMountainArray([0,3,2,1])
     print(s)

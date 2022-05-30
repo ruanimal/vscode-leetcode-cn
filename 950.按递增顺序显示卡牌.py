@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=950 lang=python
+# @lc app=leetcode.cn id=950 lang=python3
 #
 # [950] 按递增顺序显示卡牌
 #
@@ -60,6 +60,8 @@
 #
 #
 
+from comm import *
+# @lc code=start
 """
 **将所有操作反向进行有可以了**
 
@@ -79,8 +81,8 @@
 ```
 """
 
-class Solution(object):
-    def deckRevealedIncreasing(self, deck):
+class Solution:
+    def deckRevealedIncreasing(self, deck: List[int]) -> List[int]:
         """
         :type deck: List[int]
         :rtype: List[int]
@@ -94,6 +96,7 @@ class Solution(object):
             ans.appendleft(i)
         return list(ans)
 
+# @lc code=end
 if __name__ == "__main__":
     s = Solution().deckRevealedIncreasing([17,13,11,2,3,5,7])
     print(s)
