@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=970 lang=python
+# @lc app=leetcode.cn id=970 lang=python3
 #
 # [970] 强整数
 #
@@ -53,17 +53,11 @@
 #
 #
 
-'''
-x**a + y**b <= bound
-'''
 
 class Solution(object):
-    def powerfulIntegers(self, x, y, bound):
-        """
-        :type x: int
-        :type y: int
-        :type bound: int
-        :rtype: List[int]
+    def powerfulIntegers(self, x: int, y: int, bound: int) -> list:
+        """数学计数法
+        x**a + y**b <= bound
         """
         import math
 
@@ -79,8 +73,12 @@ class Solution(object):
         ans = []
         while tmp < bound:
             b = math.log(bound-tmp, y)
-            for i in range(int(b)+1):
-                ans.append(x**a+y**i)
+            # 多加1是为了防止math.log浮点数精度导致的向下取整的问题,
+            # 如 math.log(175616, 56) = 2.9999999999999996, 其实应该是3
+            for i in range(int(b)+1+1):
+                tmp1 = x**a+y**i
+                if tmp1 <= bound:
+                    ans.append(x**a+y**i)
             a += 1
             tmp *= x
         return list(set(ans))   # 处理重复
@@ -89,4 +87,6 @@ if __name__ == "__main__":
     s = Solution().powerfulIntegers(x = 3, y = 5, bound = 15)
     print(s)
     s = Solution().powerfulIntegers(x = 2, y = 1, bound = 10)
+    print(s)
+    s = Solution().powerfulIntegers(x = 60, y = 56, bound = 175617)
     print(s)
