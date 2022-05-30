@@ -1,5 +1,5 @@
 #
-# @lc app=leetcode.cn id=914 lang=python
+# @lc app=leetcode.cn id=914 lang=python3
 #
 # [914] 卡牌分组
 #
@@ -72,38 +72,28 @@
 #
 #
 #
-class Solution(object):
-    def hasGroupsSizeX(self, deck):
-        """
-        :type deck: List[int]
-        :rtype: bool
-        """
-        from collections import Counter
 
-        def func(n):
-            import math
-            for i in range(1, int(math.sqrt(n))+1):
-                a, b = divmod(n, i)
-                if b == 0:
-                    yield i
-                    yield a
+from comm import *
+# @lc code=start
+from collections import Counter
+
+class Solution:
+    def hasGroupsSizeX(self, deck: List[int]) -> bool:
+        """暴力计数法
+        """
 
         if not deck:
             return False
         counter = Counter(deck)
+        min_count = min(counter.values())
+        if min_count < 2:
+            return False
+        for i in range(2, min_count+1):
+            if all(j % i == 0 for j in counter.values()):
+                return True
+        return False
 
-        tmp = list(set(counter.values()))
-        if len(counter) == 1:
-            return len([i for i in func(tmp[0]) if i != 1]) > 0
-        tmp_set = set(i for i in func(tmp[0]) if i != 1)
-        for i in tmp[1:]:
-            for j in func(i):
-                if j in tmp_set:
-                    break
-            else:
-                return False
-        return True
-
+# @lc code=end
 
 if __name__ == "__main__":
     s = Solution().hasGroupsSizeX([1,1,1,1])

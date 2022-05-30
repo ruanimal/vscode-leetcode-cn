@@ -63,6 +63,9 @@ from copy import deepcopy
 
 class Solution:
     def minFallingPathSum(self, matrix: List[List[int]]) -> int:
+        """动态规划
+        """
+
         length = len(matrix)
         if length == 0:
             return 0
