@@ -1,3 +1,6 @@
+"""抽象工厂"""
+
+
 import os
 
 class Pet:

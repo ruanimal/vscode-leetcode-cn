@@ -1,3 +1,6 @@
+"""工厂方法"""
+
+
 import os
 
 class Pet:
