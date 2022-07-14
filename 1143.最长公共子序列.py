@@ -93,9 +93,21 @@ class SolutionA:
                     dp[i] = max(dp[i], dp[j]+1)
         return max(dp)
 
+import functools
+
 class SolutionB:
     def longestCommonSubsequence(self, text1: str, text2: str) -> int:
-        pass
+        '''递归法'''
+        @functools.lru_cache
+        def lcs(text1: str, text2: str, m: int, n: int):
+            if m == 0 or n == 0:
+                return 0
+            if text1[m-1] == text2[n-1]:
+                return lcs(text1, text2, m-1, n-1) + 1
+            else:
+                return max(lcs(text1, text2, m-1, n), lcs(text1, text2, m, n-1))
+        return lcs(text1, text2, len(text1), len(text2))
+
 
 class Solution:
     def longestCommonSubsequence(self, text1: str, text2: str) -> int:
@@ -116,4 +128,6 @@ class Solution:
 # @lc code=end
 
 s = Solution().longestCommonSubsequence("mhunuzqrkzsnidwbun", "szulspmhwpazoxijwbq")
+print(s)
+s = SolutionB().longestCommonSubsequence("mhunuzqrkzsnidwbun", "szulspmhwpazoxijwbq")
 print(s)
