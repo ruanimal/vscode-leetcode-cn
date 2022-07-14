@@ -77,7 +77,7 @@ class Solution_A:
                             break
         return max(max(i) for i in dp)
 
-class Solution:
+class SolutionA:
     def maxEnvelopes(self, envelopes: List[List[int]]) -> int:
         """
         二阶动态规划, 加二分查找, 超时
@@ -119,11 +119,50 @@ class Solution:
         if nums[left][1] < target:
             return left
         return left - 1
+
+class Solution:
+    def maxEnvelopes(self, envelopes: List[List[int]]) -> int:
+        """
+        一阶动态规划, 加二分查找
+        """
+
+        if len(envelopes) == 0:
+            return 0
+
+        nums = [i[1] for i in sorted(envelopes, key=lambda i: (i[0], -i[1]))]
+        # print(nums)
+        top = []
+        for i in nums:
+            pos = self.find_first(top, i)
+            if pos == -1:
+                top.append(i)
+            else:
+                top[pos] = i
+        # print(top)
+        return len(top)
+
+    @staticmethod
+    def find_first(nums: List[int], target: int) -> int:
+        if len(nums) == 0:
+            return -1
+        left = 0
+        right = len(nums)-1
+        while left <= right:
+            mid = (left+right) >> 1
+            if nums[mid] < target:
+                left = mid + 1
+            else:
+                right = mid - 1
+        # print(nums, target, left)
+        if left == len(nums):
+            return -1
+        return left
 # @lc code=end
 
 
 s = Solution()
-data = [[1,15],[7,18],[7,6],[7,100],[2,200],[17,30],[17,45],[3,5],[7,8],[3,6],[3,10],[7,20],[17,3],[17,45]]
+# data = [[1,15],[7,18],[7,6],[7,100],[2,200],[17,30],[17,45],[3,5],[7,8],[3,6],[3,10],[7,20],[17,3],[17,45]]
+data = [[1,3],[3,5],[6,7],[6,8],[8,4],[9,5]]
 print(s.maxEnvelopes(data))
 # print(s.maxEnvelopes([[5,4],[6,4],[6,7],[2,3]]))
 # print(sorted(data))

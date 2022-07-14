@@ -63,7 +63,7 @@ from comm import *
 
 # @lc code=start
 
-class Solution_A:
+class SolutionA:
     def lengthOfLIS(self, nums: List[int]) -> int:
         """
         暴力法, 超时
@@ -89,7 +89,7 @@ class Solution_A:
 
         return dfs(nums, [], 0, 0)
 
-class Solution:
+class SolutionB:
     def lengthOfLIS(self, nums: List[int]) -> int:
         """
         动态规划法
@@ -110,7 +110,35 @@ class Solution:
                     dp[i] = max(dp[i], dp[j]+1)
         return max(dp)
 
-# @lc code=end
+class Solution:
+    def lengthOfLIS(self, nums: List[int]) -> int:
+        top = []
+        for i in nums:
+            pos = self.find_first(top, i)
+            if pos == -1:
+                top.append(i)
+            else:
+                top[pos] = i
+        # print(top)
+        return len(top)
 
-s = Solution()
-print(s.lengthOfLIS([4,10,4,3,8,9]))
+    @staticmethod
+    def find_first(nums: List[int], target: int) -> int:
+        if len(nums) == 0:
+            return -1
+        left = 0
+        right = len(nums)-1
+        while left <= right:
+            mid = (left+right) >> 1
+            if nums[mid] < target:
+                left = mid + 1
+            else:
+                right = mid - 1
+        # print(nums, target, left)
+        if left == len(nums):
+            return -1
+        return left
+
+# @lc code=end
+print(Solution().lengthOfLIS([4,10,4,3,3,8,9]))
+print(SolutionA().lengthOfLIS([4,10,4,3,3,8,9]))
