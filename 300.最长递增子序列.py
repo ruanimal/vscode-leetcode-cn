@@ -95,7 +95,7 @@ class SolutionB:
         动态规划法
 
         // 定义：dp[i] 表示以 nums[i] 这个数结尾的最长递增子序列的长度
-        则 当 0 < j < i 时
+        则 当 0 < j < i 时, 逐一判断要不要把i加到[0,j]构成的子序列中
         dp[i] =
             nums[i] > nums[j]: max(dp[j] + 1)
             nums[i] <= nums[j]: max(dp[j])
