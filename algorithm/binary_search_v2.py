@@ -57,7 +57,6 @@ def test():
     assert findFirst([1,3,4,5,7,8,8,8,8,9], 0) == -1
     assert findFirst([9,9,9,9,9,9,9,9,9,9], 9) == 0
 
-
     assert findLast([1,3,4,5,7,8,8,8,8,9], 10) == -1
     assert findLast([1,3,4,5,7,8,8,8,8,9], 8) == 8
     assert findLast([1,3,4,5,7,8,8,8,8,9], 5.5) == -1
