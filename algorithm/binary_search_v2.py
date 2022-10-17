@@ -10,23 +10,18 @@ def findFirst(nums, target):
         return
 
     left = 0
-    right = len(nums) - 1
-    while left <= right:   # 取等号保证找到第一个的时候还会继续移动
-        # print('=', left, right)
-        mid = (left + right) >> 1
+    right = len(nums)
+    # 有效区间为[left, right)
+    while left < right:
+        mid = (left + right) >> 1   # left == right时取左侧边界
         if nums[mid] < target:
             left = mid + 1
-        elif nums[mid] == target:   # 相等时right左移
-            right = mid - 1
+        elif nums[mid] == target:   # 相等时取左半边, 不含mid这个点
+            right = mid
         else:
             right = mid - 1
-    # 退出时 left > right, 更确切地说, left - 1 == right
-    # 退出时 nums[left] >= target
-    # 由于mid+1 和 mid-1, right可能等于-1, left等于len(nums)
-    # print(left, right)
-    if left == len(nums):   # nums都比target小
-        return -1
-    if nums[left] != target:
+    print('=', left, right)
+    if left == len(nums) or nums[left] != target:   # nums都比target小或不存在
         return -1
     return left
 
@@ -38,20 +33,19 @@ def findLast(nums, target):
     if not nums:
         return
 
-    left = 0
-    right = len(nums) - 1
-    while left <= right:   # 取等号保证找到第一个的时候还会继续移动
-        mid = (left + right) >> 1
+    left = -1
+    right = len(nums)-1
+    # 有效区间为(left, right]
+    while left < right:   # 取等号保证找到第一个的时候还会继续移动
+        mid = (left + right + 1) >> 1    # left == right时取右侧边界
         if nums[mid] < target:
             left = mid + 1
-        elif nums[mid] == target:   # 相等时left右移, 此时右边界的值的准确的
-            left = mid + 1
+        elif nums[mid] == target:   # 相等时取右半边, 不含mid这个点
+            left = mid
         else:
             right = mid - 1
-    # print(left, right)
-    if right == -1:   # nums都比target大
-        return -1
-    if nums[right] != target:
+    print('=', left, right)
+    if right == -1 or nums[right] != target:  # nums都比target大或不存在
         return -1
     return right
 
@@ -68,6 +62,8 @@ def test():
     assert findLast([1,3,4,5,7,8,8,8,8,9], 8) == 8
     assert findLast([1,3,4,5,7,8,8,8,8,9], 5.5) == -1
     assert findLast([1,3,4,5,7,8,8,8,8,9], 0) == -1
+    assert findLast([1,3,4,5,7,8,8,8,8,8], 8) == 9
+    assert findLast([9,9,9,9,9,9,9,9,9,9], 9) == 9
 
 if __name__ == '__main__':
     test()
