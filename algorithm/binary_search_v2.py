@@ -1,4 +1,6 @@
-"""二分查找"""
+"""二分查找
+循环注意定义一致性
+"""
 
 
 def findFirst(nums, target):
@@ -11,12 +13,12 @@ def findFirst(nums, target):
 
     left = 0
     right = len(nums)
-    # 有效区间为[left, right)
+    # 有效区间为[left, right), left为有效取值
     while left < right:
         mid = (left + right) >> 1   # 区间长度1时取左侧边界
         if nums[mid] < target:
             left = mid + 1
-        elif nums[mid] == target:   # 相等时取左半边, 不含mid这个点
+        elif nums[mid] == target:   # 相等时取左半边, 不含mid这个点 [left, mid)
             right = mid
         else:
             right = mid - 1
@@ -35,12 +37,12 @@ def findLast(nums, target):
 
     left = -1
     right = len(nums)-1
-    # 有效区间为(left, right]
+    # 有效区间为(left, right], right为有效取值
     while left < right:   # 取等号保证找到第一个的时候还会继续移动
         mid = (left + right + 1) >> 1    # 区间长度1时取右侧边界
         if nums[mid] < target:
             left = mid + 1
-        elif nums[mid] == target:   # 相等时取右半边, 不含mid这个点
+        elif nums[mid] == target:   # 相等时取右半边, 不含mid这个点, (mid, right]
             left = mid
         else:
             right = mid - 1
