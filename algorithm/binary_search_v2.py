@@ -13,7 +13,7 @@ def findFirst(nums, target):
     right = len(nums)
     # 有效区间为[left, right)
     while left < right:
-        mid = (left + right) >> 1   # left == right时取左侧边界
+        mid = (left + right) >> 1   # 区间长度1时取左侧边界
         if nums[mid] < target:
             left = mid + 1
         elif nums[mid] == target:   # 相等时取左半边, 不含mid这个点
@@ -37,7 +37,7 @@ def findLast(nums, target):
     right = len(nums)-1
     # 有效区间为(left, right]
     while left < right:   # 取等号保证找到第一个的时候还会继续移动
-        mid = (left + right + 1) >> 1    # left == right时取右侧边界
+        mid = (left + right + 1) >> 1    # 区间长度1时取右侧边界
         if nums[mid] < target:
             left = mid + 1
         elif nums[mid] == target:   # 相等时取右半边, 不含mid这个点
