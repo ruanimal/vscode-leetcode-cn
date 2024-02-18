@@ -60,7 +60,7 @@
 
 from comm import *
 # @lc code=start
-class Solution_A:
+class SolutionA:
     def findTargetSumWays(self, nums: List[int], target: int) -> int:
         """
         回溯法, 超时
@@ -83,7 +83,7 @@ class Solution_A:
             self.backtrack(nums, level+1, remain)
             remain -= i * nums[level]
 
-class Solution_B:
+class SolutionB:
     def findTargetSumWays(self, nums: List[int], target: int) -> int:
         """
         回溯法, 加缓存
@@ -121,7 +121,9 @@ class Solution:
         sum(A) = target + sum(B)
         sum(A) + sum(A) = target + sum(B) + sum(A)
         2 * sum(A) = target + sum(nums)
-        综上，可以推出 sum(A) = (target + sum(nums)) / 2，也就是把原问题转化成：nums 中存在几个子集 A，使得 A 中元素的和为 (target + sum(nums)) / 2？
+        综上，可以推出 sum(A) = (target + sum(nums)) / 2，也就是把原问题转化成：
+
+        nums 中存在几个子集 A，使得 A 中元素的和为 (target + sum(nums)) / 2
 
         表示 nums[:i+1] 凑出 j(target) 的方案
         if j-nums[i] >= 0
@@ -148,7 +150,8 @@ class Solution:
                 else:
                     dp[i][j] = dp[i-1][j]
         return dp[-1][-1]
-        # @lc code=end
+
+# @lc code=end
 s = Solution()
 res = s.findTargetSumWays(nums = [1,1,1,1,1], target = 3)
 print(res)

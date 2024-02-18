@@ -29,3 +29,9 @@ class TreeNode:
         self.val = val
         self.left = left
         self.right = right
+
+def print_matrix(obj):
+    print('[')
+    for i in obj:
+        print('    ', i, ',')
+    print(']')
