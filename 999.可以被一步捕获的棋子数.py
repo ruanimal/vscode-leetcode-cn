@@ -79,7 +79,9 @@ from comm import *
 # @lc code=start
 class Solution:
     def numRookCaptures(self, board: List[List[str]]) -> int:
-        """暴力判断上下左右4个方向"""
+        """暴力判断上下左右4个方向
+        只能一直沿一个方向走, 所以不能用广度优先搜索
+        """
 
         rook = None
         for x in range(len(board)):
@@ -87,34 +89,30 @@ class Solution:
                 if board[x][y] == 'R':
                     rook = (x, y)
         ret = 0
-        for x in range(rook[0]+1, len(board)):
-            y = rook[1]
-            if board[x][y] == 'p':
-                ret += 1
-                break
-            if board[x][y] == 'B':
-                break
-        for x in range(rook[0]-1, -1, -1):
-            y = rook[1]
-            if board[x][y] == 'p':
-                ret += 1
-                break
-            if board[x][y] == 'B':
-                break
-        for y in range(rook[1]+1, len(board[0])):
-            x = rook[0]
-            if board[x][y] == 'p':
-                ret += 1
-                break
-            if board[x][y] == 'B':
-                break
-        for y in range(rook[1]-1, -1, -1):
-            x = rook[0]
-            if board[x][y] == 'p':
-                ret += 1
-                break
-            if board[x][y] == 'B':
-                break
+        directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+        for dx, dy in directions:
+            x, y = rook
+            while True:
+                x += dx
+                y += dy
+                if not (0 <= x < len(board) and 0 <= y < len(board[0])):
+                    break
+                if board[x][y] == 'p':
+                    ret += 1
+                    break
+                if board[x][y] == 'B':
+                    break
         return ret
+
+
 # @lc code=end
 
+board = [[".",".",".",".",".",".",".","."],
+         [".",".",".","p",".",".",".","."],
+         [".",".",".","p",".",".",".","."],
+         ["p","p",".","R",".","p","B","."],
+         [".",".",".",".",".",".",".","."],
+         [".",".",".","B",".",".",".","."],
+         [".",".",".","p",".",".",".","."],
+         [".",".",".",".",".",".",".","."]]
+print(Solution().numRookCaptures(board))

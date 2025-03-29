@@ -70,15 +70,9 @@ class Solution:
 
         X = len(matrix)
         Y = len(matrix[0])
-        for i in range(-X-1, Y):
-            pre = None
-            for x in range(X):
-                if x + i < 0 or x + i >= Y:
-                    continue
-                if pre is None:
-                    pre = matrix[x][x+i]
-                    continue
-                if matrix[x][x+i] != pre:
+        for i in range(1, X):
+            for j in range(1, Y):
+                if matrix[i-1][j-1] != matrix[i][j]:
                     return False
         return True
 

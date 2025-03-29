@@ -52,31 +52,6 @@ from comm import *
 #         self.left = left
 #         self.right = right
 
-class SolutionA:
-    def binaryTreePaths(self, root: Optional[TreeNode]) -> List[str]:
-        """
-        dfs
-        """
-
-        ans = []
-        def dfs(node, path=None):
-            if path is None:
-                path = []
-            path.append(str(node.val))
-            if not node.left and not node.right:
-                ans.append('->'.join(path))
-                return
-            if node.left:
-                dfs(node.left, path)
-                path.pop()
-            if node.right:
-                dfs(node.right, path)
-                path.pop()
-
-        if not root:
-            return
-        dfs(root)
-        return ans
 
 class Solution:
     def binaryTreePaths(self, root: Optional[TreeNode]) -> List[str]:

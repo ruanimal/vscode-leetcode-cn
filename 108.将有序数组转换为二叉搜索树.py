@@ -57,7 +57,7 @@ from comm import *
 #         self.left = left
 #         self.right = right
 
-class SolutionA(object):
+class SolutionA:
     def sortedArrayToBST(self, nums: List[int]) -> TreeNode:
         """
         简单递归
@@ -71,9 +71,10 @@ class SolutionA(object):
         node.right = self.sortedArrayToBST(nums[mid+1:])
         return node
 
-class Solution(object):
+class Solution:
+    """二叉搜索树中序遍历 -> 有序数组"""
+
     def sortedArrayToBST(self, nums: List[int]) -> TreeNode:
-        # 原以为这个版本比较快， 其实没啥差别(leetcode测速不准)
         def to_bst(nums, start, end):
             if start > end:
                 return None

@@ -42,8 +42,10 @@
 from comm import *
 # @lc code=start
 
+T: TypeAlias = Optional[TreeNode]
+
 class Solution:
-    def hasPathSum(self, root: Optional[TreeNode], targetSum: int) -> bool:
+    def hasPathSum(self, root: T, targetSum: int) -> bool:
         """
         后序位置判断
         """

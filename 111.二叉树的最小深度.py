@@ -41,22 +41,22 @@ from comm import *
 #         self.right = None
 
 
-class SolutionA(object):
+class SolutionA:
     def minDepth(self, root: TreeNode) -> int:
         """
         简单递归, 在后序位置, 要遍历完整颗树, 比较慢
         """
         if (root == None):
             return 0
-        if (root.left == None and root.right == None):
+        if root.left is None and root.right is None:
             return 1
-        if (root.left == None):
-            return 1 + self.minDepth(root.right)
-        if (root.right == None):
-            return 1 + self.minDepth(root.left)
-        return 1 + min(self.minDepth(root.left), self.minDepth(root.right))
+        l = self.minDepth(root.right)
+        r = self.minDepth(root.left)
+        if l > 0 and r > 0:
+            return 1 + min(l, r)
+        return l+1 if r == 0 else r+1
 
-class Solution(object):
+class SolutionB:
     def minDepth(self, root: TreeNode) -> int:
         """
         层次遍历, 有一个节点左右子节点都空, 则跳出
@@ -82,5 +82,6 @@ class Solution(object):
             return deep
         return deep-1
 
+Solution = SolutionA
 # @lc code=end
 

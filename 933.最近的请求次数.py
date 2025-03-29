@@ -58,7 +58,10 @@
 #
 
 # @lc code=start
-class RecentCounter:
+
+
+class RecentCounterA:
+    """简单实现"""
 
     def __init__(self):
         self.queue = []
@@ -66,12 +69,58 @@ class RecentCounter:
     def ping(self, t):
         self.queue.append(t)
 
-        while (len(self.queue) != 0):
-            if(self.queue[0] + 3000 < t):
-                self.queue.pop(0)
+        i = 0
+        while i < len(self.queue):
+            if(self.queue[i] + 3000 < t):
+                i+=1
             else:
                 break
+        self.queue[:i] = []
         return len(self.queue)
+
+
+class RecentCounter:
+    """环形数组+二分查找
+    理论上更快,但是实际不行
+
+    68/68 cases passed (179 ms)
+    Your runtime beats 11 % of python3 submissions
+    Your memory usage beats 55.08 % of python3 submissions (22.7 MB)
+    """
+    def __init__(self):
+        self.queue = [-9999] * 3001
+        self.free_idx = 0
+        self.used = 0
+
+    def search(self, target: int) -> int:
+        # 找到 >= target
+        LEN = len(self.queue)
+        i = self.free_idx
+        j = LEN + self.free_idx-1
+        while i <= j:
+            mid = (i+j)>>1
+            val = self.queue[mid%LEN]
+            # if target == 2-3000:
+            #     print('=', mid, val)
+            if val == target:
+                j = mid-1
+            elif val > target:
+                j = mid-1
+            elif val < target:
+                i = mid+1
+        # print('+', i, self.queue[i%LEN])
+        return i % LEN
+
+    def ping(self, t):
+        self.queue[self.free_idx] = t
+        self.free_idx = (self.free_idx+1) % len(self.queue)
+        if self.used < len(self.queue):
+            self.used += 1
+        s = self.search(t-3000)
+        # print('=', s, self.free_idx, self.queue[s])
+        if s < self.free_idx:
+            return self.free_idx - s
+        return self.used - s + self.free_idx
 
 
 # Your RecentCounter object will be instantiated and called as such:
@@ -79,3 +128,12 @@ class RecentCounter:
 # param_1 = obj.ping(t)
 # @lc code=end
 
+obj = RecentCounter()
+for i in [[],[2196],[3938],[4723],[4775],[5952]]:
+    if i:
+        print(obj.ping(i[0]))
+# for i in range(3010):
+#     if i < 10 or i > 2999:
+#         print(i, obj.ping(i), obj.queue[:5], obj.queue[-5:])
+#     else:
+#         obj.ping(i)
