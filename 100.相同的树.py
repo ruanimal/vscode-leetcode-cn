@@ -13,13 +13,11 @@
 class Solution(object):
     def isSameTree(self, p, q):
         """
-        :type p: TreeNode
-        :type q: TreeNode
-        :rtype: bool
+        节点相同 & 左边相同 & 右边相同
         """
         if not p and not q:
             return True
-        if p and q and p.val == q.val and self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right):
-            return True
-        return False
+        if (p and not q) or (q and not p) or (p.val != q.val):
+            return False
+        return self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right)
 

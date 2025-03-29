@@ -38,7 +38,10 @@ from comm import *
 
 
 class Solution:
-    def deleteDuplicates(self, head: ListNode) -> ListNode:
+    def aa(self):
+        return self.a
+
+    def _deleteDuplicates(self, head: ListNode) -> ListNode:
         if not head:
             return
         if not head.next:
@@ -51,10 +54,22 @@ class Solution:
             ptr = ptr.next
         return head
 
+    def deleteDuplicates(self, head: ListNode) -> ListNode:
+        if not head:
+            return
+        head.next = self.deleteDuplicates(head.next)
+        if head.next and head.val == head.next.val:
+            return head.next
+        return head
+
 # @lc code=end
 
 if __name__ == "__main__":
     l = build_list_node([1,1,2,2,2,3,4,4,6,8])
     print(Solution().deleteDuplicates(l))
+    s = Solution()
+    s.a = 1
+    d = s.aa
+    print(repr(d), s.aa(), d())
 
 

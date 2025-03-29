@@ -36,15 +36,9 @@
 #
 
 
-class Solution(object):
+class SolutionA:
     def findMedianSortedArrays(self, nums1, nums2):
-        pass
-
-    def findMedianSortedArrays_v1(self, nums1, nums2):
         """
-        :type nums1: List[int]
-        :type nums2: List[int]
-        :rtype: float
         进行一次归并, 然后求中位数
         """
         result = []
@@ -62,3 +56,8 @@ class Solution(object):
             return result[len(result)//2]
         else:
             return (result[len(result)//2-1]+result[len(result)//2])/2.0
+
+class Solution:
+    def findMedianSortedArrays(self, nums1: list[int], nums2: list[int]):
+        pass
+

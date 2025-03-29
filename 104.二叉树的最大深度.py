@@ -13,8 +13,8 @@
 class Solution(object):
     def maxDepth(self, root):
         """
-        :type root: TreeNode
-        :rtype: int
+        空树深度为0
+        max(左深度, 右深度) + 1
         """
         if not root:
             return 0

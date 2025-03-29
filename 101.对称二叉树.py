@@ -46,7 +46,7 @@
 from comm import *
 # @lc code=start
 
-class SolutionA(object):
+class SolutionA:
     def isSymmetric(self, root: TreeNode):
         """
         层次遍历
@@ -71,20 +71,21 @@ class SolutionA(object):
             level = next_level
         return True
 
-class Solution(object):
+class Solution:
     def isSymmetric(self, root: TreeNode):
         """递归法, 参考判断树相同"""
         if not root:
             return True
         return self.helper(root.left, root.right)
 
-    def helper(self, root1: TreeNode, root2: TreeNode):
-        if not root1 and not root2:
+    def helper(self, t1: TreeNode, t2: TreeNode):
+        """值相同, 且交换左右子树后相同"""
+
+        if not t1 and not t2:
             return True
-        if (root1 and root2 and root1.val == root2.val
-            and self.helper(root1.left, root2.right) and self.helper(root1.right, root2.left)):
-            return True
-        return False
+        if (t1 and not t2) or (t2 and not t1) or (t1.val != t2.val):
+            return False
+        return self.helper(t1.left, t2.right) and self.helper(t1.right, t2.left)
 
 # @lc code=end
 

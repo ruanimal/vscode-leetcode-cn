@@ -25,35 +25,14 @@
 #
 #
 #
-# Definition for singly-linked list.
-class ListNode:
-    def __init__(self, x):
-        self.val = x
-        self.next = None
+from comm import *
 
+# @lc code=start
 
-# class ListNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.next = None
-
-# def print_list_node(node):
-#     while node:
-#         print(node.val, '-> ', end='')
-#         node = node.next
-
-
-# def build_list_node(nums):
-#     head = node = ListNode(None)
-#     for i in nums:
-#         node.next = ListNode(i)
-#         node = node.next
-#     return head.next
-
-class Solution:
+class SolutionA:
     def addTwoNumbers(self, l1, l2):
         """
-        按位加法实现
+        按位加法实现, 循环法
         """
 
         if not l1:
@@ -80,9 +59,25 @@ class Solution:
             p3.next = ListNode(tmp)
         return head.next
 
+class Solution:
+    """递归解法"""
+
+    def addTwoNumbers(self, l1: ListNode, l2: ListNode, carry=0):
+        if not l1 and not l2 and carry==0:
+            return None
+
+        v1 = l1.val if l1 else 0
+        v2 = l2.val if l2 else 0
+        carry, current = divmod(v1 + v2 + carry, 10)
+        node = ListNode(current)
+        node.next = self.addTwoNumbers(l1.next if l1 else None, l2.next if l2 else None, carry)
+        return node
+
+# @lc code=end
+
 if __name__ == "__main__":
-    # l1 = build_list_node([3])
-    # l2 = build_list_node([5, 6, 6])
-    # print_list_node(Solution().addTwoNumbers(l1, l2))
+    l1 = build_list_node([3])
+    l2 = build_list_node([5, 6, 6])
+    print(Solution().addTwoNumbers(l1, l2))
     pass
 
