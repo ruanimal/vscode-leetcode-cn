@@ -81,7 +81,7 @@ class Node:
         self.right = right
         self.next = next
 
-class Solution:
+class SolutionA:
     def connect(self, root: 'Optional[Node]') -> 'Optional[Node]':
         """
         层级遍历(BFS),使用队列
@@ -106,7 +106,7 @@ class Solution:
             que = next_que
         return root
 
-class Solution_A:
+class SolutionB:
     def connect(self, root: 'Optional[Node]') -> 'Optional[Node]':
         """
         递归解法, 实现简单
@@ -125,6 +125,42 @@ class Solution_A:
         self.connectTowNode(node1.left, node1.right)
         self.connectTowNode(node2.left, node2.right)
         self.connectTowNode(node1.right, node2.left)
+
+class SolutionC:
+    def connect(self, root: 'Optional[Node]') -> 'Optional[Node]':
+        """正确递归"""
+        if not root:
+            return
+        if not root.left and not root.right:
+            return root
+        root.left.next = root.right  # 这句必须前序
+        if root.next:   # 否则这里不会成立
+            root.right.next = root.next.left
+        self.connect(root.left)
+        self.connect(root.right)
+        return root
+
+class Solution:
+    def connect(self, root: 'Optional[Node]', path=None, depth=0) -> 'Optional[Node]':
+        """递归,路径法"""
+        if path is None:
+            path = []
+        if not root:
+            return
+        if not root.left and not root.right:
+            return root
+        for i in (root.left, root.right):
+            if not i: continue
+            if len(path) == depth:
+                path.append(i)
+            else:
+                path[depth].next = i
+                path[depth] = i
+        if root.left:
+            self.connect(root.left, path, depth+1)
+        if root.right:
+            self.connect(root.right, path, depth+1)
+        return root
 
 # @lc code=end
 

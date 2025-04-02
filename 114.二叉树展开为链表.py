@@ -67,7 +67,7 @@ from comm import *
 #         self.left = left
 #         self.right = right
 
-class Solution:
+class SolutionA:
     def flatten(self, root: Optional[TreeNode]) -> None:
         """
         Do not return anything, modify root in-place instead.
@@ -86,5 +86,29 @@ class Solution:
         p.right = right
         return root
 
+class Solution:
+    def flatten(self, root: Optional[TreeNode]) -> None:
+        if not root:
+            return
+        if not root.left and not root.right:
+            return root, root
+        p = root
+        for cur in (root.left, root.right):
+            if cur:
+                start, end = self.flatten(cur)
+                p.left = None
+                p.right = start
+                p = end
+        return root, p
 # @lc code=end
 
+null = None
+ll = [1,null,2,3]
+t = TreeNode(1)
+t.right = TreeNode(2)
+t.right.left = TreeNode(3)
+# t = build_tree(ll)
+print(t)
+s, _ = Solution().flatten(t)
+print(s)
+print(t.right.left, t.right.right)

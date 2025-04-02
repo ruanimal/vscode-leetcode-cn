@@ -1,5 +1,6 @@
 from typing import *
 from pprint import pprint
+import binarytree
 
 LOCAL_TEST = True
 
@@ -30,8 +31,12 @@ class TreeNode:
         self.left = left
         self.right = right
 
+
 def print_matrix(obj):
     print('[')
     for i in obj:
         print('    ', i, ',')
     print(']')
+
+TreeNode = binarytree.Node
+build_tree = binarytree.build

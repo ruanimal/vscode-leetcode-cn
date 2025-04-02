@@ -72,7 +72,9 @@
 # @lc code=start
 class Solution:
     def removeOuterParentheses(self, s: str) -> str:
-        """用栈模拟"""
+        """用栈模拟
+        找到匹配的括号对, 去除最外层的括号
+        """
 
         stack = []
         start_index = 0
